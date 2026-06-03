@@ -11,6 +11,7 @@ Feed it any codebase — it will analyze it across security, stability, performa
 - Concrete evidence (file, function, code behavior)
 - Severity & confidence ratings
 - Confirmed vs. suspected distinction
+- Dimension scores (0.0–10.0) with letter grades
 - Minimal fix + long-term fix
 - Regression test suggestion
 - Estimated effort
@@ -42,7 +43,7 @@ Audit this repository for stable release readiness.
 fuck-my-shit-mountain/
 ├── SKILL.md              — Skill entry point & rules
 ├── prompts/              — One prompt per audit mode (7 files)
-├── rubrics/              — Severity, confidence & evidence standards
+├── rubrics/              — Severity, confidence, evidence & scoring standards
 ├── templates/            — Report, issue card & remediation plan
 └── examples/             — Rust, Node.js, Vue audit examples
 ```
@@ -55,6 +56,19 @@ Works with **Codex**, **Claude Code**, **Cursor**, **Superpower**, or any AI tha
 2. Pick a mode: `prompts/full-audit.md` (or a focused one)
 3. Paste the combined prompt + your codebase into the AI
 4. Get a structured, evidence-backed audit report
+
+## Sample Score Dashboard
+
+```
+Security        ████████░░  8.0  A
+Stability       ██████░░░░  6.0  B
+Performance     █████████░  9.0  S
+Testing         ████░░░░░░  4.0  C
+Maintainability ███████░░░  7.0  A
+Release         ██████░░░░  6.0  B
+────────────────────────────────────
+Overall         ███████░░░  6.7  B
+```
 
 ## Design Principles
 

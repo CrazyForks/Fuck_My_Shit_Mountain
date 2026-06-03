@@ -46,6 +46,15 @@ Before writing findings, build a project map:
 9. For each issue, include a regression test suggestion.
 10. Prioritize the top risks first.
 
+## Scoring
+
+After collecting all findings, calculate dimension scores using `rubrics/scoring.md`:
+
+1. Start each dimension at 10.0.
+2. Deduct per finding based on severity and confidence status.
+3. Render the score dashboard with ASCII bars and letter grades.
+4. Include the dashboard in the Executive Summary.
+
 ## Output Format
 
 Use the issue-card template for each finding. Assemble into the audit-report template.

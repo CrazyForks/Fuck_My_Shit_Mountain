@@ -11,15 +11,31 @@
 
 <2-3 paragraph summary of codebase condition>
 
-Key statistics:
-- Total findings: <N>
-- Critical: <N>
-- High: <N>
-- Medium: <N>
-- Low: <N>
-- Info: <N>
-- Confirmed: <N>
-- Suspected: <N>
+### Score Dashboard
+
+```
+Security        ████████░░  8.0  A
+Stability       ██████░░░░  6.0  B
+Performance     █████████░  9.0  S
+Testing         ████░░░░░░  4.0  C
+Maintainability ███████░░░  7.0  A
+Release         ██████░░░░  6.0  B
+────────────────────────────────────
+Overall         ███████░░░  6.7  B
+```
+
+Each dimension scored 0.0–10.0. See `rubrics/scoring.md` for calculation rules.
+
+### Finding Statistics
+
+| Severity | Count | Confirmed | Suspected |
+|----------|-------|-----------|-----------|
+| Critical | <N> | <N> | <N> |
+| High | <N> | <N> | <N> |
+| Medium | <N> | <N> | <N> |
+| Low | <N> | <N> | <N> |
+| Info | <N> | <N> | <N> |
+| **Total** | **<N>** | **<N>** | **<N>** |
 
 ## 2. Project Map
 

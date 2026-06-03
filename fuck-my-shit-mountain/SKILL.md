@@ -25,6 +25,15 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 | `maintainability` | `prompts/maintainability-audit.md` | Complexity & coupling |
 | `release` | `prompts/release-audit.md` | Release readiness |
 
+## Scoring
+
+Each audit produces a **score dashboard** with 6 dimension scores (0.0–10.0) and an overall score:
+
+- Scores are calculated automatically from findings using `rubrics/scoring.md`.
+- Each finding deducts from its own dimension based on severity and confidence.
+- A letter grade (S/A/B/C/D/F) provides an at-a-glance health indicator.
+- Scores supplement detailed findings — they do not replace them.
+
 ## Rules (Non-negotiable)
 
 1. Every finding MUST include concrete evidence (file, function, behavior).

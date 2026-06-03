@@ -6,6 +6,7 @@ An AI-powered code audit skill that produces **professional, evidence-based, act
 
 - Audits a codebase across security, stability, performance, testing, maintainability, and release readiness.
 - Produces structured findings with severity, confidence, evidence, and fix recommendations.
+- Scores each dimension (0.0–10.0) with letter grades for at-a-glance health assessment.
 - Separates confirmed issues from suspected issues.
 - Estimates fix effort and prioritizes risks.
 - Suggests regression tests for every finding.
@@ -49,7 +50,7 @@ Audit this repository as if it is preparing for a stable public release.
 
 A full audit report contains:
 
-1. **Executive Summary** — Short, direct assessment of codebase condition.
+1. **Executive Summary** — Score dashboard + finding statistics + short assessment.
 2. **Project Map** — Architecture overview with risk areas highlighted.
 3. **Top Risks** — 10-20 highest priority findings.
 4. **Detailed Findings** — Every finding with full evidence.
@@ -70,9 +71,24 @@ fuck-my-shit-mountain/
   SKILL.md              Skill entry point — how the skill works
   README.md             This file
   prompts/              Audit prompt templates (one per mode)
-  rubrics/              Severity, confidence, and evidence standards
+  rubrics/              Severity, confidence, evidence, and scoring standards
   templates/            Report, issue card, and remediation plan templates
   examples/             Usage examples for different project types
+```
+
+## Scoring
+
+Each dimension scored 0.0–10.0 with letter grades (S/A/B/C/D/F):
+
+```
+Security        ████████░░  8.0  A
+Stability       ██████░░░░  6.0  B
+Performance     █████████░  9.0  S
+Testing         ████░░░░░░  4.0  C
+Maintainability ███████░░░  7.0  A
+Release         ██████░░░░  6.0  B
+────────────────────────────────────
+Overall         ███████░░░  6.7  B
 ```
 
 ## Rules of Engagement
