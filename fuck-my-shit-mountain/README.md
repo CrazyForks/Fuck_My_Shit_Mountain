@@ -4,24 +4,26 @@ An AI-powered code audit skill that produces **professional, evidence-based, act
 
 ## What It Does
 
-- Audits a codebase across security, stability, performance, testing, maintainability, design principles, and release readiness.
-- Produces structured findings with severity, confidence, evidence, and fix recommendations.
-- Scores each dimension (0.0–10.0) with letter grades for at-a-glance health assessment.
-- Separates confirmed issues from suspected issues.
-- Estimates fix effort and prioritizes risks.
-- Suggests regression tests for every finding.
+- Audits a codebase across **17 audit dimensions** (full mode): architecture, security, stability, performance, testing, maintainability, design, release, documentation, configuration, observability, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight
+- Produces structured findings with severity, confidence, evidence, and fix recommendations
+- Scores **7 core dimensions** (0.0–10.0) with letter grades for at-a-glance health assessment
+- Separates confirmed issues from suspected issues
+- Estimates fix effort and prioritizes risks
+- Suggests regression tests for every finding
+
+## Interactive Init
+
+Before auditing, the AI **must ask 3 questions**:
+
+1. **Which modes?** — Pick from 13 modes, comma-separated or `full`
+2. **Report language?** — English / Chinese / etc.
+3. **Output format?** — `md` / `html` / `both` / `stdout`
+
+HTML output (`templates/audit-report.html`) provides a complete rendered page with sidebar navigation, scroll spy, colored score bars, per-dimension findings tables + verified checklists, design principles compliance, fix order tables, and quick wins grid.
 
 ## Usage
 
-### Prerequisites
-
-- An AI coding assistant (Codex, Claude Code, Cursor, Superpower, etc.)
-- Access to the target codebase
-
-### Quick Start
-
 ```
-# Full audit of the current project
 load fuck-my-shit-mountain/skill.md
 run full-audit on .
 ```
@@ -30,7 +32,7 @@ run full-audit on .
 
 | Command | Scope |
 |---------|-------|
-| `run full-audit` | Complete audit across all dimensions + 6 specialized areas |
+| `run full-audit` | All 17 audit dimensions |
 | `run security-audit` | Security-only review |
 | `run stability-audit` | Reliability and error handling |
 | `run performance-audit` | Realistic performance bottlenecks |
@@ -44,33 +46,20 @@ run full-audit on .
 | `run backend-api-audit` | API design, validation, data access patterns |
 | `run dependency-weight-audit` | Overweight deps, build toolchain |
 
-> **Tip:** You can combine modes — e.g., `security, stability, type-safety` — for a focused multi-dimensional audit. The AI will merge audit areas from each selected mode.
-
-### Example
-
-```text
-Use the fuck-my-shit-mountain skill in full mode.
-
-Audit this repository as if it is preparing for a stable public release.
-```
+> Combine modes: `security, stability, type-safety` — the AI merges audit areas from each.
 
 ## Report Structure
 
 A full audit report contains:
 
-1. **Executive Summary** — Score dashboard (7 dimensions) + finding statistics + short assessment.
-2. **Project Map** — Architecture overview with risk areas highlighted.
-3. **Top Risks** — 10-20 highest priority findings.
-4. **Detailed Findings** — Every finding with full evidence.
-5. **Testing Gaps** — Missing or weak tests.
-6. **Security Concerns** — Confirmed and suspected security issues.
-7. **Stability Concerns** — Crash, error handling, state consistency risks.
-8. **Performance Concerns** — Realistic bottlenecks.
-9. **Maintainability Concerns** — Complexity, coupling, duplication.
-10. **Release Concerns** — CI/CD, versioning, deployment risks.
-11. **Recommended Fix Order** — Grouped by urgency.
-12. **Quick Wins** — Low-cost high-value fixes.
-13. **Long-term Refactor Plan** — Only if evidence supports it.
+1. **Score Dashboard** — 7 dimension scores with bars + grades + one-sentence justification
+2. **Stats** — Total findings by severity
+3. **Top Risks** — Prioritized findings table
+4. **Detailed Findings** — Every finding with full evidence, fix box, and test suggestion
+5. **Per-Dimension Sections** — One `<h3>` per audited dimension with findings table + verified checklist
+6. **Design Principles** — Violations table + followed principles check list
+7. **Fix Order** — Grouped by urgency (immediate / pre-release / schedule / later)
+8. **Quick Wins** — Low-cost high-value fixes
 
 ## File Structure
 

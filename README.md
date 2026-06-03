@@ -2,36 +2,22 @@
 
 > An evidence-based AI code audit skill. Professional output. Zero emotional bullshit.
 
-**Fuck My Shit Mountain** is an AI skill (prompt framework) designed to produce rigorous, professional code reviews. Despite the intentionally crude name, every audit report is冷静 (calm), structured, evidence-driven, and actionable.
+**Fuck My Shit Mountain** is an AI skill (prompt framework) that produces rigorous, professional code reviews. Despite the crude name, every report is冷静, structured, evidence-driven, and actionable.
 
-## What It Does
+## How It Works
 
-Feed it any codebase — it will analyze it across security, stability, performance, testing, maintainability, design principles, and release readiness. Each finding comes with:
+1. **AI asks 3 questions** before touching any code: which modes, what language, what output format (md/html/both/stdout)
+2. **AI audits your codebase** exhaustively — every file, every function
+3. **AI generates a structured report** with scores, findings, principles, fix order, and quick wins
+4. **HTML output** includes a sidebar with scroll spy, colored score bars, per-dimension sections with findings tables + verified checklists, design principles compliance, and a fix order table
 
-- Concrete evidence (file, function, code behavior)
-- Severity & confidence ratings
-- Confirmed vs. suspected distinction
-- Dimension scores (0.0–10.0) with letter grades
-- Minimal fix + long-term fix
-- Regression test suggestion
-- Estimated effort
+## Modes
 
-No empty complaints. No "this code is bad" without proof. No default rewrites.
-
-## Quick Start
-
-```text
-Use fuck-my-shit-mountain in full mode.
-Audit this repository for stable release readiness.
-```
-
-### Modes
-
-Pick one, or combine multiple with commas (e.g., `security, stability, type-safety`).
+Pick one or combine (e.g., `security, stability, type-safety`). Full mode covers **17 audit dimensions**.
 
 | Mode | Focus |
 |------|-------|
-| `full` | Complete audit across all dimensions + 6 specialized areas |
+| `full` | All 17 dimensions |
 | `security` | Authentication, injection, secrets, dependencies |
 | `stability` | Panic paths, error handling, concurrency, lifecycle |
 | `performance` | Hot paths, memory, I/O, startup cost |
@@ -44,55 +30,35 @@ Pick one, or combine multiple with commas (e.g., `security, stability, type-safe
 | `frontend-state` | Component size, state duplication, effects, coupling |
 | `backend-api` | API consistency, validation, N+1, data flow |
 | `dependency-weight` | Overweight deps, build toolchain |
-| `dependency-weight` | Overweight deps, unused deps, build toolchain complexity |
-| `performance` | Hot paths, memory, I/O, startup cost |
-| `testing` | Coverage quality, test types, flakiness |
-| `maintainability` | Complexity, coupling, duplication, naming |
-| `release` | CI/CD, versioning, upgrade, rollback |
 
 ## Project Structure
 
 ```
 fuck-my-shit-mountain/
-├── SKILL.md              — Skill entry point & rules
-├── prompts/              — One prompt per audit mode (13 files)
-├── rubrics/              — Severity, confidence, evidence, principles & scoring
-├── templates/            — Report, issue card & remediation plan
+├── SKILL.md              — Entry point & rules
+├── prompts/              — 13 audit mode prompts
+├── rubrics/              — Severity, confidence, evidence, principles, scoring
+├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
 └── examples/             — Rust, Node.js, Vue audit examples
 ```
-
-## Usage with AI Tools
-
-Works with **Codex**, **Claude Code**, **Cursor**, **Superpower**, or any AI that can follow structured prompts.
-
-1. Load the skill: `SKILL.md`
-2. Pick a mode: `prompts/full-audit.md` (or a focused one)
-3. Paste the combined prompt + your codebase into the AI
-4. Get a structured, evidence-backed audit report
 
 ## Sample Score Dashboard
 
 ```
-Security        ████████░░  8.0  A   No auth on WS, hardcoded secret in config
-Stability       ██████░░░░  6.0  B   3 unwrap on hot path, no retry on DB
-Performance     ██████████  10.0 S   No issues found
-Testing         ████░░░░░░  4.0  C   9 integration tests real, but unit is weak
-Maintainability ███████░░░  7.0  A   3 files over 800 lines, SRP violated in 2 modules
-Design          █████░░░░░  5.0  B   DRY violated 5x, fail-fast missing at API boundary
-Release         ██████░░░░  6.0  B   No CI on Windows, no rollback plan
+Security        ████████░░  8.0  A
+Stability       ██████░░░░  6.0  B
+Performance     ██████████  10.0 S
+Testing         ████░░░░░░  4.0  C
+Maintainability ███████░░░  7.0  A
+Design          █████░░░░░  5.0  B
+Release         ██████░░░░  6.0  B
 ─────────────────────────────────────
 Overall         ██████░░░░  6.6  B
 ```
 
-**Higher = better (10 = clean, 0 = shit mountain).**
+**Higher = better (10 = clean, 0 = shit mountain).** Scores are judgment-based, not formula-based.
 
-## Design Principles
-
-- **Evidence over opinion** — every finding cites file, function, and behavior
-- **Separate signal from noise** — confirmed vs. suspected, never conflate
-- **Smallest practical fix** — prefer local fixes, not rewrites
-- **Test every finding** — every issue includes a regression test suggestion
-- **No emotional language** — audit the code, not the author
+See `fuck-my-shit-mountain/rubrics/scoring.md` for anchor descriptions and letter grade map.
 
 ## License
 
