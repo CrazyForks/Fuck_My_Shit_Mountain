@@ -47,6 +47,11 @@ Focus on whether the tests provide real confidence in the codebase.
 - Test environment consistency
 - Test reporting (what breaks, where, why)
 
+## Attitude
+
+1. **Be exhaustive.** Check every critical path, every error path, every edge case. One missing test can ship a critical bug.
+2. **Do not be a yes-man.** Report testing gaps even if the user says "we have good coverage." Coverage percentage does not equal confidence.
+
 ## Grouping
 
 Group recommendations into:

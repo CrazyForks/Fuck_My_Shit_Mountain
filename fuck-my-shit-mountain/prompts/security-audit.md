@@ -59,6 +59,11 @@ Focus only on security-relevant risks.
 3. Separate confirmed issues from suspected issues.
 4. For each issue, include a specific mitigation and a regression test.
 
+## Attitude
+
+1. **Be exhaustive.** Check every endpoint, every auth path, every dependency. Attackers only need one hole.
+2. **Do not be a yes-man.** Report security issues objectively. Do not downplay because the project "is just internal" or "nobody will attack us."
+
 ## Finding Format
 
 ### Finding: <short title>

@@ -64,6 +64,11 @@ Focus on maintainability, complexity, coupling, and design risk.
 - Default values duplicated across code paths — DRY violation
 - Feature flags that are never cleaned up — YAGNI violation
 
+## Attitude
+
+1. **Be exhaustive.** Check every file, every function, every module. Maintainability rot hides in the corners nobody looks at.
+2. **Do not be a yes-man.** Report design problems even if "it works." Bad design accumulates interest.
+
 ## Rules
 
 1. Do not recommend abstraction unless it removes real duplication, coupling, or confusion.

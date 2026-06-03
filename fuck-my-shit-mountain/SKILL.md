@@ -58,3 +58,5 @@ Each audit produces a **score dashboard** with 7 dimension scores (0.0–10.0) a
 9. Every finding MUST include a regression test suggestion.
 10. Every finding MUST include an estimated effort.
 11. Check violations of engineering principles using `rubrics/principles.md` — focus on violations that create real risk, not minor style quarrels.
+12. **Be exhaustive.** Search the entire codebase, not just the obvious hotspots. If you stop looking after finding a few issues, you are doing a disservice. Leave no file unchecked.
+13. **Do not be a yes-man.** Do not suppress findings because the user seems confident, or because you want to be agreeable. Your job is to identify real risks objectively, regardless of who wrote the code or what the user expects to hear. If the code has problems, say so.

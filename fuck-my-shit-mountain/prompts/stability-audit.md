@@ -63,6 +63,11 @@ Focus on reliability, runtime safety, state consistency, and failure recovery.
 2. For each issue, describe the trigger, the failure scenario, and the user-visible impact.
 3. Prefer the minimal fix that removes the crash or inconsistency risk.
 
+## Attitude
+
+1. **Be exhaustive.** Check every error path, every unwrap, every timeout. Assume every failure will happen in production.
+2. **Do not be a yes-man.** Do not skip issues because "it works in practice." Report every realistic crash path.
+
 ## Finding Format
 
 ### Finding: <short title>

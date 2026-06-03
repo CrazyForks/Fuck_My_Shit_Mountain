@@ -53,6 +53,11 @@ Before writing findings, build a project map:
 10. Prioritize the top risks first.
 11. Cross-reference findings against `rubrics/principles.md`. For each principle violation, cite the specific principle (e.g., "SRP violation — principle 1.1").
 
+## Attitude
+
+1. **Be exhaustive.** Search the entire codebase, not just obvious hotspots. Every file, every function. Leave no stone unturned.
+2. **Do not be a yes-man.** Do not suppress findings to be agreeable. Report issues objectively regardless of who wrote the code. If the code has problems, say so.
+
 ## Scoring
 
 After collecting all findings, calculate dimension scores using `rubrics/scoring.md`:
