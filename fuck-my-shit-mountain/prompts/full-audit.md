@@ -60,12 +60,13 @@ Before writing findings, build a project map:
 
 ## Scoring
 
-After collecting all findings, calculate dimension scores using `rubrics/scoring.md`:
+After collecting all findings, assign dimension scores using `rubrics/scoring.md`:
 
-1. Start each dimension at 10.0.
-2. Deduct per finding based on severity and confidence status.
-3. Render the score dashboard with ASCII bars and letter grades.
-4. Include the dashboard in the Executive Summary.
+1. Review all findings per dimension.
+2. Judge the score (0.0–10.0, where 10 = worst) based on **engineering risk and maintenance cost**, not on mechanical deduction.
+3. Each score must have a **one-sentence justification** summarizing the strongest evidence.
+4. Render the score dashboard with ASCII bars and letter grades.
+5. Include the dashboard with justifications in the Executive Summary.
 
 ## Output Format
 

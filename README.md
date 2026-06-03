@@ -60,15 +60,15 @@ Works with **Codex**, **Claude Code**, **Cursor**, **Superpower**, or any AI tha
 ## Sample Score Dashboard
 
 ```
-Security        ████████░░  8.0  A
-Stability       ██████░░░░  6.0  B
-Performance     █████████░  9.0  S
-Testing         ████░░░░░░  4.0  C
-Maintainability ███████░░░  7.0  A
-Design          █████░░░░░  5.0  B
-Release         ██████░░░░  6.0  B
+Security        ████████░░  8.0  D   No auth on WS, hardcoded secret in config
+Stability       ██████░░░░  6.0  C   3 unwrap on hot path, no retry on DB
+Performance     █████████░  9.0  D   N+1 query per request, no pagination
+Testing         ████░░░░░░  4.0  B   9 integration tests are real, but unit is weak
+Maintainability ███████░░░  7.0  C   3 files over 800 lines, SRP violated in 2 modules
+Design          █████░░░░░  5.0  B   DRY violated 5x, fail-fast missing at API boundary
+Release         ██████░░░░  6.0  C   No CI on Windows, no rollback plan
 ────────────────────────────────────
-Overall         ██████░░░░  6.4  B
+Overall         ██████░░░░  6.4  C
 ```
 
 ## Design Principles

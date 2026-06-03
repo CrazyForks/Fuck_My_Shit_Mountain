@@ -1,47 +1,69 @@
 # Scoring Rubric
 
-## Purpose
+## Principle
 
-Provide an intuitive, at-a-glance assessment of codebase health across all audit dimensions. The score is a supplement to the detailed findings — it does not replace them.
+Scores are **judgment-based, not formula-based.** The AI evaluates each dimension holistically based on the evidence collected, then assigns a score. There is no mechanical "Critical = -2.0" deduction — that produces inflated scores and false precision.
 
-## Dimension Scores
+## Scale
 
-Each of the 6 dimensions is scored **0.0 – 10.0**:
+Each dimension is scored **0.0 – 10.0**:
 
-| Dimension | Label |
-|-----------|-------|
-| Security | How resistant to attack |
-| Stability | How reliable under failure |
-| Performance | How efficient under load |
-| Testing | How much confidence tests provide |
-| Maintainability | How easy to change |
-| Design | How well it follows engineering principles |
-| Release | How ready to ship |
+- **10.0** = Maximum shit mountain. This dimension is a disaster. Unacceptable risk. Complete overhaul needed.
+- **0.0** = Completely healthy. No issues found. Production-ready.
+- The score reflects **engineering risk and maintenance cost**, not code style preference.
 
-## Score Calculation
+## Dimensions
 
-### Starting point
+| Dimension | What It Measures |
+|-----------|-----------------|
+| Security | How resistant to attack. Auth, injection, secrets, dependency risk. |
+| Stability | How reliable under failure. Panic paths, error handling, retry, timeout, state consistency. |
+| Performance | How efficient under realistic load. Hot paths, memory, I/O, contention. |
+| Testing | How much real confidence tests provide. Coverage quality, test types, flakiness. |
+| Maintainability | How easy to change. Complexity, coupling, duplication, naming. |
+| Design | How well it follows engineering principles. SRP, DRY, KISS, fail-fast, etc. |
+| Release | How ready to ship. CI/CD, versioning, upgrade, rollback. |
 
-Each dimension starts at **10.0**.
+## Score Anchors
 
-### Deductions per finding
+Use these descriptions as **guidance**, not rules. The final score is your judgment.
 
-| Severity | Confirmed | Suspected |
-|----------|-----------|-----------|
-| Critical | –2.0 | –1.0 |
-| High | –1.0 | –0.5 |
-| Medium | –0.5 | –0.25 |
-| Low | –0.2 | –0.1 |
-| Info | 0.0 | 0.0 |
+### 0 – 2 (Healthy / Minor issues)
 
-A finding only deducts from its **own dimension**. For example, a Critical security finding deducts –2.0 from Security, not from other dimensions.
+- The dimension is in good shape.
+- Issues found are isolated, low-severity, and easy to fix.
+- No structural debt. No systemic risk.
+- **One-sentence pattern:** "Solid. A few minor issues but nothing that blocks release."
 
-### Cap & Rounding
+### 3 – 4 (Fair / Needs attention)
 
-- Minimum score per dimension: **0.0**
-- Round to 1 decimal place.
+- Some real issues exist, but they are contained.
+- Moderate risk in specific areas. No systemic failure.
+- Fixing requires local changes, not rewrites.
+- **One-sentence pattern:** "Some real issues, but contained. Worth fixing before next release."
 
-### Overall Score
+### 5 – 6 (Poor / Significant risk)
+
+- Systemic issues in this dimension.
+- Multiple medium-or-higher severity findings.
+- The dimension needs deliberate investment, not just quick fixes.
+- **One-sentence pattern:** "Systemic problems. Needs deliberate investment, not quick patches."
+
+### 7 – 8 (Bad / Critical debt)
+
+- Serious failures in this dimension.
+- High-severity issues that are not isolated — they indicate a pattern.
+- Fixing requires structural changes.
+- **One-sentence pattern:** "Structural failures. Fixing requires meaningful rework, not spot fixes."
+
+### 9 – 10 (Shit Mountain / Unacceptable)
+
+- This dimension is a disaster.
+- Critical-severity issues that are pervasive.
+- The approach in this dimension is fundamentally wrong.
+- **One-sentence pattern:** "Fundamentally broken. Needs to be redone."
+
+## Overall Score
 
 Average of all 7 dimension scores, rounded to 1 decimal place.
 
@@ -51,12 +73,12 @@ For focused audit modes (e.g., security-only), only report the relevant dimensio
 
 | Score | Grade | Label | Meaning |
 |-------|-------|-------|---------|
-| 9.0 – 10.0 | S | Clean | Production-ready. Minor nitpicks only. |
-| 7.0 – 8.9 | A | Good | Solid. Some issues but low urgency. |
-| 5.0 – 6.9 | B | Fair | Needs work. Medium risks present. |
-| 3.0 – 4.9 | C | Poor | Significant risks. Should address before release. |
-| 1.0 – 2.9 | D | Bad | Critical issues. Do not ship as-is. |
-| 0.0 – 0.9 | F | Shit Mountain | High-severity issues across the board. Major rework needed. |
+| 0.0 – 1.9 | S | Clean | Production-ready. Minor nitpicks only. |
+| 2.0 – 3.9 | A | Good | Solid. Some issues but low urgency. |
+| 4.0 – 5.9 | B | Fair | Needs work. Medium risks present. |
+| 6.0 – 7.9 | C | Poor | Significant risks. Should address before release. |
+| 8.0 – 9.4 | D | Bad | Critical issues. Do not ship as-is. |
+| 9.5 – 10.0 | F | Shit Mountain | High-severity issues across the board. Major rework needed. |
 
 ## Score Visualization
 
@@ -76,22 +98,24 @@ Number of filled blocks = floor(score). Remainder rounds up at ≥ 0.5.
 ### Example Dashboard
 
 ```
-Security        ████████░░  8.0  A
-Stability       ██████░░░░  6.0  B
-Performance     █████████░  9.0  S
-Testing         ████░░░░░░  4.0  C
-Maintainability ███████░░░  7.0  A
+Security        ████████░░  8.0  D
+Stability       ██████░░░░  6.0  C
+Performance     █████████░  9.0  D
+Testing         ████░░░░░░  4.0  B
+Maintainability ███████░░░  7.0  C
 Design          █████░░░░░  5.0  B
-Release         ██████░░░░  6.0  B
+Release         ██████░░░░  6.0  C
 ────────────────────────────────────
-Overall         ██████░░░░  6.4  B
+Overall         ██████░░░░  6.4  C
 ```
 
 ## Rules
 
-1. The score is derived from findings, not independent judgment. Do not adjust scores to match intuition.
-2. If a dimension has no findings, score is 10.0 (Clean). This is correct — no evidence of problems means no deduction.
-3. For suspected issues, use the halved deduction. This reflects lower confidence.
-4. If the same issue is reported in both Confirmed and Suspected status, only count the Confirmed version.
-5. Scores are relative to the audit scope. A security-only audit only assesses the Security dimension.
-6. Include the score dashboard in the Executive Summary section of the report.
+1. **Each score must have a one-sentence justification** in the score dashboard (e.g., "Security: 8.0 — No auth on WebSocket, hardcoded JWT secret in config"). The justification summarizes the strongest evidence.
+2. **Do not average finding severities.** If there is 1 Critical issue and nothing else, the score is not "10.0 - 2.0 = 8.0". Judge based on whether that one issue is systemic or isolated.
+3. **Consider intensity and density.** 10 low-severity issues in one file may deserve a higher score than 1 critical issue with a trivial fix.
+4. **Consider context.** A 600-line file in a CLI tool is different from a 600-line file in a security-critical library. Adjust for project type and scale.
+5. **If a dimension has zero findings, score 0.0 (Clean).** But confirm you actually checked — absence of evidence is not evidence of absence.
+6. **Do not round to game the grade.** If the score is 5.9, show 5.9, not 6.0. If it's 6.0, show 6.0.
+7. **Include the score dashboard in the Executive Summary** with one-sentence justifications per dimension.
+8. **Focused audit modes** (security-only, etc.): only score the relevant dimension. State "not assessed" for others.

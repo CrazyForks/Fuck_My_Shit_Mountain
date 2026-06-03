@@ -40,8 +40,8 @@ After receiving answers, load the corresponding prompt and proceed.
 
 Each audit produces a **score dashboard** with 7 dimension scores (0.0–10.0) and an overall score:
 
-- Scores are calculated automatically from findings using `rubrics/scoring.md`.
-- Each finding deducts from its own dimension based on severity and confidence.
+- Scores are **judgment-based**, not mechanical deductions. The AI evaluates evidence holistically per dimension.
+- Each score must have a **one-sentence justification** referencing the strongest evidence.
 - A letter grade (S/A/B/C/D/F) provides an at-a-glance health indicator.
 - Scores supplement detailed findings — they do not replace them.
 
