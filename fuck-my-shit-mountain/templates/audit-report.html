@@ -139,12 +139,25 @@
 
 <nav class="sidebar">
   <div class="sidebar-header">
-    <!-- CHANGE: project name and subtitle -->
     <h1>[[PROJECT]]</h1>
     <div class="sub">[[AUDIT_MODE_LABEL]] · [[DATE]]</div>
   </div>
   <div class="sidebar-nav">
-    <!-- CHANGE: nav links matching each section below. Add one per dimension audited. -->
+    <!--
+      CRITICAL: Generate ONE <a> per section in the report — only include
+      sections for the dimensions the user actually selected. For example:
+      - User chose "full"              → all sections below: summary, findings,
+        security, stability, performance, testing, maintainability, architecture,
+        design, release, documentation, configuration, observability, fallback,
+        testing-authenticity, type-safety, frontend-state, backend-api,
+        dependency-weight, principles, fix-order
+      - User chose "security, release" → only summary, findings, security,
+        release, principles, fix-order
+      - User chose "frontend-state"    → only summary, findings, frontend-state,
+        principles, fix-order
+
+      Use the same icon + label pattern. Match href to the section's id.
+    -->
     <a href="#summary"><span class="icon">📊</span> [[SUMMARY_LABEL]]</a>
     <a href="#findings"><span class="icon">🔍</span> [[FINDINGS_LABEL]]</a>
     <a href="#security"><span class="icon">🔒</span> [[SECURITY_LABEL]]</a>
@@ -177,10 +190,17 @@
   <!-- SCORE DASHBOARD                        -->
   <!-- ════════════════════════════════════════ -->
   <!--
-    CRITICAL: You MUST generate one .score-item per dimension (Security, Stability,
-    Performance, Testing, Maintainability, Design, Release), each with its own
-    score, grade letter, bar width, and one-sentence justification. Then add the
-    overall-row at the end. Do NOT skip any dimension. Do NOT merge them.
+    CRITICAL: You MUST generate one .score-item per dimension.
+    The dimensions depend on the user's mode selection:
+    - full        → Security, Stability, Performance, Testing, Maintainability, Design, Release
+    - security    → Security
+    - stability   → Stability
+    - performance → Performance
+    - testing     → Testing
+    - maintainability → Maintainability
+    - design/architecture → Design
+    - release     → Release
+    If the user chose multiple modes (e.g., "security, stability"), show ONLY those.
 
     Score → bar width: score * 10% (e.g., 8.5 → width:85%)
     Grade letter → CSS classes:
@@ -190,6 +210,7 @@
       C → .bar-fill.c .grade-c
       D → .bar-fill.d .grade-d
       F → .bar-fill.f .grade-f
+    Overall score = average of selected dimensions.
   -->
   <div class="card">
     <div class="card-header">📊 评分面板</div>
@@ -356,112 +377,59 @@
   <!-- ... repeat per finding ... -->
 
   <!-- ════════════════════════════════════════ -->
-  <!-- DIMENSION SECTIONS: Security           -->
+  <!-- PER-DIMENSION SECTIONS                  -->
   <!-- ════════════════════════════════════════ -->
-  <h3 class="section-title" id="security">🔒 [[SECURITY_TITLE]]</h3>
+  <!--
+    CRITICAL: Generate one <h3> section per dimension that the user selected.
+    Do NOT generate sections for dimensions the user didn't ask about.
+    
+    Examples:
+      User selected "full"              → Architecture, Security, Stability,
+        Performance, Testing, Maintainability, Design, Release, Documentation,
+        Configuration, Observability, Fallback, Testing-Authenticity, Type-Safety,
+        Frontend-State, Backend-API, Dependency-Weight
+      User selected "security, stability" → Security, Stability
+      User selected "frontend-state"       → Frontend-State
 
-  <!-- CHANGE: table of findings in this dimension -->
+    Each section has:
+      <h3 class="section-title" id="[dimension-id]">[ICON] [DIMENSION_TITLE]</h3>
+      <div class="card">  ← findings table (if any findings for this dimension)
+        <div class="card-header">已确认 <span>· N 个发现</span></div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap"><table>
+            <thead><tr><th>发现</th><th style="width:100px">严重程度</th><th style="width:100px">状态</th></tr></thead>
+            <tbody>
+              <tr><td>[finding title]</td><td><span class="badge badge-medium">Medium</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="card">  ← verified good practices (always include)
+        <div class="card-header">✅ [VERIFIED_HEADER]</div>
+        <div class="card-body">
+          <div class="check-list">
+            <div class="check-item"><span class="check">✓</span> [practice]</div>
+          </div>
+        </div>
+      </div>
+
+    If a dimension has zero findings, just show the verified card.
+    If a dimension is not applicable (e.g., Frontend-State for a pure backend project),
+    skip it entirely.
+  -->
+
+  <!-- EXAMPLE: Security -->
+  <h3 class="section-title" id="security">🔒 Security</h3>
+
   <div class="card">
-    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
+    <div class="card-header">已确认 <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· 2 个发现</span></div>
     <div class="card-body" style="padding:0">
       <div class="table-wrap">
         <table>
-          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
+          <thead><tr><th>发现</th><th style="width:100px">严重程度</th><th style="width:100px">状态</th></tr></thead>
           <tbody>
-            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-medium">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
-            <!-- ... -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- verified good practices checklist -->
-  <div class="card">
-    <div class="card-header">✅ [[VERIFIED_HEADER]]</div>
-    <div class="card-body">
-      <div class="check-list">
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_2]]</div>
-        <!-- ... -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════ -->
-  <!-- DIMENSION SECTIONS: Stability          -->
-  <!-- ════════════════════════════════════════ -->
-  <h3 class="section-title" id="stability">⚡ [[STABILITY_TITLE]]</h3>
-
-  <div class="card">
-    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
-    <div class="card-body" style="padding:0">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
-          <tbody>
-            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-high">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">✅ [[VERIFIED_HEADER]]</div>
-    <div class="card-body">
-      <div class="check-list">
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
-        <!-- ... -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════ -->
-  <!-- DIMENSION SECTIONS: Performance        -->
-  <!-- ════════════════════════════════════════ -->
-  <!-- If no findings, just show the verified card -->
-  <h3 class="section-title" id="performance">🚀 [[PERFORMANCE_TITLE]]</h3>
-
-  <div class="card">
-    <div class="card-header">✅ [[NO_FINDINGS_HEADER]]</div>
-    <div class="card-body">
-      <div class="check-list">
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
-        <!-- ... -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════ -->
-  <!-- DIMENSION SECTIONS: Testing            -->
-  <!-- ════════════════════════════════════════ -->
-  <h3 class="section-title" id="testing">🧪 [[TESTING_TITLE]]</h3>
-
-  <div class="card">
-    <div class="card-header">✅ [[NO_GAPS_HEADER]]</div>
-    <div class="card-body">
-      <div class="check-list">
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
-        <!-- ... -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════ -->
-  <!-- DIMENSION SECTIONS: Maintainability    -->
-  <!-- ════════════════════════════════════════ -->
-  <h3 class="section-title" id="maintainability">📐 [[MAINTAINABILITY_TITLE]]</h3>
-
-  <div class="card">
-    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
-    <div class="card-body" style="padding:0">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
-          <tbody>
-            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-low">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
-            <!-- ... -->
+            <tr><td>TOTP 时钟偏差窗口已文档化但未实现</td><td><span class="badge badge-medium">Medium</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
+            <tr><td>SMTP AUTH PLAIN 密码通过 format! 构建</td><td><span class="badge badge-low">Low</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -469,14 +437,62 @@
   </div>
 
   <div class="card">
-    <div class="card-header">✅ [[GOOD_PRACTICES_HEADER]]</div>
+    <div class="card-header">✅ 已验证安全</div>
     <div class="card-body">
       <div class="check-list">
-        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
-        <!-- ... -->
+        <div class="check-item"><span class="check">✓</span> Argon2id token 哈希（OWASP 2023 参数）</div>
+        <div class="check-item"><span class="check">✓</span> 常量时间比较（subtle::ConstantTimeEq）</div>
+        <div class="check-item"><span class="check">✓</span> CSPRNG token 生成（getrandom）</div>
       </div>
     </div>
   </div>
+
+  <!-- EXAMPLE: Stability -->
+  <h3 class="section-title" id="stability">⚡ Stability</h3>
+
+  <div class="card">
+    <div class="card-header">已确认 <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· 1 个发现</span></div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>发现</th><th style="width:100px">严重程度</th><th style="width:100px">状态</th></tr></thead>
+          <tbody>
+            <tr><td>生产代码 .unwrap() 在 web_assets.rs</td><td><span class="badge badge-medium">Medium</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">✅ 已验证稳健</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> 优雅关闭（CancellationToken + drain + 5s 超时）</div>
+        <div class="check-item"><span class="check">✓</span> Mutex 中毒处理（prune + clear_poison）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAMPLE: Performance (no findings) -->
+  <h3 class="section-title" id="performance">🚀 Performance</h3>
+
+  <div class="card">
+    <div class="card-header">✅ 无发现</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> 三层视图缓存（overview/nodes/metrics）</div>
+        <div class="check-item"><span class="check">✓</span> 有界队列（history writer + audit writer）</div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    REPEAT the same pattern for each audited dimension:
+    <h3 class="section-title" id="[dimension]">[ICON] [TITLE]</h3>
+    + findings card (or "✅ 无发现" card)
+    + verified good practices card
+  -->
 
   <!-- ════════════════════════════════════════ -->
   <!-- DESIGN PRINCIPLES                      -->

@@ -89,15 +89,15 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 2. The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML).
 
 3. For HTML output: read `templates/audit-report.html` and generate a COMPLETE HTML file that copies the exact structure:
-   - All 7 score dimensions (Security, Stability, Performance, Testing, Maintainability, Design, Release) each with its own .score-item, bar, grade, and one-sentence justification
+   - Score dashboard: one .score-item per dimension the user selected (full mode = Security, Stability, Performance, Testing, Maintainability, Design, Release). Do NOT show dimensions the user didn't pick.
    - Stats row with total + severity breakdown
    - Top risks table with all findings
    - Detailed findings with full evidence + fix boxes
-   - Per-dimension sections (one <h3> per dimension) with findings table + verified checklist
+   - Per-dimension sections: one `<h3>` per dimension the user selected. Do NOT generate sections for unselected dimensions. Each section has findings table + verified checklist.
    - Design principles violations table + followed checklist
    - Fix order with tables grouped by priority
    - Quick wins grid
-   - Sidebar nav links matching every section ID
+   - Sidebar nav links: one per section, matching selected dimensions only
    - Footer text
    Do NOT skip any section. Do NOT use placeholder variables. Generate complete, self-contained HTML.
 3. Do NOT copy formatting, headings, or style from any `.md` file in the audited project.
