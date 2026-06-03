@@ -383,29 +383,44 @@
     CRITICAL: Generate one <h3> section per dimension that the user selected.
     Do NOT generate sections for dimensions the user didn't ask about.
     
-    Examples:
-      User selected "full"              → Architecture, Security, Stability,
-        Performance, Testing, Maintainability, Design, Release, Documentation,
-        Configuration, Observability, Fallback, Testing-Authenticity, Type-Safety,
-        Frontend-State, Backend-API, Dependency-Weight
-      User selected "security, stability" → Security, Stability
-      User selected "frontend-state"       → Frontend-State
+    FULL mode covers ALL 17 audit dimensions:
+      1.  Architecture & Module Boundaries
+      2.  Security
+      3.  Stability & Error Handling
+      4.  Performance & Scalability
+      5.  Testing Quality
+      6.  Maintainability
+      7.  Design Principles Compliance
+      8.  Release & Deployment Process
+      9.  Documentation Accuracy
+      10. Configuration Safety
+      11. Observability
+      12. Fallback / Defensive Code
+      13. Testing Authenticity
+      14. Type Safety
+      15. Frontend State
+      16. Backend API
+      17. Dependency Weight
 
-    Each section has:
-      <h3 class="section-title" id="[dimension-id]">[ICON] [DIMENSION_TITLE]</h3>
-      <div class="card">  ← findings table (if any findings for this dimension)
-        <div class="card-header">已确认 <span>· N 个发现</span></div>
+    Each section has the SAME pattern:
+      <h3 class="section-title" id="[dimension-id]">[ICON] [TITLE]</h3>
+
+      <!-- findings table (if any) -->
+      <div class="card">
+        <div class="card-header">已确认 <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· N 个发现</span></div>
         <div class="card-body" style="padding:0">
           <div class="table-wrap"><table>
             <thead><tr><th>发现</th><th style="width:100px">严重程度</th><th style="width:100px">状态</th></tr></thead>
             <tbody>
-              <tr><td>[finding title]</td><td><span class="badge badge-medium">Medium</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
+              <tr><td>[title]</td><td><span class="badge badge-medium">Medium</span></td><td><span class="badge badge-confirmed">Confirmed</span></td></tr>
             </tbody>
           </table></div>
         </div>
       </div>
-      <div class="card">  ← verified good practices (always include)
-        <div class="card-header">✅ [VERIFIED_HEADER]</div>
+
+      <!-- verified good practices (always include, even if no findings) -->
+      <div class="card">
+        <div class="card-header">✅ [VERIFIED HEADER]</div>
         <div class="card-body">
           <div class="check-list">
             <div class="check-item"><span class="check">✓</span> [practice]</div>
@@ -418,7 +433,14 @@
     skip it entirely.
   -->
 
-  <!-- EXAMPLE: Security -->
+  <!-- ──── EXAMPLE SECTIONS ──── -->
+  <!--
+    BELOW ARE EXAMPLE SECTIONS showing the pattern for different cases.
+    REPLACE all content with your actual audit data.
+    GENERATE one section per audited dimension (up to 17 in full mode).
+  -->
+
+  <!-- EXAMPLE 1: Security — has findings -->
   <h3 class="section-title" id="security">🔒 Security</h3>
 
   <div class="card">
@@ -447,7 +469,7 @@
     </div>
   </div>
 
-  <!-- EXAMPLE: Stability -->
+  <!-- EXAMPLE 2: Stability — has findings -->
   <h3 class="section-title" id="stability">⚡ Stability</h3>
 
   <div class="card">
@@ -474,7 +496,7 @@
     </div>
   </div>
 
-  <!-- EXAMPLE: Performance (no findings) -->
+  <!-- EXAMPLE 3: Performance — zero findings, only verified card -->
   <h3 class="section-title" id="performance">🚀 Performance</h3>
 
   <div class="card">
@@ -488,10 +510,15 @@
   </div>
 
   <!--
-    REPEAT the same pattern for each audited dimension:
-    <h3 class="section-title" id="[dimension]">[ICON] [TITLE]</h3>
-    + findings card (or "✅ 无发现" card)
-    + verified good practices card
+    REPEAT the above pattern for EVERY audited dimension.
+    In full mode: Architecture, Security, Stability, Performance, Testing,
+    Maintainability, Design, Release, Documentation, Configuration,
+    Observability, Fallback, Testing-Authenticity, Type-Safety,
+    Frontend-State, Backend-API, Dependency-Weight.
+
+    Each gets its own <h3> + findings card (or "✅ 无发现") + verified card.
+    Use the icon + Chinese title consistent with the dimension's topic.
+    Do NOT skip any. Do NOT merge dimensions together.
   -->
 
   <!-- ════════════════════════════════════════ -->

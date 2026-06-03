@@ -89,11 +89,11 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 2. The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML).
 
 3. For HTML output: read `templates/audit-report.html` and generate a COMPLETE HTML file that copies the exact structure:
-   - Score dashboard: one .score-item per dimension the user selected (full mode = Security, Stability, Performance, Testing, Maintainability, Design, Release). Do NOT show dimensions the user didn't pick.
+   - Score dashboard: one .score-item per scoring dimension the user selected (full mode = Security, Stability, Performance, Testing, Maintainability, Design, Release). Do NOT show dimensions the user didn't pick.
    - Stats row with total + severity breakdown
    - Top risks table with all findings
    - Detailed findings with full evidence + fix boxes
-   - Per-dimension sections: one `<h3>` per dimension the user selected. Do NOT generate sections for unselected dimensions. Each section has findings table + verified checklist.
+   - Per-dimension sections: one `<h3>` per audit dimension the user selected (full mode = ALL 17: Architecture, Security, Stability, Performance, Testing, Maintainability, Design, Release, Documentation, Configuration, Observability, Fallback, Testing-Authenticity, Type-Safety, Frontend-State, Backend-API, Dependency-Weight). Each section has findings table + verified checklist. Do NOT skip any.
    - Design principles violations table + followed checklist
    - Fix order with tables grouped by priority
    - Quick wins grid
