@@ -61,6 +61,10 @@ Wait for answers before proceeding.
 3. Developer experience matters — a well-known library may be worth the weight for DX alone.
 4. For each flagged dependency, check: can it be removed, replaced with a lighter alternative, or inlined?
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

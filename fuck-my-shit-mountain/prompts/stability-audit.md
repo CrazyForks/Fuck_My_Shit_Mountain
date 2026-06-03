@@ -75,6 +75,10 @@ Focus on reliability, runtime safety, state consistency, and failure recovery.
 1. **Be exhaustive.** Check every error path, every unwrap, every timeout. Assume every failure will happen in production.
 2. **Do not be a yes-man.** Do not skip issues because "it works in practice." Report every realistic crash path.
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

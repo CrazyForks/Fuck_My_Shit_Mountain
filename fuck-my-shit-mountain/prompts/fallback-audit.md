@@ -55,6 +55,10 @@ Wait for answers before proceeding.
 4. Distinguish between **defensive programming** (validates external input) and **defensive guessing** (hides bugs).
 5. A fallback that activates silently and is never monitored is worse than a crash.
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

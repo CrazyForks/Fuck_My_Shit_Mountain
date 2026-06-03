@@ -83,4 +83,9 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 
 ## Output Format
 
-Use the issue-card template for each finding. Assemble into the audit-report template.
+**IMPORTANT: Use the skill's templates, NOT the project's markdown style.**
+
+1. Each finding MUST follow `templates/issue-card.md` exactly.
+2. The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML).
+3. Do NOT copy formatting, headings, or style from any `.md` file in the audited project.
+4. The project's own README, docs, or comments are not the report format.

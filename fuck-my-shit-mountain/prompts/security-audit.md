@@ -71,6 +71,10 @@ Focus only on security-relevant risks.
 1. **Be exhaustive.** Check every endpoint, every auth path, every dependency. Attackers only need one hole.
 2. **Do not be a yes-man.** Report security issues objectively. Do not downplay because the project "is just internal" or "nobody will attack us."
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

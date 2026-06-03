@@ -77,6 +77,10 @@ Wait for answers before proceeding.
 2. Consistency is more important than "correct" design. If all endpoints use snake_case, do not recommend camelCase.
 3. Missing pagination is a problem only if the dataset can grow beyond ~1000 items.
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

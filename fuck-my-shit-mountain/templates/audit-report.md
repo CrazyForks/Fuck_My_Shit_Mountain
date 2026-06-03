@@ -1,3 +1,5 @@
+> **INSTRUCTION TO AI: This is the ONLY valid report template. Do NOT use any formatting, heading style, or structure from files inside the audited project. Output MUST follow this template exactly.**
+
 # Fuck My Shit Mountain Audit Report
 
 **Project:** <project name>

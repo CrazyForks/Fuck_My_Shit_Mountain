@@ -82,6 +82,10 @@ Focus on maintainability, complexity, coupling, and design risk.
 2. For each issue, include the risk of changing the code and the test needed before refactoring.
 3. Prefer local improvements over architectural rewrites.
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>

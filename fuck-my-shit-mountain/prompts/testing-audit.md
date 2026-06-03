@@ -68,6 +68,10 @@ Group recommendations into:
 - **Nice to have** — incremental improvement
 - **Not worth testing** — trivial, stable, or generated code
 
+## Format Constraint
+
+**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
+
 ## Finding Format
 
 ### Finding: <short title>
