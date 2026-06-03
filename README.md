@@ -29,9 +29,21 @@ Audit this repository for stable release readiness.
 
 | Mode | Focus |
 |------|-------|
-| `full` | Complete audit across all dimensions + design principles |
+| `full` | Complete audit across all dimensions + 6 specialized areas |
+| `fallback` | Silent fallback, catch, defensive guessing |
+| `testing-authenticity` | Real test confidence vs green checkmarks |
+| `type-safety` | Unsafe blocks, type assertions, boundary types |
+| `frontend-state` | Component size, state management, effects |
+| `backend-api` | API design, validation, data access patterns |
+| `dependency-weight` | Overweight deps, build toolchain |
 | `security` | Authentication, injection, secrets, dependencies |
 | `stability` | Panic paths, error handling, concurrency, lifecycle |
+| `fallback` | Silent fallback, catch, defensive guessing, compatibility branches |
+| `testing-authenticity` | Over-mocking, implementation-detail tests, false confidence |
+| `type-safety` | Unsafe blocks, type assertions, error types, input boundaries |
+| `frontend-state` | Component size, state duplication, effects, UI-business coupling |
+| `backend-api` | API consistency, request validation, N+1, data flow |
+| `dependency-weight` | Overweight deps, unused deps, build toolchain complexity |
 | `performance` | Hot paths, memory, I/O, startup cost |
 | `testing` | Coverage quality, test types, flakiness |
 | `maintainability` | Complexity, coupling, duplication, naming |
@@ -42,8 +54,8 @@ Audit this repository for stable release readiness.
 ```
 fuck-my-shit-mountain/
 ├── SKILL.md              — Skill entry point & rules
-├── prompts/              — One prompt per audit mode (7 files)
-├── rubrics/              — Severity, confidence, evidence & scoring standards
+├── prompts/              — One prompt per audit mode (13 files)
+├── rubrics/              — Severity, confidence, evidence, principles & scoring
 ├── templates/            — Report, issue card & remediation plan
 └── examples/             — Rust, Node.js, Vue audit examples
 ```

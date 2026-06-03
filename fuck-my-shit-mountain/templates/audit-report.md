@@ -55,18 +55,26 @@ Each dimension scored 0.0–10.0 (10 = worst). Scores are judgment-based, not fo
 
 Depending on audit mode:
 
-- **Full / Security:** Security Concerns
-- **Full / Stability:** Stability Concerns
+- **Full / Security / Backend-API:** Security Concerns
+- **Full / Stability / Fallback:** Stability Concerns
 - **Full / Performance:** Performance Concerns
-- **Full / Testing:** Testing Gaps
-- **Full / Maintainability:** Maintainability Concerns
-- **Full / Release:** Release Concerns
+- **Full / Testing / Testing-Authenticity:** Testing Gaps
+- **Full / Maintainability / Frontend-State / Backend-API:** Maintainability Concerns
+- **Full / Type-Safety:** Type Safety Concerns
+- **Full / Release / Dependency-Weight:** Release Concerns
 - **Security:** Security Concerns
 - **Stability:** Stability Concerns
 - **Performance:** Performance Concerns
 - **Testing:** Testing Gaps
+- **Testing-Authenticity:** Testing Authenticity Analysis
 - **Maintainability:** Maintainability Concerns
+- **Design:** Design / Principles Concerns
 - **Release:** Release Concerns
+- **Fallback:** Fallback / Defensive Code Analysis
+- **Type-Safety:** Type Safety Analysis
+- **Frontend-State:** Frontend State Analysis
+- **Backend-API:** Backend API Analysis
+- **Dependency-Weight:** Dependency Weight Analysis
 
 Each section lists relevant issues grouped by sub-category.
 
@@ -95,7 +103,115 @@ Repeat for all dimensions covered by the audit mode.
 
 ---
 
+## <N+1a>. Fallback / Defensive Code Analysis
 
+<Only for full or fallback mode. See prompts/fallback-audit.md>
+
+### Fallback Summary
+
+| Subtype | Count | KeepWithAlert | FailFast | Remove |
+|---------|-------|---------------|----------|--------|
+| SilentFallback | <N> | <N> | <N> | <N> |
+| EmptyCatch | <N> | <N> | <N> | <N> |
+| CompatibilityBranch | <N> | <N> | <N> | <N> |
+| SilentCorrection | <N> | <N> | <N> | <N> |
+| DefensiveGuess | <N> | <N> | <N> | <N> |
+
+<Detail each finding with the fallback audit finding format>
+
+## <N+1b>. Testing Authenticity Analysis
+
+<Only for full or testing-authenticity mode. See prompts/testing-authenticity-audit.md>
+
+### Confidence Assessment
+
+| Test Area | Real Confidence | Risk | Action |
+|-----------|---------------|------|--------|
+| <test file/area> | High / Medium / Low / None | <what bugs would escape> | Keep / Rewrite / Delete |
+
+### Valuable Tests
+
+<Tests that actually provide real regression protection>
+
+### Suspicious Tests
+
+<Over-mocked, implementation-detail, happy-path-only, brittle>
+
+### Missing Tests
+
+<Critical paths with no test coverage>
+
+---
+
+## <N+1c>. Type Safety Analysis
+
+<Only for full or type-safety mode. See prompts/type-safety-audit.md>
+
+### Summary
+
+| Subtype | Count | Critical | High | Medium | Low |
+|---------|-------|----------|------|--------|-----|
+| UnsafeBlock | <N> | <N> | <N> | <N> | <N> |
+| TypeAssertion | <N> | <N> | <N> | <N> | <N> |
+| InputBoundary | <N> | <N> | <N> | <N> | <N> |
+| OutputLeak | <N> | <N> | <N> | <N> | <N> |
+| BooleanTrap | <N> | <N> | <N> | <N> | <N> |
+| StringlyTyped | <N> | <N> | <N> | <N> | <N> |
+| ErrorType | <N> | <N> | <N> | <N> | <N> |
+
+<Detail each finding with the type-safety audit finding format>
+
+## <N+1d>. Frontend State Analysis
+
+<Only for full or frontend-state mode. See prompts/frontend-state-audit.md>
+
+### Summary
+
+| Subtype | Count | Affected Components |
+|---------|-------|-------------------|
+| ComponentSize | <N> | <list> |
+| StateDuplication | <N> | <list> |
+| PropDrilling | <N> | <list> |
+| EffectChain | <N> | <list> |
+| UIBusinessCoupling | <N> | <list> |
+| DOMasState | <N> | <list> |
+| RequestState | <N> | <list> |
+| RenderPerf | <N> | <list> |
+
+<Detail each finding with the frontend-state audit finding format>
+
+## <N+1e>. Backend API Analysis
+
+<Only for full or backend-api mode. See prompts/backend-api-audit.md>
+
+### Summary
+
+| Subtype | Count | Affected Endpoints |
+|---------|-------|-------------------|
+| ApiConsistency | <N> | <list> |
+| Validation | <N> | <list> |
+| Auth | <N> | <list> |
+| NplusOne | <N> | <list> |
+| Caching | <N> | <list> |
+| ErrorResponse | <N> | <list> |
+| BusinessLogic | <N> | <list> |
+| DataFlow | <N> | <list> |
+
+<Detail each finding with the backend-api audit finding format>
+
+## <N+1f>. Dependency Weight Analysis
+
+<Only for full or dependency-weight mode. See prompts/dependency-weight-audit.md>
+
+### Dependency Scoreboard
+
+| Dependency | Status | Weight | Transitives | Used For | Recommended Action |
+|------------|--------|--------|-------------|----------|-------------------|
+| <name@version> | Healthy / Overweight / Unused / Dead | <KB/MB> | <count> | <what it does> | Keep / Inline / Remove |
+
+<Detail each finding with the dependency-weight audit finding format>
+
+---
 
 ## <N+2>. Recommended Fix Order
 

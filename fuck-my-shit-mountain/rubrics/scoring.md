@@ -14,15 +14,15 @@ Each dimension is scored **0.0 – 10.0**:
 
 ## Dimensions
 
-| Dimension | What It Measures |
-|-----------|-----------------|
-| Security | How resistant to attack. Auth, injection, secrets, dependency risk. |
-| Stability | How reliable under failure. Panic paths, error handling, retry, timeout, state consistency. |
-| Performance | How efficient under realistic load. Hot paths, memory, I/O, contention. |
-| Testing | How much real confidence tests provide. Coverage quality, test types, flakiness. |
-| Maintainability | How easy to change. Complexity, coupling, duplication, naming. |
-| Design | How well it follows engineering principles. SRP, DRY, KISS, fail-fast, etc. |
-| Release | How ready to ship. CI/CD, versioning, upgrade, rollback. |
+| Dimension | What It Measures | Mapped From Modes |
+|-----------|-----------------|-------------------|
+| Security | How resistant to attack. Auth, injection, secrets, dependency risk. | security, type-safety |
+| Stability | How reliable under failure. Panic paths, error handling, retry, timeout, state consistency, fallback quality. | stability, fallback |
+| Performance | How efficient under realistic load. Hot paths, memory, I/O, contention. | performance, dependency-weight |
+| Testing | How much real confidence tests provide. Coverage quality, test types, authenticity. | testing, testing-authenticity |
+| Maintainability | How easy to change. Complexity, coupling, duplication, naming, state management, API design. | maintainability, frontend-state, backend-api |
+| Design | How well it follows engineering principles. SRP, DRY, KISS, fail-fast, type safety. | (cross-cutting) |
+| Release | How ready to ship. CI/CD, versioning, upgrade, rollback, dependency weight. | release, dependency-weight |
 
 ## Score Anchors
 

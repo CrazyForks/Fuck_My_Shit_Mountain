@@ -30,13 +30,19 @@ run full-audit on .
 
 | Command | Scope |
 |---------|-------|
-| `run full-audit` | Complete audit across all dimensions + design principles |
+| `run full-audit` | Complete audit across all dimensions + 6 specialized areas |
 | `run security-audit` | Security-only review |
 | `run stability-audit` | Reliability and error handling |
 | `run performance-audit` | Realistic performance bottlenecks |
 | `run testing-audit` | Test quality and coverage gaps |
 | `run maintainability-audit` | Code complexity and coupling |
 | `run release-audit` | Release and deployment readiness |
+| `run fallback-audit` | Silent fallback, catch, defensive guessing |
+| `run testing-authenticity-audit` | Real test confidence vs green checkmarks |
+| `run type-safety-audit` | Unsafe blocks, type assertions, boundary types |
+| `run frontend-state-audit` | Component size, state management, effects |
+| `run backend-api-audit` | API design, validation, data access patterns |
+| `run dependency-weight-audit` | Overweight deps, build toolchain |
 
 ### Example
 
@@ -70,8 +76,8 @@ A full audit report contains:
 fuck-my-shit-mountain/
   SKILL.md              Skill entry point — how the skill works
   README.md             This file
-  prompts/              Audit prompt templates (one per mode)
-  rubrics/              Severity, confidence, evidence, and scoring standards
+  prompts/              Audit prompt templates (13 modes)
+  rubrics/              Severity, confidence, evidence, principles, scoring
   templates/            Report, issue card, and remediation plan templates
   examples/             Usage examples for different project types
 ```

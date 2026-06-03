@@ -8,7 +8,7 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 
 When the skill is invoked, the AI MUST first ask the user these questions before proceeding:
 
-1. **Audit scope** — Which mode? (full / security / stability / performance / testing / maintainability / release)
+1. **Audit scope** — Which mode? (full / security / stability / performance / testing / maintainability / release / fallback / testing-authenticity / type-safety / frontend-state / backend-api / dependency-weight)
 2. **Target language / framework** — So the AI can use language-specific checklists and examples (e.g., Rust + Axum, Node.js + Express, Vue 3 + Pinia)
 3. **Output to file?** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or just print to stdout. If yes, the AI MUST write the file after generating the report.
 
@@ -35,6 +35,12 @@ After receiving answers, load the corresponding prompt and proceed.
 | `testing` | `prompts/testing-audit.md` | Test quality & gaps |
 | `maintainability` | `prompts/maintainability-audit.md` | Complexity, coupling, principles |
 | `release` | `prompts/release-audit.md` | Release readiness |
+| `fallback` | `prompts/fallback-audit.md` | Silent fallback, catch, defensive guessing |
+| `testing-authenticity` | `prompts/testing-authenticity-audit.md` | Real confidence vs green checkmarks |
+| `type-safety` | `prompts/type-safety-audit.md` | Unsafe blocks, assertions, boundary types |
+| `frontend-state` | `prompts/frontend-state-audit.md` | Component size, state, effects, coupling |
+| `backend-api` | `prompts/backend-api-audit.md` | API design, validation, data access patterns |
+| `dependency-weight` | `prompts/dependency-weight-audit.md` | Overweight deps, build toolchain |
 
 ## Scoring
 
