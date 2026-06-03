@@ -44,6 +44,8 @@ run full-audit on .
 | `run backend-api-audit` | API design, validation, data access patterns |
 | `run dependency-weight-audit` | Overweight deps, build toolchain |
 
+> **Tip:** You can combine modes — e.g., `security, stability, type-safety` — for a focused multi-dimensional audit. The AI will merge audit areas from each selected mode.
+
 ### Example
 
 ```text

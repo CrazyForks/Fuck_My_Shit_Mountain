@@ -27,22 +27,23 @@ Audit this repository for stable release readiness.
 
 ### Modes
 
+Pick one, or combine multiple with commas (e.g., `security, stability, type-safety`).
+
 | Mode | Focus |
 |------|-------|
 | `full` | Complete audit across all dimensions + 6 specialized areas |
-| `fallback` | Silent fallback, catch, defensive guessing |
-| `testing-authenticity` | Real test confidence vs green checkmarks |
-| `type-safety` | Unsafe blocks, type assertions, boundary types |
-| `frontend-state` | Component size, state management, effects |
-| `backend-api` | API design, validation, data access patterns |
-| `dependency-weight` | Overweight deps, build toolchain |
 | `security` | Authentication, injection, secrets, dependencies |
 | `stability` | Panic paths, error handling, concurrency, lifecycle |
-| `fallback` | Silent fallback, catch, defensive guessing, compatibility branches |
-| `testing-authenticity` | Over-mocking, implementation-detail tests, false confidence |
-| `type-safety` | Unsafe blocks, type assertions, error types, input boundaries |
-| `frontend-state` | Component size, state duplication, effects, UI-business coupling |
-| `backend-api` | API consistency, request validation, N+1, data flow |
+| `performance` | Hot paths, memory, I/O, startup cost |
+| `testing` | Coverage quality, test types, flakiness |
+| `maintainability` | Complexity, coupling, duplication, naming |
+| `release` | CI/CD, versioning, upgrade, rollback |
+| `fallback` | Silent fallback, catch, defensive guessing |
+| `testing-authenticity` | Over-mocking, impl-detail tests, false confidence |
+| `type-safety` | Unsafe blocks, type assertions, boundary types |
+| `frontend-state` | Component size, state duplication, effects, coupling |
+| `backend-api` | API consistency, validation, N+1, data flow |
+| `dependency-weight` | Overweight deps, build toolchain |
 | `dependency-weight` | Overweight deps, unused deps, build toolchain complexity |
 | `performance` | Hot paths, memory, I/O, startup cost |
 | `testing` | Coverage quality, test types, flakiness |

@@ -10,7 +10,9 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 
 The 3 questions are:
 
-1. **Confirm audit scope** — Tell the user which mode this prompt corresponds to and confirm they want to proceed.
+1. **Audit modes** — Ask: "Which modes? You can pick multiple, comma-separated. Available: full, security, stability, performance, testing, maintainability, release, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight. Or just 'full' for everything."
+   - If the user picks `full`, do all dimensions.
+   - If the user picks multiple (e.g., `security, stability, frontend-state`), combine the audit areas from each mode's prompt. Use the most specific finding format rules.
 2. **Language / framework** — So the AI can use language-specific checklists and examples (e.g., Rust + Axum, Node.js + Express, Vue 3 + Pinia).
 3. **File output** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or print to stdout. If yes, the AI MUST write the file after generating the report.
 
@@ -19,7 +21,7 @@ The 3 questions are:
 ## How It Works
 
 1. The user invokes the skill (or the AI asks the 3 init questions — **mandatory, do not skip**).
-2. The AI loads the corresponding prompt from `prompts/`.
+2. The AI loads the corresponding prompt(s) from `prompts/`. If multiple modes are selected, merge the audit areas from each.
 3. The AI audits the codebase using the rubrics in `rubrics/`.
 4. Each finding is recorded using the template in `templates/issue-card.md`.
 5. Results are assembled into a report using `templates/audit-report.md`.
