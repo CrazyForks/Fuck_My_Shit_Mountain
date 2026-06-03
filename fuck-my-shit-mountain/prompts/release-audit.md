@@ -1,5 +1,10 @@
 # Release Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → release ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **release mode**.
 
 Focus on whether this project can be safely released, installed, upgraded, and rolled back.

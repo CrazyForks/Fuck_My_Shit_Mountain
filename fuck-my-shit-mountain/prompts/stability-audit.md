@@ -1,5 +1,10 @@
 # Stability Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → stability ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **stability mode**.
 
 Focus on reliability, runtime safety, state consistency, and failure recovery.

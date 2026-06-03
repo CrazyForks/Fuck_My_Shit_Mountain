@@ -1,5 +1,10 @@
 # Maintainability Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → maintainability ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **maintainability mode**.
 
 Focus on maintainability, complexity, coupling, and design risk.

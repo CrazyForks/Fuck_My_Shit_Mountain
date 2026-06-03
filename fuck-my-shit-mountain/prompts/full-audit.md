@@ -1,5 +1,10 @@
 # Full Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → full ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **full mode**.
 
 Audit this repository as if it is preparing for a stable public release.

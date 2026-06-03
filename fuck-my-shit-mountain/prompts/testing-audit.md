@@ -1,5 +1,10 @@
 # Testing Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → testing ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **testing mode**.
 
 Focus on whether the tests provide real confidence in the codebase.

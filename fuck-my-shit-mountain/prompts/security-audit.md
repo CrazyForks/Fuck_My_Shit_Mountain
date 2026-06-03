@@ -1,5 +1,10 @@
 # Security Audit Prompt
 
+> **Before starting, the AI should have already asked:**
+> 1. Audit scope → security ✅
+> 2. Target language / framework?
+> 3. Output to .md file?
+
 Use the fuck-my-shit-mountain skill in **security mode**.
 
 Focus only on security-relevant risks.

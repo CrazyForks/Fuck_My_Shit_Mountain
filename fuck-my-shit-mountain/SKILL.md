@@ -4,14 +4,25 @@
 
 Guide AI to perform an evidence-based, professional code audit of a software project. Despite the irreverent name, the output must be冷静 (calm), professional, actionable, and free of emotional language.
 
+## Interactive Flow
+
+When the skill is invoked, the AI MUST first ask the user these questions before proceeding:
+
+1. **Audit scope** — Which mode? (full / security / stability / performance / testing / maintainability / release)
+2. **Target language / framework** — So the AI can use language-specific checklists and examples (e.g., Rust + Axum, Node.js + Express, Vue 3 + Pinia)
+3. **Output to file?** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or just print to stdout. If yes, the AI MUST write the file after generating the report.
+
+After receiving answers, load the corresponding prompt and proceed.
+
 ## How It Works
 
-1. The user selects an audit mode (full or focused).
+1. The user invokes the skill (or the AI asks the 3 init questions).
 2. The AI loads the corresponding prompt from `prompts/`.
 3. The AI audits the codebase using the rubrics in `rubrics/`.
 4. Each finding is recorded using the template in `templates/issue-card.md`.
 5. Results are assembled into a report using `templates/audit-report.md`.
-6. If remediation is requested, the AI uses `templates/remediation-plan.md`.
+6. If output-to-file was requested, the AI writes the report to disk.
+7. If remediation is requested, the AI uses `templates/remediation-plan.md`.
 
 ## Modes
 
