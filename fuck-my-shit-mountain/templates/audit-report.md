@@ -16,18 +16,18 @@
 ### Score Dashboard
 
 ```
-Security        ████████░░  8.0  D   No auth on WS, hardcoded secret in config
-Stability       ██████░░░░  6.0  C   3 unwrap on hot path, no retry on DB
-Performance     █████████░  9.0  D   N+1 query per request, no pagination
-Testing         ████░░░░░░  4.0  B   9 integration tests are real, but unit is weak
-Maintainability ███████░░░  7.0  C   3 files over 800 lines, SRP violated in 2 modules
+Security        ████████░░  8.0  A   No auth on WS, hardcoded secret in config
+Stability       ██████░░░░  6.0  B   3 unwrap on hot path, no retry on DB
+Performance     ██████████  10.0 S   No issues found
+Testing         ████░░░░░░  4.0  C   9 integration tests real, but unit is weak
+Maintainability ███████░░░  7.0  A   3 files over 800 lines, SRP violated in 2 modules
 Design          █████░░░░░  5.0  B   DRY violated 5x, fail-fast missing at API boundary
-Release         ██████░░░░  6.0  C   No CI on Windows, no rollback plan
-────────────────────────────────────
-Overall         ██████░░░░  6.4  C
+Release         ██████░░░░  6.0  B   No CI on Windows, no rollback plan
+─────────────────────────────────────
+Overall         ██████░░░░  6.6  B
 ```
 
-Each dimension scored 0.0–10.0 (10 = worst). Scores are judgment-based, not formula-based. See `rubrics/scoring.md` for anchor descriptions.
+Each dimension scored 0.0–10.0. **Higher = better (10 = clean, 0 = shit mountain).** Scores are judgment-based, not formula-based. See `rubrics/scoring.md` for anchor descriptions.
 
 ### Finding Statistics
 

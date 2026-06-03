@@ -6,11 +6,15 @@ Scores are **judgment-based, not formula-based.** The AI evaluates each dimensio
 
 ## Scale
 
-Each dimension is scored **0.0 – 10.0**:
+Each dimension is scored **0.0 – 10.0** — **higher = better**.
 
-- **10.0** = Maximum shit mountain. This dimension is a disaster. Unacceptable risk. Complete overhaul needed.
-- **0.0** = Completely healthy. No issues found. Production-ready.
-- The score reflects **engineering risk and maintenance cost**, not code style preference.
+| Score | Meaning |
+|-------|---------|
+| **10.0** | **Perfect.** Clean, production-ready. No issues found. |
+| **0.0** | **Maximum shit mountain.** Completely unmaintainable. Unacceptable risk. |
+| The score reflects **engineering quality and maintainability**, not code style preference. |
+
+**CRITICAL — Do not reverse this. 10 is the best score. 0 is the worst. Higher = better, always.**
 
 ## Dimensions
 
@@ -28,35 +32,35 @@ Each dimension is scored **0.0 – 10.0**:
 
 Use these descriptions as **guidance**, not rules. The final score is your judgment.
 
-### 0 – 2 (Healthy / Minor issues)
+### 9.0 – 10.0 (Excellent / Clean)
 
-- The dimension is in good shape.
+- The dimension is in good shape or has only minor issues.
 - Issues found are isolated, low-severity, and easy to fix.
 - No structural debt. No systemic risk.
 - **One-sentence pattern:** "Solid. A few minor issues but nothing that blocks release."
 
-### 3 – 4 (Fair / Needs attention)
+### 7.0 – 8.9 (Good / Needs attention)
 
 - Some real issues exist, but they are contained.
 - Moderate risk in specific areas. No systemic failure.
 - Fixing requires local changes, not rewrites.
 - **One-sentence pattern:** "Some real issues, but contained. Worth fixing before next release."
 
-### 5 – 6 (Poor / Significant risk)
+### 5.0 – 6.9 (Fair / Significant risk)
 
 - Systemic issues in this dimension.
 - Multiple medium-or-higher severity findings.
 - The dimension needs deliberate investment, not just quick fixes.
 - **One-sentence pattern:** "Systemic problems. Needs deliberate investment, not quick patches."
 
-### 7 – 8 (Bad / Critical debt)
+### 3.0 – 4.9 (Poor / Critical debt)
 
 - Serious failures in this dimension.
 - High-severity issues that are not isolated — they indicate a pattern.
 - Fixing requires structural changes.
 - **One-sentence pattern:** "Structural failures. Fixing requires meaningful rework, not spot fixes."
 
-### 9 – 10 (Shit Mountain / Unacceptable)
+### 0.0 – 2.9 (Shit Mountain / Unacceptable)
 
 - This dimension is a disaster.
 - Critical-severity issues that are pervasive.
@@ -71,18 +75,20 @@ For focused audit modes (e.g., security-only), only report the relevant dimensio
 
 ## Grade Map
 
+**Higher = better.** S is best, F is worst.
+
 | Score | Grade | Label | Meaning |
 |-------|-------|-------|---------|
-| 0.0 – 1.9 | S | Clean | Production-ready. Minor nitpicks only. |
-| 2.0 – 3.9 | A | Good | Solid. Some issues but low urgency. |
-| 4.0 – 5.9 | B | Fair | Needs work. Medium risks present. |
-| 6.0 – 7.9 | C | Poor | Significant risks. Should address before release. |
-| 8.0 – 9.4 | D | Bad | Critical issues. Do not ship as-is. |
-| 9.5 – 10.0 | F | Shit Mountain | High-severity issues across the board. Major rework needed. |
+| 9.0 – 10.0 | S | Excellent | Production-ready. Minor nitpicks only. |
+| 7.0 – 8.9 | A | Good | Solid. Some issues but low urgency. |
+| 5.0 – 6.9 | B | Fair | Needs work. Medium risks present. |
+| 3.0 – 4.9 | C | Poor | Significant risks. Should address before release. |
+| 1.0 – 2.9 | D | Bad | Critical issues. Do not ship as-is. |
+| 0.0 – 0.9 | F | Shit Mountain | High-severity issues across the board. Major rework needed. |
 
 ## Score Visualization
 
-Render each dimension score as a 10-character ASCII bar:
+Render each dimension score as a 10-character ASCII bar. **Higher = more filled = better.**
 
 ```
 Score bar: ████████░░
@@ -98,24 +104,25 @@ Number of filled blocks = floor(score). Remainder rounds up at ≥ 0.5.
 ### Example Dashboard
 
 ```
-Security        ████████░░  8.0  D
-Stability       ██████░░░░  6.0  C
-Performance     █████████░  9.0  D
-Testing         ████░░░░░░  4.0  B
-Maintainability ███████░░░  7.0  C
-Design          █████░░░░░  5.0  B
-Release         ██████░░░░  6.0  C
-────────────────────────────────────
-Overall         ██████░░░░  6.4  C
+Security        ████████░░  8.0  A   No auth on WS, hardcoded secret in config
+Stability       ██████░░░░  6.0  B   3 unwrap on hot path, no retry on DB
+Performance     ██████████  10.0 S   No issues found
+Testing         ████░░░░░░  4.0  C   9 integration tests real, but unit is weak
+Maintainability ███████░░░  7.0  A   3 files over 800 lines, SRP violated in 2 modules
+Design          █████░░░░░  5.0  B   DRY violated 5x, fail-fast missing at API boundary
+Release         ██████░░░░  6.0  B   No CI on Windows, no rollback plan
+─────────────────────────────────────
+Overall         ██████░░░░  6.6  B
 ```
 
 ## Rules
 
-1. **Each score must have a one-sentence justification** in the score dashboard (e.g., "Security: 8.0 — No auth on WebSocket, hardcoded JWT secret in config"). The justification summarizes the strongest evidence.
-2. **Do not average finding severities.** If there is 1 Critical issue and nothing else, the score is not "10.0 - 2.0 = 8.0". Judge based on whether that one issue is systemic or isolated.
-3. **Consider intensity and density.** 10 low-severity issues in one file may deserve a higher score than 1 critical issue with a trivial fix.
+1. **Each score must have a one-sentence justification** in the score dashboard. The justification summarizes the strongest evidence.
+2. **Do not average finding severities.** If there is 1 Critical issue and nothing else, judge based on whether that one issue is systemic or isolated.
+3. **Consider intensity and density.** 10 low-severity issues in one file may deserve a lower score than 1 critical issue with a trivial fix.
 4. **Consider context.** A 600-line file in a CLI tool is different from a 600-line file in a security-critical library. Adjust for project type and scale.
-5. **If a dimension has zero findings, score 0.0 (Clean).** But confirm you actually checked — absence of evidence is not evidence of absence.
+5. **If a dimension has zero findings, score 10.0 (Excellent).** But confirm you actually checked — absence of evidence is not evidence of absence.
 6. **Do not round to game the grade.** If the score is 5.9, show 5.9, not 6.0. If it's 6.0, show 6.0.
 7. **Include the score dashboard in the Executive Summary** with one-sentence justifications per dimension.
 8. **Focused audit modes** (security-only, etc.): only score the relevant dimension. State "not assessed" for others.
+9. **IMPORTANT — Direction:** 10.0 = best (clean). 0.0 = worst (shit mountain). Do not reverse this.

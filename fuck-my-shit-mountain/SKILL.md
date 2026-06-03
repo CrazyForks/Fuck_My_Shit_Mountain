@@ -55,6 +55,7 @@ The 3 questions are:
 
 Each audit produces a **score dashboard** with 7 dimension scores (0.0–10.0) and an overall score:
 
+- **Higher = better.** 10 = clean / production-ready. 0 = shit mountain / unacceptable. Do not reverse this.
 - Scores are **judgment-based**, not mechanical deductions. The AI evaluates evidence holistically per dimension.
 - Each score must have a **one-sentence justification** referencing the strongest evidence.
 - A letter grade (S/A/B/C/D/F) provides an at-a-glance health indicator.
