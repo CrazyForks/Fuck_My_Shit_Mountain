@@ -14,7 +14,12 @@ The 3 questions are:
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple (e.g., `security, stability, frontend-state`), combine the audit areas from each mode's prompt. Use the most specific finding format rules.
 2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)" The AI will figure out the programming language from the codebase itself.
-3. **File output** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or print to stdout. If yes, the AI MUST write the file after generating the report.
+3. **Output format** — Ask: "How do you want the report? (md / html / both / stdout)".
+   - `md` — Save as `audit-report-<project>-<date>.md`
+   - `html` — Save as `audit-report-<project>-<date>.html` (rendered page with sidebar, score bars, etc.)
+   - `both` — Save both .md and .html
+   - `stdout` — Print to console only
+   If md/html/both, the AI MUST write the file(s) after generating the report. Use `templates/audit-report.html` as the base for HTML output.
 
 **Do not skip these questions. Do not assume the answers. Do not proceed until the user has responded to all 3.**
 

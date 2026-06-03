@@ -6,7 +6,7 @@
 
 1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for maintainability but you can choose any."
 2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
-3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
+3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
 
 Wait for answers before proceeding.
 
