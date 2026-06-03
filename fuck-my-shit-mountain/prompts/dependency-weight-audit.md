@@ -4,10 +4,17 @@ Use the fuck-my-shit-mountain skill in **dependency-weight mode**.
 
 Focus on whether dependencies are pulling their weight — not just known vulnerabilities, but whether each dependency is justified relative to the project's scale.
 
-> **Before starting, the AI should have already asked:**
-> 1. Audit scope → dependency-weight ✅
-> 2. Target language / framework?
-> 3. Output to .md file?
+## Required: Ask Before Auditing
+
+**STOP. Do not read any code yet. You must ask the user these 3 questions first:**
+
+1. **Confirm scope** — This prompt is for dependency-weight mode audit. Ask: "Proceed with dependency-weight audit?"
+2. **Language / framework** — Ask: "What language and framework does the project use?"
+3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
+
+Wait for answers before proceeding.
+
+---
 
 ## Audit Areas
 

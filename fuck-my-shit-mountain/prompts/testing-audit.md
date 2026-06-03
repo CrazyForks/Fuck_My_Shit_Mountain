@@ -1,9 +1,16 @@
 # Testing Audit Prompt
 
-> **Before starting, the AI should have already asked:**
-> 1. Audit scope → testing ✅
-> 2. Target language / framework?
-> 3. Output to .md file?
+## Required: Ask Before Auditing
+
+**STOP. Do not read any code yet. You must ask the user these 3 questions first:**
+
+1. **Confirm scope** — This prompt is for testing mode audit. Ask: "Proceed with testing audit?"
+2. **Language / framework** — Ask: "What language and framework does the project use?"
+3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
+
+Wait for answers before proceeding.
+
+---
 
 Use the fuck-my-shit-mountain skill in **testing mode**.
 

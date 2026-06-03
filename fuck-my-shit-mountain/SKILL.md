@@ -4,19 +4,21 @@
 
 Guide AI to perform an evidence-based, professional code audit of a software project. Despite the irreverent name, the output must be冷静 (calm), professional, actionable, and free of emotional language.
 
-## Interactive Flow
+## Critical: You Must Ask Before Auditing
 
-When the skill is invoked, the AI MUST first ask the user these questions before proceeding:
+**Every prompt in this skill starts with a mandatory instruction: STOP and ask the user 3 questions before reading any code.**
 
-1. **Audit scope** — Which mode? (full / security / stability / performance / testing / maintainability / release / fallback / testing-authenticity / type-safety / frontend-state / backend-api / dependency-weight)
-2. **Target language / framework** — So the AI can use language-specific checklists and examples (e.g., Rust + Axum, Node.js + Express, Vue 3 + Pinia)
-3. **Output to file?** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or just print to stdout. If yes, the AI MUST write the file after generating the report.
+The 3 questions are:
 
-After receiving answers, load the corresponding prompt and proceed.
+1. **Confirm audit scope** — Tell the user which mode this prompt corresponds to and confirm they want to proceed.
+2. **Language / framework** — So the AI can use language-specific checklists and examples (e.g., Rust + Axum, Node.js + Express, Vue 3 + Pinia).
+3. **File output** — Whether to save the report as `audit-report-<project>-<date>.md` in the current directory, or print to stdout. If yes, the AI MUST write the file after generating the report.
+
+**Do not skip these questions. Do not assume the answers. Do not proceed until the user has responded to all 3.**
 
 ## How It Works
 
-1. The user invokes the skill (or the AI asks the 3 init questions).
+1. The user invokes the skill (or the AI asks the 3 init questions — **mandatory, do not skip**).
 2. The AI loads the corresponding prompt from `prompts/`.
 3. The AI audits the codebase using the rubrics in `rubrics/`.
 4. Each finding is recorded using the template in `templates/issue-card.md`.

@@ -4,10 +4,17 @@ Use the fuck-my-shit-mountain skill in **frontend-state mode**.
 
 Focus on frontend state management, component architecture, and UI data flow. This mode is for projects with a browser/client-side UI.
 
-> **Before starting, the AI should have already asked:**
-> 1. Audit scope → frontend-state ✅
-> 2. Target language / framework?
-> 3. Output to .md file?
+## Required: Ask Before Auditing
+
+**STOP. Do not read any code yet. You must ask the user these 3 questions first:**
+
+1. **Confirm scope** — This prompt is for frontend-state mode audit. Ask: "Proceed with frontend-state audit?"
+2. **Language / framework** — Ask: "What language and framework does the project use?"
+3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
+
+Wait for answers before proceeding.
+
+---
 
 ## Audit Areas
 
