@@ -4,7 +4,7 @@ Use the fuck-my-shit-mountain skill in **security mode**.
 
 Focus only on security-relevant risks.
 
-## Audit Areas
+## Audit Areas (see principle 4.6: Least Privilege)
 
 ### Authentication & Authorization
 - How does the application identify users?

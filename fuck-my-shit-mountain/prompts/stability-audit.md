@@ -4,7 +4,7 @@ Use the fuck-my-shit-mountain skill in **stability mode**.
 
 Focus on reliability, runtime safety, state consistency, and failure recovery.
 
-## Audit Areas
+## Audit Areas (see principles 4.4, 6.1–6.4, 10.1–10.4)
 
 ### Crash & Panic Paths
 - Direct calls to `panic!`, `unwrap()`, `expect()`, `assert!`

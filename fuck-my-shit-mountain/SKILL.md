@@ -17,17 +17,17 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 
 | Mode | Prompt | Focus |
 |------|--------|-------|
-| `full` | `prompts/full-audit.md` | All dimensions |
+| `full` | `prompts/full-audit.md` | All dimensions + principles |
 | `security` | `prompts/security-audit.md` | Security risks |
 | `stability` | `prompts/stability-audit.md` | Reliability & errors |
 | `performance` | `prompts/performance-audit.md` | Realistic bottlenecks |
 | `testing` | `prompts/testing-audit.md` | Test quality & gaps |
-| `maintainability` | `prompts/maintainability-audit.md` | Complexity & coupling |
+| `maintainability` | `prompts/maintainability-audit.md` | Complexity, coupling, principles |
 | `release` | `prompts/release-audit.md` | Release readiness |
 
 ## Scoring
 
-Each audit produces a **score dashboard** with 6 dimension scores (0.0–10.0) and an overall score:
+Each audit produces a **score dashboard** with 7 dimension scores (0.0–10.0) and an overall score:
 
 - Scores are calculated automatically from findings using `rubrics/scoring.md`.
 - Each finding deducts from its own dimension based on severity and confidence.
@@ -46,3 +46,4 @@ Each audit produces a **score dashboard** with 6 dimension scores (0.0–10.0) a
 8. If evidence is insufficient, say so. Do not fabricate findings.
 9. Every finding MUST include a regression test suggestion.
 10. Every finding MUST include an estimated effort.
+11. Check violations of engineering principles using `rubrics/principles.md` — focus on violations that create real risk, not minor style quarrels.

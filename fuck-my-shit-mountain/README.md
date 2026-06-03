@@ -4,7 +4,7 @@ An AI-powered code audit skill that produces **professional, evidence-based, act
 
 ## What It Does
 
-- Audits a codebase across security, stability, performance, testing, maintainability, and release readiness.
+- Audits a codebase across security, stability, performance, testing, maintainability, design principles, and release readiness.
 - Produces structured findings with severity, confidence, evidence, and fix recommendations.
 - Scores each dimension (0.0–10.0) with letter grades for at-a-glance health assessment.
 - Separates confirmed issues from suspected issues.
@@ -30,7 +30,7 @@ run full-audit on .
 
 | Command | Scope |
 |---------|-------|
-| `run full-audit` | Complete audit across all dimensions |
+| `run full-audit` | Complete audit across all dimensions + design principles |
 | `run security-audit` | Security-only review |
 | `run stability-audit` | Reliability and error handling |
 | `run performance-audit` | Realistic performance bottlenecks |
@@ -50,7 +50,7 @@ Audit this repository as if it is preparing for a stable public release.
 
 A full audit report contains:
 
-1. **Executive Summary** — Score dashboard + finding statistics + short assessment.
+1. **Executive Summary** — Score dashboard (7 dimensions) + finding statistics + short assessment.
 2. **Project Map** — Architecture overview with risk areas highlighted.
 3. **Top Risks** — 10-20 highest priority findings.
 4. **Detailed Findings** — Every finding with full evidence.
@@ -86,9 +86,10 @@ Stability       ██████░░░░  6.0  B
 Performance     █████████░  9.0  S
 Testing         ████░░░░░░  4.0  C
 Maintainability ███████░░░  7.0  A
+Design          █████░░░░░  5.0  B
 Release         ██████░░░░  6.0  B
 ────────────────────────────────────
-Overall         ███████░░░  6.7  B
+Overall         ██████░░░░  6.4  B
 ```
 
 ## Rules of Engagement

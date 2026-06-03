@@ -22,16 +22,17 @@ Before writing findings, build a project map:
 
 ## Audit Dimensions
 
-1. **Architecture and module boundaries** — cohesion, coupling, dependency direction
+1. **Architecture and module boundaries** — cohesion, coupling, dependency direction, layered architecture
 2. **Security** — authentication, authorization, injection, secret handling, dependency risks
 3. **Stability and error handling** — panic paths, error propagation, retry, timeout, shutdown
 4. **Performance and scalability** — hot paths, growth limits, resource leaks, contention
 5. **Testing quality** — coverage, test types, flakiness, confidence
 6. **Maintainability** — complexity, duplication, naming, documentation accuracy
-7. **Release and deployment process** — CI/CD, versioning, upgrade, rollback
-8. **Documentation accuracy** — does the docs match the code?
-9. **Configuration safety** — defaults, environment separation, validation
-10. **Observability** — logging, metrics, tracing, debugging support
+7. **Design principles compliance** — check `rubrics/principles.md` for SRP, file size, function length, coupling, cohesion, DRY, YAGNI, KISS, fail-fast, command-query separation, law of demeter, and all other principles
+8. **Release and deployment process** — CI/CD, versioning, upgrade, rollback
+9. **Documentation accuracy** — does the docs match the code?
+10. **Configuration safety** — defaults, environment separation, validation
+11. **Observability** — logging, metrics, tracing, debugging support
 
 ## Rules
 
@@ -45,6 +46,7 @@ Before writing findings, build a project map:
 8. If evidence is insufficient, say so.
 9. For each issue, include a regression test suggestion.
 10. Prioritize the top risks first.
+11. Cross-reference findings against `rubrics/principles.md`. For each principle violation, cite the specific principle (e.g., "SRP violation — principle 1.1").
 
 ## Scoring
 

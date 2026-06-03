@@ -15,6 +15,7 @@ Each of the 6 dimensions is scored **0.0 – 10.0**:
 | Performance | How efficient under load |
 | Testing | How much confidence tests provide |
 | Maintainability | How easy to change |
+| Design | How well it follows engineering principles |
 | Release | How ready to ship |
 
 ## Score Calculation
@@ -42,7 +43,7 @@ A finding only deducts from its **own dimension**. For example, a Critical secur
 
 ### Overall Score
 
-Average of all 6 dimension scores, rounded to 1 decimal place.
+Average of all 7 dimension scores, rounded to 1 decimal place.
 
 For focused audit modes (e.g., security-only), only report the relevant dimension score and note that other dimensions were not assessed.
 
@@ -80,9 +81,10 @@ Stability       ██████░░░░  6.0  B
 Performance     █████████░  9.0  S
 Testing         ████░░░░░░  4.0  C
 Maintainability ███████░░░  7.0  A
+Design          █████░░░░░  5.0  B
 Release         ██████░░░░  6.0  B
 ────────────────────────────────────
-Overall         ███████░░░  6.7  B
+Overall         ██████░░░░  6.4  B
 ```
 
 ## Rules

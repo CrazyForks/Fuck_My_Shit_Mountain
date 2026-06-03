@@ -73,7 +73,30 @@ Each section lists relevant issues grouped by sub-category.
 
 Repeat for all dimensions covered by the audit mode.
 
-## <N+1>. Recommended Fix Order
+---
+
+## <N+1>. Principles Compliance
+
+<Summary of how well the codebase follows software engineering principles from rubrics/principles.md>
+
+### Principles Violated
+
+| Principle | Violations | Severity | Affected Areas |
+|-----------|------------|----------|----------------|
+| Single Responsibility (SRP) | <N> | Medium | <modules> |
+| File Size Limit | <N> | Low | <modules> |
+| Fail-Fast | <N> | High | <modules> |
+| ... | ... | ... | ... |
+
+### Principles Respected
+
+<Principles that the codebase follows well — what is being done right>
+
+---
+
+
+
+## <N+2>. Recommended Fix Order
 
 ### Fix Immediately
 
@@ -91,11 +114,11 @@ Repeat for all dimensions covered by the audit mode.
 
 <Low-severity issues, theoretical risks, style preferences>
 
-## <N+2>. Quick Wins
+## <N+3>. Quick Wins
 
 <Low-cost, high-value fixes — typically 1-2 hour changes that remove real risk>
 
-## <N+3>. Long-term Refactor Plan
+## <N+4>. Long-term Refactor Plan
 
 <Only included if evidence supports structural improvements>
 <Each item includes: motivation, approach, risk, and testing strategy>

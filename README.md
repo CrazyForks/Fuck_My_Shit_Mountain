@@ -6,7 +6,7 @@
 
 ## What It Does
 
-Feed it any codebase — it will analyze it across security, stability, performance, testing, maintainability, and release readiness. Each finding comes with:
+Feed it any codebase — it will analyze it across security, stability, performance, testing, maintainability, design principles, and release readiness. Each finding comes with:
 
 - Concrete evidence (file, function, code behavior)
 - Severity & confidence ratings
@@ -29,7 +29,7 @@ Audit this repository for stable release readiness.
 
 | Mode | Focus |
 |------|-------|
-| `full` | Complete audit across all dimensions |
+| `full` | Complete audit across all dimensions + design principles |
 | `security` | Authentication, injection, secrets, dependencies |
 | `stability` | Panic paths, error handling, concurrency, lifecycle |
 | `performance` | Hot paths, memory, I/O, startup cost |
@@ -65,9 +65,10 @@ Stability       ██████░░░░  6.0  B
 Performance     █████████░  9.0  S
 Testing         ████░░░░░░  4.0  C
 Maintainability ███████░░░  7.0  A
+Design          █████░░░░░  5.0  B
 Release         ██████░░░░  6.0  B
 ────────────────────────────────────
-Overall         ███████░░░  6.7  B
+Overall         ██████░░░░  6.4  B
 ```
 
 ## Design Principles

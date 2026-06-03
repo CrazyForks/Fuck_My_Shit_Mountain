@@ -4,7 +4,7 @@ Use the fuck-my-shit-mountain skill in **release mode**.
 
 Focus on whether this project can be safely released, installed, upgraded, and rolled back.
 
-## Audit Areas
+## Audit Areas (see principles 9.1–9.3: Configuration & Environment)
 
 ### CI/CD Pipeline
 - What checks run in CI? (lint, typecheck, test, build, security scan)

@@ -4,7 +4,7 @@ Use the fuck-my-shit-mountain skill in **performance mode**.
 
 Focus on realistic bottlenecks, not premature micro-optimization.
 
-## Audit Areas
+## Audit Areas (see principle 10.2: Unbounded Resources)
 
 ### Hot Paths
 - Request handler latency

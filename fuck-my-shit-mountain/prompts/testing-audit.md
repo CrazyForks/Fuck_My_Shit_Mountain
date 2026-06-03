@@ -4,7 +4,7 @@ Use the fuck-my-shit-mountain skill in **testing mode**.
 
 Focus on whether the tests provide real confidence in the codebase.
 
-## Audit Areas
+## Audit Areas (see principles 8.1–8.5)
 
 ### Coverage Quality (not quantity)
 - Critical paths without test coverage
