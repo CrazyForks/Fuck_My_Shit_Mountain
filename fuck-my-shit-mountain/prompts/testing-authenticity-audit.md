@@ -6,13 +6,15 @@ Focus on whether tests provide **real confidence** or just green checkmarks. Thi
 
 ## Required: Ask Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these 3 questions first:**
+**STOP. Do not read any code yet. You must ask the user these questions first:**
 
-1. **Confirm scope** — This prompt is for testing-authenticity mode audit. Ask: "Proceed with testing-authenticity audit?"
+1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for testing-authenticity but you can choose any."
 2. **Language / framework** — Ask: "What language and framework does the project use?"
 3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
 
 Wait for answers before proceeding.
+
+---
 
 ---
 

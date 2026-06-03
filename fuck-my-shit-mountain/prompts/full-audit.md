@@ -2,9 +2,9 @@
 
 ## Required: Ask Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these 3 questions first:**
+**STOP. Do not read any code yet. You must ask the user these questions first:**
 
-1. **Confirm scope** — Ask: "Full audit — covers all 17 dimensions (security, stability, performance, testing, maintainability, design, release, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight). Proceed?"
+1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for full (all 17 dimensions) but you can choose any."
 2. **Language / framework** — Ask: "What language and framework does the project use?"
 3. **File output** — Ask: "Should I save the report to an .md file or print to stdout?"
 
