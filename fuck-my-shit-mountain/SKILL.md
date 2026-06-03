@@ -19,7 +19,7 @@ The 3 questions are:
    - `html` — Save as `audit-report-<project>-<date>.html` (rendered page with sidebar, score bars, etc.)
    - `both` — Save both .md and .html
    - `stdout` — Print to console only
-   If md/html/both, the AI MUST write the file(s) after generating the report. Use `templates/audit-report.html` as the base for HTML output.
+    If md/html/both, the AI MUST write the file(s) after generating the report. For HTML output: read `templates/audit-report.html`, copy its **exact CSS and HTML structure** (all sections, all score items, all tables), and replace the content with actual audit data. Do NOT use placeholder variables — generate complete, self-contained HTML.
 
 **Do not skip these questions. Do not assume the answers. Do not proceed until the user has responded to all 3.**
 
@@ -76,4 +76,4 @@ Each audit produces a **score dashboard** with 7 dimension scores (0.0–10.0) a
 11. Check violations of engineering principles using `rubrics/principles.md` — focus on violations that create real risk, not minor style quarrels.
 12. **Be exhaustive.** Search the entire codebase, not just the obvious hotspots. If you stop looking after finding a few issues, you are doing a disservice. Leave no file unchecked.
 13. **Do not be a yes-man.** Do not suppress findings because the user seems confident, or because you want to be agreeable. Your job is to identify real risks objectively, regardless of who wrote the code or what the user expects to hear. If the code has problems, say so.
-14. **Use the skill's template format, not the project's style.** The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML output). Do NOT copy formatting, structure, or style from markdown files inside the audited project. The project's READMEs, docs, or comments are not the report template.
+14. **Use the skill's template format, not the project's style.** The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML output). For HTML output: copy the **exact CSS and HTML structure** from the template (all 7 score rows, stat cards, top risks table, detailed findings, per-dimension sections with tables+checklists, design principles, fix order tables, quick wins grid). Only replace content — keep all HTML classes, CSS variables, and section ordering intact. Do NOT invent new section structures. Do NOT copy formatting, structure, or style from markdown files inside the audited project.

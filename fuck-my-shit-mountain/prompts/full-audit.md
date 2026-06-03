@@ -84,8 +84,21 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 ## Output Format
 
 **IMPORTANT: Use the skill's templates, NOT the project's markdown style.**
-
 1. Each finding MUST follow `templates/issue-card.md` exactly.
+
 2. The report MUST follow `templates/audit-report.md` (or `templates/audit-report.html` for HTML).
+
+3. For HTML output: read `templates/audit-report.html` and generate a COMPLETE HTML file that copies the exact structure:
+   - All 7 score dimensions (Security, Stability, Performance, Testing, Maintainability, Design, Release) each with its own .score-item, bar, grade, and one-sentence justification
+   - Stats row with total + severity breakdown
+   - Top risks table with all findings
+   - Detailed findings with full evidence + fix boxes
+   - Per-dimension sections (one <h3> per dimension) with findings table + verified checklist
+   - Design principles violations table + followed checklist
+   - Fix order with tables grouped by priority
+   - Quick wins grid
+   - Sidebar nav links matching every section ID
+   - Footer text
+   Do NOT skip any section. Do NOT use placeholder variables. Generate complete, self-contained HTML.
 3. Do NOT copy formatting, headings, or style from any `.md` file in the audited project.
 4. The project's own README, docs, or comments are not the report format.

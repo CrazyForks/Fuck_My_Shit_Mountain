@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{LANG}}">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{PROJECT}} {{TITLE_SUFFIX}}</title>
+<title>[[PROJECT]] 审计报告</title>
 <style>
   :root {
     --sidebar-bg: #1a1f2e;
@@ -37,28 +37,12 @@
     min-height: 100vh;
     font-size: 15px;
   }
-  .sidebar {
-    width: 240px;
-    background: var(--sidebar-bg);
-    color: #fff;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-  }
+  .sidebar { width: 240px; background: var(--sidebar-bg); color: #fff; flex-shrink: 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
   .sidebar-header { padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.06); }
   .sidebar-header h1 { font-size: 18px; font-weight: 700; letter-spacing: .5px; }
   .sidebar-header .sub { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 4px; }
   .sidebar-nav { padding: 8px 0; flex: 1; }
-  .sidebar-nav a {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 20px; color: rgba(255,255,255,.6);
-    text-decoration: none; font-size: 14px;
-    transition: all .15s; border-left: 3px solid transparent;
-  }
+  .sidebar-nav a { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: rgba(255,255,255,.6); text-decoration: none; font-size: 14px; transition: all .15s; border-left: 3px solid transparent; }
   .sidebar-nav a:hover { background: var(--sidebar-hover); color: #fff; }
   .sidebar-nav a.active { background: var(--sidebar-active); color: #fff; border-left-color: var(--accent); }
   .sidebar-nav a .icon { width: 18px; text-align: center; font-size: 14px; }
@@ -155,86 +139,442 @@
 
 <nav class="sidebar">
   <div class="sidebar-header">
-    <h1>{{PROJECT}}</h1>
-    <div class="sub">{{SIDEBAR_SUBTITLE}}</div>
+    <!-- CHANGE: project name and subtitle -->
+    <h1>[[PROJECT]]</h1>
+    <div class="sub">[[AUDIT_MODE_LABEL]] · [[DATE]]</div>
   </div>
   <div class="sidebar-nav">
-    <a href="#summary"><span class="icon">📊</span> {{SUMMARY_LABEL}}</a>
-    <a href="#findings"><span class="icon">🔍</span> {{FINDINGS_LABEL}}</a>
-    {{DIMENSION_NAV}}
-    <a href="#principles"><span class="icon">📋</span> {{PRINCIPLES_LABEL}}</a>
-    <a href="#fix-order"><span class="icon">🎯</span> {{FIX_ORDER_LABEL}}</a>
+    <!-- CHANGE: nav links matching each section below. Add one per dimension audited. -->
+    <a href="#summary"><span class="icon">📊</span> [[SUMMARY_LABEL]]</a>
+    <a href="#findings"><span class="icon">🔍</span> [[FINDINGS_LABEL]]</a>
+    <a href="#security"><span class="icon">🔒</span> [[SECURITY_LABEL]]</a>
+    <a href="#stability"><span class="icon">⚡</span> [[STABILITY_LABEL]]</a>
+    <a href="#performance"><span class="icon">🚀</span> [[PERFORMANCE_LABEL]]</a>
+    <a href="#testing"><span class="icon">🧪</span> [[TESTING_LABEL]]</a>
+    <a href="#maintainability"><span class="icon">📐</span> [[MAINTAINABILITY_LABEL]]</a>
+    <a href="#principles"><span class="icon">📋</span> [[PRINCIPLES_LABEL]]</a>
+    <a href="#fix-order"><span class="icon">🎯</span> [[FIX_ORDER_LABEL]]</a>
   </div>
   <div class="sidebar-footer">Fuck My Shit Mountain v1.0</div>
 </nav>
 
 <div class="main">
 
-  <!-- Header -->
+  <!-- ════════════════════════════════════════ -->
+  <!-- PAGE HEADER                            -->
+  <!-- ════════════════════════════════════════ -->
   <div class="page-header" id="summary">
-    <h2>{{TITLE}}</h2>
+    <!-- CHANGE: title and meta -->
+    <h2>[[PROJECT]] [[TITLE_SUFFIX]]</h2>
     <div class="meta">
-      <span>📅 {{DATE}}</span>
-      <span>🔍 {{AUDIT_MODE_LABEL}}</span>
-      <span>🛠 {{REVIEWER}}</span>
+      <span>📅 [[DATE]]</span>
+      <span>🔍 [[AUDIT_MODE]]</span>
+      <span>🛠 [[REVIEWER]]</span>
     </div>
   </div>
 
-  <!-- Score Dashboard -->
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCORE DASHBOARD                        -->
+  <!-- ════════════════════════════════════════ -->
+  <!--
+    CRITICAL: You MUST generate one .score-item per dimension (Security, Stability,
+    Performance, Testing, Maintainability, Design, Release), each with its own
+    score, grade letter, bar width, and one-sentence justification. Then add the
+    overall-row at the end. Do NOT skip any dimension. Do NOT merge them.
+
+    Score → bar width: score * 10% (e.g., 8.5 → width:85%)
+    Grade letter → CSS classes:
+      S → .bar-fill.s .grade-s
+      A → .bar-fill.a .grade-a
+      B → .bar-fill.b .grade-b
+      C → .bar-fill.c .grade-c
+      D → .bar-fill.d .grade-d
+      F → .bar-fill.f .grade-f
+  -->
   <div class="card">
-    <div class="card-header">📊 {{SCORE_DASHBOARD_LABEL}}</div>
+    <div class="card-header">📊 评分面板</div>
     <div class="card-body">
       <div class="score-grid">
-        {{SCORE_ROWS}}
-        <div class="score-item overall-row">
-          <div class="label">{{OVERALL_LABEL}}</div>
+
+        <!-- EXAMPLE: keep this structure, replace content for each dimension -->
+        <div class="score-item">
+          <div class="label">Security</div>
           <div class="bar-row">
-            <div class="bar-track" style="background:rgba(255,255,255,.12)"><div class="bar-fill" style="width:{{OVERALL_PCT}}%;background:linear-gradient(90deg,#34c759,#30d158)"></div></div>
-            <span class="value" style="color:#fff">{{OVERALL_SCORE}}</span>
-            <span class="grade" style="color:#34c759">{{OVERALL_GRADE}}</span>
+            <div class="bar-track"><div class="bar-fill a" style="width:80%"></div></div>
+            <span class="value grade-a">8.0</span>
+            <span class="grade grade-a">A</span>
+          </div>
+          <div class="small">No auth on WS, hardcoded secret in config</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Stability</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill b" style="width:60%"></div></div>
+            <span class="value grade-b">6.0</span>
+            <span class="grade grade-b">B</span>
+          </div>
+          <div class="small">3 unwrap on hot path, no retry on DB</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Performance</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill s" style="width:100%"></div></div>
+            <span class="value grade-s">10.0</span>
+            <span class="grade grade-s">S</span>
+          </div>
+          <div class="small">No issues found</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Testing</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill c" style="width:40%"></div></div>
+            <span class="value grade-c">4.0</span>
+            <span class="grade grade-c">C</span>
+          </div>
+          <div class="small">9 integration tests real, but unit is weak</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Maintainability</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill a" style="width:70%"></div></div>
+            <span class="value grade-a">7.0</span>
+            <span class="grade grade-a">A</span>
+          </div>
+          <div class="small">3 files over 800 lines, SRP violated in 2 modules</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Design</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill b" style="width:50%"></div></div>
+            <span class="value grade-b">5.0</span>
+            <span class="grade grade-b">B</span>
+          </div>
+          <div class="small">DRY violated 5x, fail-fast missing at API boundary</div>
+        </div>
+
+        <div class="score-item">
+          <div class="label">Release</div>
+          <div class="bar-row">
+            <div class="bar-track"><div class="bar-fill b" style="width:60%"></div></div>
+            <span class="value grade-b">6.0</span>
+            <span class="grade grade-b">B</span>
+          </div>
+          <div class="small">No CI on Windows, no rollback plan</div>
+        </div>
+
+        <div class="score-item overall-row">
+          <div class="label">Overall</div>
+          <div class="bar-row">
+            <div class="bar-track" style="background:rgba(255,255,255,.12)"><div class="bar-fill" style="width:66%;background:linear-gradient(90deg,#34c759,#30d158)"></div></div>
+            <span class="value" style="color:#fff">6.6</span>
+            <span class="grade" style="color:#34c759">B</span>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Stats -->
+  <!-- ════════════════════════════════════════ -->
+  <!-- STATS                                  -->
+  <!-- ════════════════════════════════════════ -->
+  <!--
+    GENERATE one .stat-card per severity level. Include total findings first.
+    Use inline color style matching severity:
+      critical → var(--badge-critical)
+      high     → var(--badge-high)
+      medium   → var(--badge-medium)
+      low      → var(--badge-low)
+      info     → var(--badge-info)
+  -->
   <div class="stats-row">
-    <div class="stat-card"><div class="num">{{TOTAL_FINDINGS}}</div><div class="desc">{{TOTAL_LABEL}}</div></div>
-    {{STAT_CARDS}}
+    <div class="stat-card"><div class="num">6</div><div class="desc">总发现</div></div>
+    <div class="stat-card"><div class="num" style="color:var(--badge-medium)">2</div><div class="desc">Medium</div></div>
+    <div class="stat-card"><div class="num" style="color:var(--badge-low)">3</div><div class="desc">Low</div></div>
+    <div class="stat-card"><div class="num" style="color:var(--badge-info)">1</div><div class="desc">Info</div></div>
   </div>
 
-  <!-- Top Risks -->
-  {{TOP_RISKS_TABLE}}
+  <!-- ════════════════════════════════════════ -->
+  <!-- TOP RISKS                              -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="top-risks">⚠️ [[TOP_RISKS_TITLE]]</h3>
 
-  <!-- Detailed Findings -->
-  <h3 class="section-title" id="findings">🔍 {{DETAILED_FINDINGS_LABEL}}</h3>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:60px">#</th><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:80px">[[CATEGORY_COL]]</th></tr></thead>
+          <tbody>
+            <!-- CHANGE: one row per finding, sorted by severity descending -->
+            <tr><td>1</td><td>[[FINDING_TITLE_1]]</td><td><span class="badge badge-medium">[[SEVERITY_1]]</span></td><td>[[CATEGORY_1]]</td></tr>
+            <tr><td>2</td><td>[[FINDING_TITLE_2]]</td><td><span class="badge badge-medium">[[SEVERITY_2]]</span></td><td>[[CATEGORY_2]]</td></tr>
+            <tr><td>3</td><td>[[FINDING_TITLE_3]]</td><td><span class="badge badge-low">[[SEVERITY_3]]</span></td><td>[[CATEGORY_3]]</td></tr>
+            <!-- ... more rows ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-  {{FINDINGS}}
+  <!-- ════════════════════════════════════════ -->
+  <!-- DETAILED FINDINGS                      -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="findings">🔍 [[DETAILED_FINDINGS_TITLE]]</h3>
 
-  <!-- Dimension Sections -->
-  {{DIMENSION_SECTIONS}}
+  <!-- REPLACE: generate one .finding per finding. Use .severity-* class matching severity level. -->
+  <div class="finding severity-medium">
+    <div class="finding-header">
+      <h4>[[FINDING_NUM]]. [[FINDING_TITLE]]</h4>
+      <span class="badge badge-medium">[[SEVERITY]]</span>
+      <span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span>
+    </div>
+    <div class="finding-meta">
+      <span>📁 [[CATEGORY]]</span>
+      <span>📍 [[FILE_LOCATION]]</span>
+      <span>🎯 [[FUNCTION_MODULE]]</span>
+    </div>
+    <div class="problem">
+      <strong>[[PROBLEM_LABEL]]：</strong>[[PROBLEM_DESC]]
+    </div>
+    <div class="evidence">
+      [[EVIDENCE_CODE]]
+    </div>
+    <div class="fix-box">
+      <div class="fix-label">[[MIN_FIX_LABEL]]</div>
+      <code>[[MIN_FIX_CODE]]</code>
+    </div>
+    <div class="fix-box" style="margin-top:6px;background:#fff8e1;border-color:#ffe082">
+      <strong>⏱ [[EFFORT_LABEL]]：</strong> [[EFFORT]] &nbsp;·&nbsp; <strong>[[REGRESSION_LABEL]]：</strong> [[REGRESSION_DESC]]
+    </div>
+  </div>
 
-  <!-- Design Principles -->
-  <h3 class="section-title" id="principles">📋 {{PRINCIPLES_TITLE}}</h3>
+  <!-- ... repeat per finding ... -->
 
-  {{PRINCIPLES_VIOLATIONS}}
+  <!-- ════════════════════════════════════════ -->
+  <!-- DIMENSION SECTIONS: Security           -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="security">🔒 [[SECURITY_TITLE]]</h3>
 
-  {{PRINCIPLES_FOLLOWED}}
+  <!-- CHANGE: table of findings in this dimension -->
+  <div class="card">
+    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-medium">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-  <!-- Fix Order -->
-  <h3 class="section-title" id="fix-order">🎯 {{FIX_ORDER_TITLE}}</h3>
+  <!-- verified good practices checklist -->
+  <div class="card">
+    <div class="card-header">✅ [[VERIFIED_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_2]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
 
-  {{FIX_ORDER_SECTIONS}}
+  <!-- ════════════════════════════════════════ -->
+  <!-- DIMENSION SECTIONS: Stability          -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="stability">⚡ [[STABILITY_TITLE]]</h3>
 
-  <!-- Quick Wins -->
-  <h3 class="section-title">⚡ {{QUICK_WINS_TITLE}}</h3>
+  <div class="card">
+    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-high">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">✅ [[VERIFIED_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DIMENSION SECTIONS: Performance        -->
+  <!-- ════════════════════════════════════════ -->
+  <!-- If no findings, just show the verified card -->
+  <h3 class="section-title" id="performance">🚀 [[PERFORMANCE_TITLE]]</h3>
+
+  <div class="card">
+    <div class="card-header">✅ [[NO_FINDINGS_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DIMENSION SECTIONS: Testing            -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="testing">🧪 [[TESTING_TITLE]]</h3>
+
+  <div class="card">
+    <div class="card-header">✅ [[NO_GAPS_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DIMENSION SECTIONS: Maintainability    -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="maintainability">📐 [[MAINTAINABILITY_TITLE]]</h3>
+
+  <div class="card">
+    <div class="card-header">[[CONFIRMED_HEADER]] <span style="font-weight:400;font-size:13px;color:var(--text-secondary)">· [[COUNT]] [[FINDINGS_UNIT]]</span></div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[FINDING_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th style="width:100px">[[STATUS_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[FINDING_TITLE]]</td><td><span class="badge badge-low">[[SEVERITY]]</span></td><td><span class="badge badge-confirmed">[[CONFIRMED_LABEL]]</span></td></tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">✅ [[GOOD_PRACTICES_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[GOOD_PRACTICE_1]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DESIGN PRINCIPLES                      -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="principles">📋 [[PRINCIPLES_TITLE]]</h3>
+
+  <!-- violations table -->
+  <div class="card">
+    <div class="card-header">[[VIOLATIONS_HEADER]]</div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[PRINCIPLE_COL]]</th><th>[[COUNT_COL]]</th><th style="width:100px">[[SEVERITY_COL]]</th><th>[[AREA_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[PRINCIPLE_NAME]]</td><td>[[VIOLATION_COUNT]]</td><td><span class="badge badge-low">[[SEVERITY]]</span></td><td>[[AREA]]</td></tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- followed principles -->
+  <div class="card">
+    <div class="card-header">✅ [[FOLLOWED_HEADER]]</div>
+    <div class="card-body">
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span> [[PRINCIPLE_NAME]] — [[DESC]]</div>
+        <!-- ... -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- FIX ORDER                             -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="fix-order">🎯 [[FIX_ORDER_TITLE]]</h3>
+
+  <!-- Each priority group gets its own card with a table -->
+  <div class="card">
+    <div class="card-header">
+      <span>⚡ [[IMMEDIATE_LABEL]]</span>
+      <span class="badge badge-medium">[[URGENCY]]</span>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>[[FIX_COL]]</th><th>[[EFFORT_COL]]</th><th>[[RISK_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>[[FIX_DESC]]</td><td>[[EFFORT]]</td><td>[[RISK_DESC]]</td></tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span>📅 [[SCHEDULE_LABEL]]</span>
+      <span class="badge badge-low">[[URGENCY]]</span>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>[[FIX_COL]]</th><th>[[EFFORT_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[NUM]]</td><td>[[FIX_DESC]]</td><td>[[EFFORT]]</td></tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- QUICK WINS                             -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title">⚡ [[QUICK_WINS_TITLE]]</h3>
+
   <div class="win-grid">
-    {{QUICK_WINS}}
+    <div class="win-card">
+      <div class="win-title">[[WIN_TITLE]]</div>
+      <div class="win-meta">[[WIN_META]]</div>
+    </div>
+    <div class="win-card">
+      <div class="win-title">[[WIN_TITLE]]</div>
+      <div class="win-meta">[[WIN_META]]</div>
+    </div>
+    <div class="win-card">
+      <div class="win-title">[[WIN_TITLE]]</div>
+      <div class="win-meta">[[WIN_META]]</div>
+    </div>
+    <!-- ... -->
   </div>
 
   <div style="text-align:center;padding:40px 0 20px;color:var(--text-secondary);font-size:12px">
-    Fuck My Shit Mountain — {{FOOTER_TEXT}}
+    [[FOOTER_TEXT]]
   </div>
 
 </div>
@@ -248,7 +588,6 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) activeId = entry.target.id;
     });
-    // Pick the last intersecting section (bottom-most visible)
     if (activeId) {
       navLinks.forEach(a => {
         a.classList.toggle('active', a.getAttribute('href') === '#' + activeId);

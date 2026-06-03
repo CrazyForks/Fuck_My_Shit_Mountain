@@ -75,6 +75,8 @@ Focus only on security-relevant risks.
 
 **CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
 
+For HTML output: read `templates/audit-report.html` and generate complete HTML that copies the exact structure — all 7 score dimensions (each with its own .score-item, bar, grade, one-sentence justification), stats row with severity breakdown, findings table, per-dimension findings+checklists (one `<h3>` per dimension), design principles, fix order tables, quick wins grid, sidebar nav for every section ID. Do NOT use placeholder variables. Generate complete self-contained HTML.
+
 ## Finding Format
 
 ### Finding: <short title>
