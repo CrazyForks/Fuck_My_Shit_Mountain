@@ -4,7 +4,7 @@ An AI-powered code audit skill that produces **professional, evidence-based, act
 
 ## What It Does
 
-- Audits a codebase across **17 audit dimensions** (full mode): architecture, security, stability, performance, testing, maintainability, design, release, documentation, configuration, observability, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight
+- Audits a codebase across **19 audit dimensions** (full mode): architecture, security, stability, performance, testing, maintainability, design, release, documentation, configuration, observability, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight, code-consistency, comment-coverage
 - Produces structured findings with severity, confidence, evidence, and fix recommendations
 - Scores **7 core dimensions** (0.0–10.0) with letter grades for at-a-glance health assessment
 - Separates confirmed issues from suspected issues
@@ -15,7 +15,7 @@ An AI-powered code audit skill that produces **professional, evidence-based, act
 
 Before auditing, the AI **must ask 3 questions**:
 
-1. **Which modes?** — Pick from 13 modes, comma-separated or `full`
+1. **Which modes?** — Pick from 15 modes, comma-separated or `full`
 2. **Report language?** — English / Chinese / etc.
 3. **Output format?** — `md` / `html` / `both` / `stdout`
 
@@ -32,7 +32,7 @@ run full-audit on .
 
 | Command | Scope |
 |---------|-------|
-| `run full-audit` | All 17 audit dimensions |
+| `run full-audit` | All 19 audit dimensions |
 | `run security-audit` | Security-only review |
 | `run stability-audit` | Reliability and error handling |
 | `run performance-audit` | Realistic performance bottlenecks |
@@ -45,6 +45,8 @@ run full-audit on .
 | `run frontend-state-audit` | Component size, state management, effects |
 | `run backend-api-audit` | API design, validation, data access patterns |
 | `run dependency-weight-audit` | Overweight deps, build toolchain |
+| `run code-consistency-audit` | Naming, imports, patterns, style uniformity |
+| `run comment-coverage-audit` | Doc quality, stale comments, missing docs |
 
 > Combine modes: `security, stability, type-safety` — the AI merges audit areas from each.
 
@@ -67,7 +69,7 @@ A full audit report contains:
 fuck-my-shit-mountain/
   SKILL.md              Skill entry point — how the skill works
   README.md             This file
-  prompts/              Audit prompt templates (13 modes)
+  prompts/              Audit prompt templates (15 modes)
   rubrics/              Severity, confidence, evidence, principles, scoring
   templates/            Report, issue card, and remediation plan templates
   examples/             Usage examples for different project types

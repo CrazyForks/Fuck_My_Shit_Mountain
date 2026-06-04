@@ -4,7 +4,7 @@
 
 **STOP. Do not read any code yet. You must ask the user these questions first:**
 
-1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for full (all 17 dimensions) but you can choose any."
+1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for full (all 19 dimensions) but you can choose any."
 2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
 3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
 
@@ -51,6 +51,8 @@ Before writing findings, build a project map:
 15. **Frontend state audit** (if applicable) — check `prompts/frontend-state-audit.md` for component size, state duplication, effect proliferation, and UI-business logic coupling
 16. **Backend API audit** (if applicable) — check `prompts/backend-api-audit.md` for API consistency, request validation, data access patterns, and error response structure
 17. **Dependency weight audit** — check `prompts/dependency-weight-audit.md` for overweight deps, unused deps, build toolchain complexity, and version strategy
+18. **Code consistency audit** — check `prompts/code-consistency-audit.md` for naming conventions, import organization, error handling patterns, pattern uniformity, file structure, and boilerplate duplication
+19. **Comment coverage audit** — check `prompts/comment-coverage-audit.md` for missing public API docs, stale/misleading comments, over-commenting, module documentation gaps, and inline comment quality
 
 ## Rules
 
@@ -93,7 +95,7 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
    - Stats row with total + severity breakdown
    - Top risks table with all findings
    - Detailed findings with full evidence + fix boxes
-   - Per-dimension sections: one `<h3>` per audit dimension the user selected (full mode = ALL 17: Architecture, Security, Stability, Performance, Testing, Maintainability, Design, Release, Documentation, Configuration, Observability, Fallback, Testing-Authenticity, Type-Safety, Frontend-State, Backend-API, Dependency-Weight). Each section has findings table + verified checklist. Do NOT skip any.
+   - Per-dimension sections: one `<h3>` per audit dimension the user selected (full mode = ALL 19: Architecture, Security, Stability, Performance, Testing, Maintainability, Design, Release, Documentation, Configuration, Observability, Fallback, Testing-Authenticity, Type-Safety, Frontend-State, Backend-API, Dependency-Weight, Code-Consistency, Comment-Coverage). Each section has findings table + verified checklist. Do NOT skip any.
    - Design principles violations table + followed checklist
    - Fix order with tables grouped by priority
    - Quick wins grid

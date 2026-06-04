@@ -13,11 +13,11 @@
 
 ## Modes
 
-Pick one or combine (e.g., `security, stability, type-safety`). Full mode covers **17 audit dimensions**.
+Pick one or combine (e.g., `security, stability, type-safety`). Full mode covers **19 audit dimensions**.
 
 | Mode | Focus |
 |------|-------|
-| `full` | All 17 dimensions |
+| `full` | All 19 dimensions |
 | `security` | Authentication, injection, secrets, dependencies |
 | `stability` | Panic paths, error handling, concurrency, lifecycle |
 | `performance` | Hot paths, memory, I/O, startup cost |
@@ -30,13 +30,15 @@ Pick one or combine (e.g., `security, stability, type-safety`). Full mode covers
 | `frontend-state` | Component size, state duplication, effects, coupling |
 | `backend-api` | API consistency, validation, N+1, data flow |
 | `dependency-weight` | Overweight deps, build toolchain |
+| `code-consistency` | Naming, imports, patterns, style uniformity |
+| `comment-coverage` | Doc quality, stale comments, missing docs |
 
 ## Project Structure
 
 ```
 fuck-my-shit-mountain/
 ├── SKILL.md              — Entry point & rules
-├── prompts/              — 13 audit mode prompts
+├── prompts/              — 15 audit mode prompts
 ├── rubrics/              — Severity, confidence, evidence, principles, scoring
 ├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
 └── examples/             — Rust, Node.js, Vue audit examples

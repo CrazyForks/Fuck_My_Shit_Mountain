@@ -150,7 +150,7 @@
         security, stability, performance, testing, maintainability, architecture,
         design, release, documentation, configuration, observability, fallback,
         testing-authenticity, type-safety, frontend-state, backend-api,
-        dependency-weight, principles, fix-order
+        dependency-weight, code-consistency, comment-coverage, principles, fix-order
       - User chose "security, release" → only summary, findings, security,
         release, principles, fix-order
       - User chose "frontend-state"    → only summary, findings, frontend-state,
@@ -383,7 +383,7 @@
     CRITICAL: Generate one <h3> section per dimension that the user selected.
     Do NOT generate sections for dimensions the user didn't ask about.
     
-    FULL mode covers ALL 17 audit dimensions:
+    FULL mode covers ALL 19 audit dimensions:
       1.  Architecture & Module Boundaries
       2.  Security
       3.  Stability & Error Handling
@@ -401,6 +401,8 @@
       15. Frontend State
       16. Backend API
       17. Dependency Weight
+      18. Code Consistency
+      19. Comment Coverage
 
     Each section has the SAME pattern:
       <h3 class="section-title" id="[dimension-id]">[ICON] [TITLE]</h3>
@@ -514,7 +516,8 @@
     In full mode: Architecture, Security, Stability, Performance, Testing,
     Maintainability, Design, Release, Documentation, Configuration,
     Observability, Fallback, Testing-Authenticity, Type-Safety,
-    Frontend-State, Backend-API, Dependency-Weight.
+    Frontend-State, Backend-API, Dependency-Weight, Code-Consistency,
+    Comment-Coverage.
 
     Each gets its own <h3> + findings card (or "✅ 无发现") + verified card.
     Use the icon + Chinese title consistent with the dimension's topic.

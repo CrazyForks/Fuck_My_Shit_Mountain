@@ -10,7 +10,7 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 
 The 3 questions are:
 
-1. **Audit modes** — Ask: "Which modes? You can pick multiple, comma-separated. Available: full, security, stability, performance, testing, maintainability, release, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight. Or just 'full' for everything."
+1. **Audit modes** — Ask: "Which modes? You can pick multiple, comma-separated. Available: full, security, stability, performance, testing, maintainability, release, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight, code-consistency, comment-coverage. Or just 'full' for everything."
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple (e.g., `security, stability, frontend-state`), combine the audit areas from each mode's prompt. Use the most specific finding format rules.
 2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)" The AI will figure out the programming language from the codebase itself.
@@ -50,6 +50,8 @@ The 3 questions are:
 | `frontend-state` | `prompts/frontend-state-audit.md` | Component size, state, effects, coupling |
 | `backend-api` | `prompts/backend-api-audit.md` | API design, validation, data access patterns |
 | `dependency-weight` | `prompts/dependency-weight-audit.md` | Overweight deps, build toolchain |
+| `code-consistency` | `prompts/code-consistency-audit.md` | Naming, imports, patterns, style uniformity |
+| `comment-coverage` | `prompts/comment-coverage-audit.md` | Doc quality, stale comments, missing docs |
 
 ## Scoring
 
