@@ -62,6 +62,55 @@ Overall         ██████░░░░  6.6  B
 
 详见 `fuck-my-shit-mountain/rubrics/scoring.md`。
 
+## 各 AI 工具安装方式
+
+### Codex（已配置元数据）
+
+项目已包含 Codex 配置，可直接加载 skill：
+
+```
+/code
+请使用 fuck-my-shit-mountain skill 审计当前项目
+```
+
+或在 Codex 中引用 SKILL.md：
+
+```
+load fuck-my-shit-mountain/skill.md
+run full-audit on .
+```
+
+### Claude Code
+
+```bash
+# 在项目目录中运行
+claude
+```
+
+然后在对话中引用：
+
+```
+请使用 fuck-my-shit-mountain skill 进行 full 审计
+输出格式 html
+```
+
+### Cursor / Superpower / 其他 AI IDE
+
+将 `SKILL.md` 作为 system prompt 加载，然后输入：
+
+```
+Use the fuck-my-shit-mountain skill in full mode.
+Audit this repository for stable release readiness.
+Output format: html with Chinese report
+```
+
+### 手动使用
+
+1. 打开 `fuck-my-shit-mountain/SKILL.md` 了解规则
+2. 根据需求选择 `prompts/` 下对应的审计模式
+3. 将提示词 + 代码库内容粘贴到任意 AI
+4. AI 会先问 3 个问题，然后开始审计
+
 ## License
 
 MIT
