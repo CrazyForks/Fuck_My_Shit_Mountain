@@ -65,3 +65,7 @@ Overall         ██████░░░░  6.6  B
 ## License
 
 MIT
+
+---
+
+学 AI 上 [LinuxDo](https://linux.do/)
