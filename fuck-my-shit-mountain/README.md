@@ -1,84 +1,84 @@
 # Fuck My Shit Mountain
 
-An AI-powered code audit skill that produces **professional, evidence-based, actionable** code reviews. Despite the crude name, the output is冷静, structured, and engineering-rigorous.
+一个 AI 代码审计技能，生成**专业、证据驱动、可执行**的代码审查报告。名字粗俗，但输出冷静、结构化、工程严谨。
 
-## What It Does
+## 功能
 
-- Audits a codebase across **19 audit dimensions** (full mode): architecture, security, stability, performance, testing, maintainability, design, release, documentation, configuration, observability, fallback, testing-authenticity, type-safety, frontend-state, backend-api, dependency-weight, code-consistency, comment-coverage
-- Produces structured findings with severity, confidence, evidence, and fix recommendations
-- Scores **7 core dimensions** (0.0–10.0) with letter grades for at-a-glance health assessment
-- Separates confirmed issues from suspected issues
-- Estimates fix effort and prioritizes risks
-- Suggests regression tests for every finding
+- 审计代码库的 **19 个维度**（full 模式）：架构、安全、稳定性、性能、测试、可维护性、设计、发布、文档、配置、可观测性、降级、测试真实性、类型安全、前端状态、后端 API、依赖权重、代码一致性、注释覆盖率
+- 生成结构化发现项，包含严重程度、置信度、证据和修复建议
+- 对 **7 个核心维度** 打分（0.0–10.0），附带等级 S/A/B/C/D/F
+- 区分**已确认**和**待确认**问题
+- 每个发现预估修复工作量并排序风险
+- 每个发现附带回归测试建议
 
-## Interactive Init
+## 交互式初始化
 
-Before auditing, the AI **must ask 3 questions**:
+审计前 AI **必须问 3 个问题**：
 
-1. **Which modes?** — Pick from 15 modes, comma-separated or `full`
-2. **Report language?** — English / Chinese / etc.
-3. **Output format?** — `md` / `html` / `both` / `stdout`
+1. **选择模式？** — 15 种模式可选，逗号分隔或 `full`
+2. **报告语言？** — 中文 / English / 其他
+3. **输出格式？** — `md` / `html` / `both` / `stdout`
 
-HTML output (`templates/audit-report.html`) provides a complete rendered page with sidebar navigation, scroll spy, colored score bars, per-dimension findings tables + verified checklists, design principles compliance, fix order tables, and quick wins grid.
+HTML 输出（`templates/audit-report.html`）是一个完整的渲染页面，含侧边栏导航、滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表、速赢网格。
 
-## Usage
+## 使用
 
 ```
 load fuck-my-shit-mountain/skill.md
 run full-audit on .
 ```
 
-### Mode Selection
+### 模式选择
 
-| Command | Scope |
-|---------|-------|
-| `run full-audit` | All 19 audit dimensions |
-| `run security-audit` | Security-only review |
-| `run stability-audit` | Reliability and error handling |
-| `run performance-audit` | Realistic performance bottlenecks |
-| `run testing-audit` | Test quality and coverage gaps |
-| `run maintainability-audit` | Code complexity and coupling |
-| `run release-audit` | Release and deployment readiness |
-| `run fallback-audit` | Silent fallback, catch, defensive guessing |
-| `run testing-authenticity-audit` | Real test confidence vs green checkmarks |
-| `run type-safety-audit` | Unsafe blocks, type assertions, boundary types |
-| `run frontend-state-audit` | Component size, state management, effects |
-| `run backend-api-audit` | API design, validation, data access patterns |
-| `run dependency-weight-audit` | Overweight deps, build toolchain |
-| `run code-consistency-audit` | Naming, imports, patterns, style uniformity |
-| `run comment-coverage-audit` | Doc quality, stale comments, missing docs |
+| 命令 | 范围 |
+|------|------|
+| `run full-audit` | 全部 19 个审计维度 |
+| `run security-audit` | 仅安全审查 |
+| `run stability-audit` | 可靠性和错误处理 |
+| `run performance-audit` | 真实性能瓶颈 |
+| `run testing-audit` | 测试质量和覆盖率缺口 |
+| `run maintainability-audit` | 代码复杂度和耦合 |
+| `run release-audit` | 发布和部署就绪度 |
+| `run fallback-audit` | 静默降级、空 catch、防御性猜测 |
+| `run testing-authenticity-audit` | 真实测试信心 vs 绿色勾号 |
+| `run type-safety-audit` | Unsafe 块、类型断言、边界类型 |
+| `run frontend-state-audit` | 组件大小、状态管理、副作用 |
+| `run backend-api-audit` | API 设计、校验、数据访问模式 |
+| `run dependency-weight-audit` | 过重依赖、构建工具链 |
+| `run code-consistency-audit` | 命名、导入、模式、风格统一性 |
+| `run comment-coverage-audit` | 文档质量、过期注释、缺失文档 |
 
-> Combine modes: `security, stability, type-safety` — the AI merges audit areas from each.
+> 组合模式：`security, stability, type-safety` — AI 会合并各模式的审计范围。
 
-## Report Structure
+## 报告结构
 
-A full audit report contains:
+一份完整的审计报告包含：
 
-1. **Score Dashboard** — 7 dimension scores with bars + grades + one-sentence justification
-2. **Executive Summary** — Overall project assessment, biggest risks, bright spots, priorities
-3. **Stats** — Total findings by severity
-3. **Top Risks** — Prioritized findings table
-4. **Detailed Findings** — Every finding with full evidence, fix box, and test suggestion
-5. **Per-Dimension Sections** — One `<h3>` per audited dimension with findings table + verified checklist
-6. **Design Principles** — Violations table + followed principles check list
-7. **Fix Order** — Grouped by urgency (immediate / pre-release / schedule / later)
-8. **Quick Wins** — Low-cost high-value fixes
+1. **评分面板** — 7 个维度分数 + 条形图 + 等级 + 一句话理由
+2. **总体评估** — 项目整体状况、最大风险、亮点、优先级
+3. **统计** — 按严重程度统计发现总数
+4. **最高风险** — 排序后的风险表
+5. **详细发现** — 每个发现含完整证据、修复方案、测试建议
+6. **各维度评价** — 每个审计维度一个 `<h3>` 小节，含发现表 + 已验证清单
+7. **设计原则** — 违规表 + 遵循的原则清单
+8. **修复顺序** — 按紧急程度分组（立即 / 发布前 / 安排 / 后续）
+9. **速赢项** — 低成本高价值的修复
 
-## File Structure
+## 文件结构
 
 ```
 fuck-my-shit-mountain/
-  SKILL.md              Skill entry point — how the skill works
-  README.md             This file
-  prompts/              Audit prompt templates (15 modes)
-  rubrics/              Severity, confidence, evidence, principles, scoring
-  templates/            Report, issue card, and remediation plan templates
-  examples/             Usage examples for different project types
+  SKILL.md              技能入口 — 工作方式和规则
+  README.md             本文件
+  prompts/              审计提示词模板（15 种模式）
+  rubrics/              严重程度、置信度、证据、原则、评分
+  templates/            报告、发现卡、修复计划模板
+  examples/             不同项目类型的使用示例
 ```
 
-## Scoring
+## 评分体系
 
-Each dimension scored 0.0–10.0 with letter grades (S/A/B/C/D/F):
+每个维度 0.0–10.0 分，等级 S/A/B/C/D/F：
 
 ```
 Security        ████████░░  8.0  A   No auth on WS, hardcoded secret in config
@@ -92,14 +92,14 @@ Release         ██████░░░░  6.0  B   No CI on Windows, no ro
 Overall         ██████░░░░  6.6  B
 ```
 
-Scoring is **judgment-based**, not formula-based. **Higher = better (10 = clean, 0 = shit mountain).** The AI evaluates evidence holistically, with a one-sentence justification per dimension. See `rubrics/scoring.md`.
+评分基于**判断**而非公式。**越高越好（10 = 干净，0 = 屎山）。** AI 根据证据整体评估，每个维度附一句话理由。详见 `rubrics/scoring.md`。
 
-## Rules of Engagement
+## 规则
 
-- Every finding must have **concrete evidence**.
-- No emotional language or personal attacks.
-- No generic complaints about code quality.
-- No default recommendation to rewrite.
-- Distinguish **confirmed** from **suspected** issues.
-- Include a **regression test suggestion** for every finding.
-- Estimate **fix effort** for every finding.
+- 每个发现必须有**具体证据**
+- 禁止情绪化语言和人身攻击
+- 禁止对代码质量的泛泛抱怨
+- 禁止默认建议重写
+- 区分**已确认**和**待确认**问题
+- 每个发现附带**回归测试建议**
+- 每个发现预估**修复工作量**

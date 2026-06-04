@@ -1,50 +1,50 @@
 # Fuck My Shit Mountain 🏔️💩
 
-> An evidence-based AI code audit skill. Professional output. Zero emotional bullshit.
+> 基于证据的 AI 代码审计技能。专业输出。零情绪废话。
 
-**Fuck My Shit Mountain** is an AI skill (prompt framework) that produces rigorous, professional code reviews. Despite the crude name, every report is冷静, structured, evidence-driven, and actionable.
+**Fuck My Shit Mountain** 是一个 AI 技能（提示词框架），用于生成严谨、专业的代码审查报告。名字虽然粗俗，但每一份报告都是冷静、结构化、证据驱动、可执行的。
 
-## How It Works
+## 工作流程
 
-1. **AI asks 3 questions** before touching any code: which modes, what language, what output format (md/html/both/stdout)
-2. **AI audits your codebase** exhaustively — every file, every function
-3. **AI generates a structured report** with scores, findings, principles, fix order, and quick wins
-4. **HTML output** includes a sidebar with scroll spy, colored score bars, per-dimension sections with findings tables + verified checklists, design principles compliance, and a fix order table
+1. **AI 先问 3 个问题** — 选什么模式、报告用什么语言、输出格式（md/html/both/stdout）
+2. **AI 穷尽审计你的代码库** — 每个文件、每个函数都不放过
+3. **AI 生成结构化报告** — 评分、发现、原则合规、修复顺序、速赢项
+4. **HTML 输出** — 带侧边栏导航 + 滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表
 
-## Modes
+## 模式
 
-Pick one or combine (e.g., `security, stability, type-safety`). Full mode covers **19 audit dimensions**.
+可选单个或组合（如 `security, stability, type-safety`）。Full 模式覆盖 **19 个审计维度**。
 
-| Mode | Focus |
-|------|-------|
-| `full` | All 19 dimensions |
-| `security` | Authentication, injection, secrets, dependencies |
-| `stability` | Panic paths, error handling, concurrency, lifecycle |
-| `performance` | Hot paths, memory, I/O, startup cost |
-| `testing` | Coverage quality, test types, flakiness |
-| `maintainability` | Complexity, coupling, duplication, naming |
-| `release` | CI/CD, versioning, upgrade, rollback |
-| `fallback` | Silent fallback, catch, defensive guessing |
-| `testing-authenticity` | Over-mocking, impl-detail tests, false confidence |
-| `type-safety` | Unsafe blocks, type assertions, boundary types |
-| `frontend-state` | Component size, state duplication, effects, coupling |
-| `backend-api` | API consistency, validation, N+1, data flow |
-| `dependency-weight` | Overweight deps, build toolchain |
-| `code-consistency` | Naming, imports, patterns, style uniformity |
-| `comment-coverage` | Doc quality, stale comments, missing docs |
+| 模式 | 聚焦 |
+|------|------|
+| `full` | 全部 19 个维度 |
+| `security` | 认证、注入、密钥、依赖 |
+| `stability` | Panic 路径、错误处理、并发、生命周期 |
+| `performance` | 热点路径、内存、I/O、启动开销 |
+| `testing` | 测试覆盖率、测试类型、脆性 |
+| `maintainability` | 复杂度、耦合、重复、命名 |
+| `release` | CI/CD、版本管理、升级、回滚 |
+| `fallback` | 静默降级、空 catch、防御性猜测 |
+| `testing-authenticity` | 过度 Mock、实现细节测试、虚假信心 |
+| `type-safety` | Unsafe 块、类型断言、边界类型 |
+| `frontend-state` | 组件大小、状态重复、副作用、耦合 |
+| `backend-api` | API 一致性、校验、N+1、数据流 |
+| `dependency-weight` | 过重依赖、构建工具链 |
+| `code-consistency` | 命名、导入、模式、风格统一性 |
+| `comment-coverage` | 文档质量、过期注释、缺失文档 |
 
-## Project Structure
+## 项目结构
 
 ```
 fuck-my-shit-mountain/
-├── SKILL.md              — Entry point & rules
-├── prompts/              — 15 audit mode prompts
-├── rubrics/              — Severity, confidence, evidence, principles, scoring
+├── SKILL.md              — 入口点 & 规则
+├── prompts/              — 15 个审计模式提示词
+├── rubrics/              — 严重程度、置信度、证据、原则、评分
 ├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
-└── examples/             — Rust, Node.js, Vue audit examples
+└── examples/             — Rust、Node.js、Vue 审计示例
 ```
 
-## Sample Score Dashboard
+## 评分面板示例
 
 ```
 Security        ████████░░  8.0  A
@@ -58,9 +58,9 @@ Release         ██████░░░░  6.0  B
 Overall         ██████░░░░  6.6  B
 ```
 
-**Higher = better (10 = clean, 0 = shit mountain).** Scores are judgment-based, not formula-based.
+**越高越好（10 = 干净，0 = 屎山）。** 评分基于判断而非公式计算。
 
-See `fuck-my-shit-mountain/rubrics/scoring.md` for anchor descriptions and letter grade map.
+详见 `fuck-my-shit-mountain/rubrics/scoring.md`。
 
 ## License
 
