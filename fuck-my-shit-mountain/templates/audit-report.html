@@ -147,7 +147,7 @@
       CRITICAL: Generate ONE <a> per section in the report — only include
       sections for the dimensions the user actually selected. For example:
       - User chose "full"              → all sections below: summary, findings,
-        security, stability, performance, testing, maintainability, architecture,
+        executive-summary, security, stability, performance, testing, maintainability, architecture,
         design, release, documentation, configuration, observability, fallback,
         testing-authenticity, type-safety, frontend-state, backend-api,
         dependency-weight, code-consistency, comment-coverage, principles, fix-order
@@ -159,6 +159,7 @@
       Use the same icon + label pattern. Match href to the section's id.
     -->
     <a href="#summary"><span class="icon">📊</span> [[SUMMARY_LABEL]]</a>
+    <a href="#executive-summary"><span class="icon">📝</span> [[EXECUTIVE_SUMMARY_LABEL]]</a>
     <a href="#findings"><span class="icon">🔍</span> [[FINDINGS_LABEL]]</a>
     <a href="#security"><span class="icon">🔒</span> [[SECURITY_LABEL]]</a>
     <a href="#stability"><span class="icon">⚡</span> [[STABILITY_LABEL]]</a>
@@ -298,6 +299,31 @@
         </div>
 
       </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- EXECUTIVE SUMMARY                      -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="executive-summary">📝 总体评估</h3>
+  <!--
+    Write a 2-4 paragraph executive summary that gives an overall assessment
+    of the project. Cover:
+    - The project's overall health (what it is, what stage, what language/stack)
+    - The biggest risk areas in 1-2 sentences
+    - What the project does well (bright spots)
+    - What the project should prioritize fixing
+    - The overall grade in context (e.g., "B overall — solid but has real issues
+      in testing coverage that could block a stable release")
+  -->
+  <div class="card">
+    <div class="card-header">📋 总体评估</div>
+    <div class="card-body">
+      <p><strong>项目概况：</strong> [[PROJECT_DESC]]</p>
+      <p style="margin-top:12px"><strong>主要风险：</strong> [[TOP_RISKS_SUMMARY]]</p>
+      <p style="margin-top:12px"><strong>亮点：</strong> [[STRENGTHS]]</p>
+      <p style="margin-top:12px"><strong>优先修复：</strong> [[PRIORITIES]]</p>
+      <p style="margin-top:12px"><strong>总评：</strong> [[OVERALL_GRADE_CONTEXT]]</p>
     </div>
   </div>
 

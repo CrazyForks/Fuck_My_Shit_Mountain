@@ -55,7 +55,8 @@ run full-audit on .
 A full audit report contains:
 
 1. **Score Dashboard** — 7 dimension scores with bars + grades + one-sentence justification
-2. **Stats** — Total findings by severity
+2. **Executive Summary** — Overall project assessment, biggest risks, bright spots, priorities
+3. **Stats** — Total findings by severity
 3. **Top Risks** — Prioritized findings table
 4. **Detailed Findings** — Every finding with full evidence, fix box, and test suggestion
 5. **Per-Dimension Sections** — One `<h3>` per audited dimension with findings table + verified checklist

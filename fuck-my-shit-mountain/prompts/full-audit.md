@@ -92,6 +92,7 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 
 3. For HTML output: read `templates/audit-report.html` and generate a COMPLETE HTML file that copies the exact structure:
    - Score dashboard: one .score-item per scoring dimension the user selected (full mode = Security, Stability, Performance, Testing, Maintainability, Design, Release). Do NOT show dimensions the user didn't pick.
+   - Executive summary: 2-4 paragraph overview covering project health, biggest risks, bright spots, priorities, and overall grade in context
    - Stats row with total + severity breakdown
    - Top risks table with all findings
    - Detailed findings with full evidence + fix boxes
