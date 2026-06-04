@@ -1,5 +1,7 @@
 # Fuck My Shit Mountain 🏔️💩
 
+> 免责声明：AI 审查结果仅供娱乐和参考，不代表项目的实际质量、安全性、合规性或发布就绪度；任何结论都应结合人工审查、测试结果和真实运行环境验证。
+
 > 基于证据的 AI 代码审计技能。专业输出。零情绪废话。
 
 **Fuck My Shit Mountain** 是一个 AI 技能（提示词框架），用于生成严谨、专业的代码审查报告。名字虽然粗俗，但每一份报告都是冷静、结构化、证据驱动、可执行的。
@@ -62,54 +64,24 @@ Overall         ██████░░░░  6.6  B
 
 详见 `fuck-my-shit-mountain/rubrics/scoring.md`。
 
-## 各 AI 工具安装方式
+## Codex 安装方式
 
-### Codex（已配置元数据）
+当前仓库只维护 **Codex** 所需的 skill 元数据。
 
-项目已包含 Codex 配置，可直接加载 skill：
+1. 将 `fuck-my-shit-mountain/` 整个目录复制到 `~/.codex/skills/fuck-my-shit-mountain/`
+2. 重启 Codex，让它重新加载 skill 元数据
+3. 在 Codex 对话里直接请求使用这个 skill
 
-```
-/code
+示例：
+
+```text
 请使用 fuck-my-shit-mountain skill 审计当前项目
+模式：full
+报告语言：中文
+输出格式：html
 ```
 
-或在 Codex 中引用 SKILL.md：
-
-```
-load fuck-my-shit-mountain/skill.md
-run full-audit on .
-```
-
-### Claude Code
-
-```bash
-# 在项目目录中运行
-claude
-```
-
-然后在对话中引用：
-
-```
-请使用 fuck-my-shit-mountain skill 进行 full 审计
-输出格式 html
-```
-
-### Cursor / Superpower / 其他 AI IDE
-
-将 `SKILL.md` 作为 system prompt 加载，然后输入：
-
-```
-Use the fuck-my-shit-mountain skill in full mode.
-Audit this repository for stable release readiness.
-Output format: html with Chinese report
-```
-
-### 手动使用
-
-1. 打开 `fuck-my-shit-mountain/SKILL.md` 了解规则
-2. 根据需求选择 `prompts/` 下对应的审计模式
-3. 将提示词 + 代码库内容粘贴到任意 AI
-4. AI 会先问 3 个问题，然后开始审计
+如果你更新了仓库里的 skill 内容，重新同步一次目录到 `~/.codex/skills/fuck-my-shit-mountain/` 即可。
 
 ## License
 
