@@ -1,3 +1,8 @@
+---
+name: fuck-my-shit-mountain
+description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as security, stability, performance, testing, maintainability, release readiness, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
+---
+
 # Fuck My Shit Mountain — Skill Definition
 
 ## Purpose
