@@ -64,15 +64,40 @@ Overall         ██████░░░░  6.6  B
 
 详见 `fuck-my-shit-mountain/rubrics/scoring.md`。
 
-## Codex 安装方式
+## 原生支持平台
 
-当前仓库只维护 **Codex** 所需的 skill 元数据。
+当前这个仓库提供的是标准的 `SKILL.md + prompts + rubrics + templates` skill 目录，原生可用于以下工具：
+
+### Codex
 
 1. 将 `fuck-my-shit-mountain/` 整个目录复制到 `~/.codex/skills/fuck-my-shit-mountain/`
 2. 重启 Codex，让它重新加载 skill 元数据
 3. 在 Codex 对话里直接请求使用这个 skill
 
-示例：
+### Claude Code
+
+1. 个人安装：复制到 `~/.claude/skills/fuck-my-shit-mountain/`
+2. 项目安装：复制到 `.claude/skills/fuck-my-shit-mountain/`
+3. 启动 `claude` 后，通过提示词或 `/fuck-my-shit-mountain` 调用
+
+### GitHub Copilot（CLI / VS Code Agent / Cloud Agent）
+
+1. 个人安装：复制到 `~/.copilot/skills/fuck-my-shit-mountain/`，或 `~/.agents/skills/fuck-my-shit-mountain/`
+2. 项目安装：复制到 `.github/skills/fuck-my-shit-mountain/`、`.claude/skills/fuck-my-shit-mountain/`，或 `.agents/skills/fuck-my-shit-mountain/`
+3. 在 Copilot CLI 中执行 `/skills reload`
+4. 用 `/skills info fuck-my-shit-mountain` 确认已加载
+
+### Gemini CLI
+
+1. 个人安装：复制到 `~/.gemini/skills/fuck-my-shit-mountain/`，或 `~/.agents/skills/fuck-my-shit-mountain/`
+2. 项目安装：复制到 `.gemini/skills/fuck-my-shit-mountain/`，或 `.agents/skills/fuck-my-shit-mountain/`
+3. 在 Gemini CLI 中执行 `/skills reload`
+4. 用 `/skills list` 确认 skill 已被发现
+5. 如果使用项目目录安装，先确保工作区已 trust
+
+如果你更新了仓库里的 skill 内容，把目录重新同步到对应工具的 skills 目录，再按各工具的刷新方式重新加载即可。
+
+示例提示词：
 
 ```text
 请使用 fuck-my-shit-mountain skill 审计当前项目
@@ -80,8 +105,6 @@ Overall         ██████░░░░  6.6  B
 报告语言：中文
 输出格式：html
 ```
-
-如果你更新了仓库里的 skill 内容，重新同步一次目录到 `~/.codex/skills/fuck-my-shit-mountain/` 即可。
 
 ## License
 

@@ -21,11 +21,24 @@
 
 HTML 输出（`templates/audit-report.html`）是一个完整的渲染页面，含侧边栏导航、滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表、速赢网格。
 
-## 使用
+## 安装与使用
 
-```
-load fuck-my-shit-mountain/skill.md
-run full-audit on .
+把整个 `fuck-my-shit-mountain/` 目录复制到目标工具的 skills 目录中即可。
+
+| 工具 | 个人安装目录 | 项目安装目录 | 备注 |
+|------|--------------|--------------|------|
+| Codex | `~/.codex/skills/fuck-my-shit-mountain/` | - | 复制后重启 Codex |
+| Claude Code | `~/.claude/skills/fuck-my-shit-mountain/` | `.claude/skills/fuck-my-shit-mountain/` | 可通过 `/fuck-my-shit-mountain` 或自然语言触发 |
+| GitHub Copilot（CLI / VS Code Agent / Cloud Agent） | `~/.copilot/skills/fuck-my-shit-mountain/` 或 `~/.agents/skills/fuck-my-shit-mountain/` | `.github/skills/fuck-my-shit-mountain/`、`.claude/skills/fuck-my-shit-mountain/` 或 `.agents/skills/fuck-my-shit-mountain/` | 安装后执行 `/skills reload` |
+| Gemini CLI | `~/.gemini/skills/fuck-my-shit-mountain/` 或 `~/.agents/skills/fuck-my-shit-mountain/` | `.gemini/skills/fuck-my-shit-mountain/` 或 `.agents/skills/fuck-my-shit-mountain/` | 安装后执行 `/skills reload`，工作区安装前先 trust |
+
+通用示例提示词：
+
+```text
+请使用 fuck-my-shit-mountain skill 审计当前项目
+模式：full
+报告语言：中文
+输出格式：html
 ```
 
 ### 模式选择
