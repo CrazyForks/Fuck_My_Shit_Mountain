@@ -1,14 +1,8 @@
 # Security Audit Prompt
 
-## Required: Ask Before Auditing
+## Required Context Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these questions first:**
-
-1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for security but you can choose any."
-2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
-3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
-
-Wait for answers before proceeding.
+Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
 
 ---
 
@@ -68,7 +62,7 @@ Focus only on security-relevant risks.
 
 ## Attitude
 
-1. **Be exhaustive.** Check every endpoint, every auth path, every dependency. Attackers only need one hole.
+1. **Be exhaustively systematic.** Check all in-scope endpoints, auth paths, input boundaries, and dependency evidence. Follow the skill's coverage strategy and document exclusions honestly.
 2. **Do not be a yes-man.** Report security issues objectively. Do not downplay because the project "is just internal" or "nobody will attack us."
 
 ## Format Constraint

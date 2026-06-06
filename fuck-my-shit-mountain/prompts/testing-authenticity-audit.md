@@ -4,15 +4,9 @@ Use the fuck-my-shit-mountain skill in **testing-authenticity mode**.
 
 Focus on whether tests provide **real confidence** or just green checkmarks. This is not about coverage percentage — it is about whether the tests would catch real bugs.
 
-## Required: Ask Before Auditing
+## Required Context Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these questions first:**
-
-1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for testing-authenticity but you can choose any."
-2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
-3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
-
-Wait for answers before proceeding.
+Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
 
 ---
 

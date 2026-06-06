@@ -1,14 +1,8 @@
 # Stability Audit Prompt
 
-## Required: Ask Before Auditing
+## Required Context Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these questions first:**
-
-1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for stability but you can choose any."
-2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
-3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
-
-Wait for answers before proceeding.
+Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
 
 ---
 
@@ -72,7 +66,7 @@ Focus on reliability, runtime safety, state consistency, and failure recovery.
 
 ## Attitude
 
-1. **Be exhaustive.** Check every error path, every unwrap, every timeout. Assume every failure will happen in production.
+1. **Be exhaustively systematic.** Check in-scope error paths, panic/unwrap paths, timeout behavior, lifecycle edges, and recovery paths. Follow the skill's coverage strategy and document exclusions honestly.
 2. **Do not be a yes-man.** Do not skip issues because "it works in practice." Report every realistic crash path.
 
 ## Format Constraint

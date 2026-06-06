@@ -1,14 +1,8 @@
 # Full Audit Prompt
 
-## Required: Ask Before Auditing
+## Required Context Before Auditing
 
-**STOP. Do not read any code yet. You must ask the user these questions first:**
-
-1. **Audit modes** — Present the FULL list: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`. Ask: "Which mode(s)? Pick one or comma-separated. This prompt is pre-configured for full (all 19 dimensions) but you can choose any."
-2. **Report language** — Ask: "What language should the report be written in? (English / Chinese / etc.)"
-3. **Output format** — Ask: "How do you want the report? `md` / `html` / `both` / `stdout`"
-
-Wait for answers before proceeding.
+Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
 
 ---
 
@@ -70,7 +64,7 @@ Before writing findings, build a project map:
 
 ## Attitude
 
-1. **Be exhaustive.** Search the entire codebase, not just obvious hotspots. Every file, every function. Leave no stone unturned.
+1. **Be exhaustively systematic.** Search all in-scope first-party areas, not just obvious hotspots. Follow the skill's coverage strategy and document exclusions honestly.
 2. **Do not be a yes-man.** Do not suppress findings to be agreeable. Report issues objectively regardless of who wrote the code. If the code has problems, say so.
 
 ## Scoring
