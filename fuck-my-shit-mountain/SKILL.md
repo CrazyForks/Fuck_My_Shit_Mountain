@@ -1,6 +1,6 @@
 ---
 name: fuck-my-shit-mountain
-description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as security, stability, performance, testing, maintainability, release readiness, observability, configuration safety, data integrity, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
+description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as architecture, design, security, stability, performance, testing, maintainability, release readiness, documentation, observability, configuration safety, data integrity, privacy, accessibility, supply chain, cost, AI/LLM safety, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
 ---
 
 # Fuck My Shit Mountain — Skill Definition
@@ -15,7 +15,7 @@ Before reading code, determine whether the user has already supplied all require
 
 Required inputs:
 
-1. **Audit modes** — Accepted values: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `observability`, `configuration`, `data-integrity`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
+1. **Audit modes** — Accepted values: `full`, `architecture`, `security`, `stability`, `performance`, `testing`, `maintainability`, `design`, `release`, `documentation`, `observability`, `configuration`, `data-integrity`, `privacy`, `accessibility`, `supply-chain`, `cost`, `ai-safety`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple modes, merge the audit areas from each selected prompt. Use the most specific finding format rules.
 2. **Report language** — The language used in the final report, such as English or Chinese. The programming language is inferred from the repository and is not a substitute for this answer.
@@ -38,14 +38,21 @@ If the user says something like "audit this project" without any of the required
    - `rubrics/evidence.md` for evidence quality and minimum evidence thresholds.
    - `rubrics/coverage.md` for dimension coverage confidence and reporting limits.
    - `rubrics/scoring.md` for score dashboards and grade anchors.
-   - `rubrics/principles.md` when producing full, maintainability, design, frontend-state, backend-api, type-safety, configuration, data-integrity, or principles-related findings.
+   - `rubrics/principles.md` when producing full, architecture, maintainability, design, documentation, frontend-state, backend-api, type-safety, configuration, data-integrity, accessibility, or principles-related findings.
 4. The AI audits the codebase using the coverage strategy below.
 5. Each finding is recorded using `templates/issue-card.md`.
 6. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
 7. If output-to-file was requested, the AI writes the report to disk.
-8. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
+8. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py --modes <selected-modes> <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
 9. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
 10. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
+
+## Mode vs Dimension Model
+
+- **Selectable modes** are user-facing audit entry points. Each mode maps to one prompt file in `prompts/`.
+- **Full dimensions** are the sections covered by `full` mode. Full mode covers all selectable focused dimensions and marks project-inapplicable dimensions as Not assessed.
+- Focused modes may affect multiple score dimensions. For example, `configuration` can affect Security, Stability, and Release.
+- If a dimension is only conditionally relevant, such as `frontend-state`, `accessibility`, or `ai-safety`, inspect for applicability first and mark it Not assessed with evidence when the project lacks that surface.
 
 ## Resource Loading
 
@@ -62,10 +69,10 @@ By default, this skill audits and reports. It may create requested report files,
 Be exhaustively systematic over in-scope project files, not literally every byte in the repository.
 
 1. Start with a file inventory using fast project-aware search such as `rg --files`.
-2. Build a project map before writing findings: entry points, main modules, data flow, state ownership, persistence, data integrity boundaries, external interfaces, security boundaries, observability surfaces, configuration sources, tests, CI, release files, and dependency manifests.
+2. Build a project map before writing findings: entry points, main modules, architecture boundaries, data flow, state ownership, persistence, data integrity boundaries, privacy-sensitive data, external interfaces, security boundaries, AI/model surfaces, observability surfaces, configuration sources, tests, CI, release files, and dependency manifests.
 3. Treat first-party source, tests, scripts, CI/config, migrations, dependency manifests, and documentation that describes behavior as in scope.
 4. Exclude by default: `.git`, dependency folders (`node_modules`, `vendor` unless first-party vendored code must be audited), build artifacts (`dist`, `build`, `target`, `out`, `coverage`, `.next`, `.nuxt`), generated files, minified bundles, binary assets, cache folders, and lockfiles unless the selected mode needs dependency or release evidence.
-5. For large repositories, prioritize high-risk areas first: auth, input boundaries, persistence, data integrity, concurrency, network/file-system access, error handling, observability gaps, build/release config, and critical user workflows.
+5. For large repositories, prioritize high-risk areas first: auth, input boundaries, persistence, data integrity, privacy-sensitive data, AI/model tool boundaries, concurrency, network/file-system access, error handling, observability gaps, build/release config, supply-chain surfaces, cost drivers, and critical user workflows.
 6. Assign coverage confidence per selected dimension using `rubrics/coverage.md`: High, Medium, Low, or Not assessed.
 7. Include a short coverage note in the report, usually in Project Map or Executive Summary: inspected areas, excluded path categories, important commands run, and any time or access limits.
 8. Include a coverage matrix in the report with one row per selected dimension: dimension, coverage confidence, inspected evidence, exclusions/limits.
@@ -85,15 +92,23 @@ If the audit discovers secrets, tokens, private keys, `.env` values, credentials
 | Mode | Prompt | Focus |
 |------|--------|-------|
 | `full` | `prompts/full-audit.md` | All dimensions + principles |
+| `architecture` | `prompts/architecture-audit.md` | Module boundaries, dependency direction, state ownership |
 | `security` | `prompts/security-audit.md` | Security risks |
 | `stability` | `prompts/stability-audit.md` | Reliability & errors |
 | `performance` | `prompts/performance-audit.md` | Realistic bottlenecks |
 | `testing` | `prompts/testing-audit.md` | Test quality & gaps |
 | `maintainability` | `prompts/maintainability-audit.md` | Complexity, coupling, principles |
+| `design` | `prompts/design-audit.md` | Engineering principles and design risk |
 | `release` | `prompts/release-audit.md` | Release readiness |
+| `documentation` | `prompts/documentation-audit.md` | Docs accuracy, setup, operator/developer guidance |
 | `observability` | `prompts/observability-audit.md` | Logging, metrics, tracing, health checks, alerting |
 | `configuration` | `prompts/configuration-audit.md` | Config validation, defaults, feature flags, env separation |
 | `data-integrity` | `prompts/data-integrity-audit.md` | Transactions, idempotency, migrations, invariants |
+| `privacy` | `prompts/privacy-audit.md` | PII, minimization, retention, deletion, data governance |
+| `accessibility` | `prompts/accessibility-audit.md` | Keyboard, focus, semantics, responsive and UX states |
+| `supply-chain` | `prompts/supply-chain-audit.md` | Provenance, reproducibility, CI integrity, signing |
+| `cost` | `prompts/cost-audit.md` | Resource economics, budgets, external API and LLM costs |
+| `ai-safety` | `prompts/ai-safety-audit.md` | Prompt injection, tool auth, RAG leakage, evals, cost abuse |
 | `fallback` | `prompts/fallback-audit.md` | Silent fallback, catch, defensive guessing |
 | `testing-authenticity` | `prompts/testing-authenticity-audit.md` | Real confidence vs green checkmarks |
 | `type-safety` | `prompts/type-safety-audit.md` | Unsafe blocks, assertions, boundary types |

@@ -3,7 +3,7 @@
 # Fuck My Shit Mountain Audit Report
 
 **Project:** <project name>
-**Audit mode:** <full / security / stability / performance / testing / maintainability / release / observability / configuration / data-integrity / fallback / testing-authenticity / type-safety / frontend-state / backend-api / dependency-weight / code-consistency / comment-coverage>
+**Audit mode:** <full / architecture / security / stability / performance / testing / maintainability / design / release / documentation / observability / configuration / data-integrity / privacy / accessibility / supply-chain / cost / ai-safety / fallback / testing-authenticity / type-safety / frontend-state / backend-api / dependency-weight / code-consistency / comment-coverage>
 **Date:** <date>
 **Reviewer:** <AI model / version>
 
@@ -63,16 +63,25 @@ Each dimension scored 0.0–10.0. **Higher = better (10 = clean, 0 = shit mounta
 
 Depending on audit mode:
 
-- **Full / Security / Backend-API:** Security Concerns
-- **Full / Stability / Fallback / Observability / Configuration / Data-Integrity:** Stability Concerns
-- **Full / Performance:** Performance Concerns
-- **Full / Testing / Testing-Authenticity:** Testing Gaps
-- **Full / Maintainability / Frontend-State / Backend-API:** Maintainability Concerns
+- **Full / Architecture:** Architecture Concerns
+- **Full / Security / Backend-API / Privacy / Supply-Chain / AI-Safety:** Security Concerns
+- **Full / Stability / Fallback / Observability / Configuration / Data-Integrity / Privacy / AI-Safety:** Stability Concerns
+- **Full / Performance / Cost / AI-Safety:** Performance Concerns
+- **Full / Testing / Testing-Authenticity / Accessibility / AI-Safety:** Testing Gaps
+- **Full / Maintainability / Architecture / Documentation / Frontend-State / Backend-API / Accessibility:** Maintainability Concerns
+- **Full / Design / Architecture / Accessibility:** Design / Principles Concerns
 - **Full / Type-Safety:** Type Safety Concerns
-- **Full / Release / Dependency-Weight / Observability / Configuration / Data-Integrity:** Release Concerns
+- **Full / Release / Dependency-Weight / Observability / Configuration / Data-Integrity / Documentation / Privacy / Supply-Chain / Cost:** Release Concerns
+- **Full / Documentation:** Documentation Analysis
 - **Full / Observability:** Observability / Operability Analysis
 - **Full / Configuration:** Configuration Safety Analysis
 - **Full / Data-Integrity:** Data Integrity Analysis
+- **Full / Privacy:** Privacy / Data Governance Analysis
+- **Full / Accessibility:** Accessibility / UX Correctness Analysis
+- **Full / Supply-Chain:** Supply Chain / Reproducibility Analysis
+- **Full / Cost:** Cost / Resource Economics Analysis
+- **Full / AI-Safety:** AI / LLM Safety Analysis
+- **Architecture:** Architecture Concerns
 - **Security:** Security Concerns
 - **Stability:** Stability Concerns
 - **Performance:** Performance Concerns
@@ -81,9 +90,15 @@ Depending on audit mode:
 - **Maintainability:** Maintainability Concerns
 - **Design:** Design / Principles Concerns
 - **Release:** Release Concerns
+- **Documentation:** Documentation Analysis
 - **Observability:** Observability / Operability Analysis
 - **Configuration:** Configuration Safety Analysis
 - **Data-Integrity:** Data Integrity Analysis
+- **Privacy:** Privacy / Data Governance Analysis
+- **Accessibility:** Accessibility / UX Correctness Analysis
+- **Supply-Chain:** Supply Chain / Reproducibility Analysis
+- **Cost:** Cost / Resource Economics Analysis
+- **AI-Safety:** AI / LLM Safety Analysis
 - **Fallback:** Fallback / Defensive Code Analysis
 - **Type-Safety:** Type Safety Analysis
 - **Frontend-State:** Frontend State Analysis
@@ -123,7 +138,126 @@ Repeat for all dimensions covered by the audit mode.
 
 ---
 
-## <N+1a>. Observability / Operability Analysis
+## <N+1a>. Architecture Analysis
+
+<Only for full or architecture mode. See prompts/architecture-audit.md>
+
+### Architecture Summary
+
+| Subtype | Count | Affected Areas | Recommended Action |
+|---------|-------|----------------|-------------------|
+| ModuleBoundary | <N> | <list> | Clarify ownership / split responsibility |
+| DependencyDirection | <N> | <list> | Invert dependency / introduce port |
+| StateOwnership | <N> | <list> | Define source of truth |
+| BoundaryContract | <N> | <list> | Add explicit contract/schema |
+| EvolutionRisk | <N> | <list> | Reduce feature-change blast radius |
+
+<Detail each finding with the architecture audit finding format>
+
+## <N+1b>. Documentation Analysis
+
+<Only for full or documentation mode. See prompts/documentation-audit.md>
+
+### Documentation Summary
+
+| Subtype | Count | Affected Docs | Recommended Action |
+|---------|-------|---------------|-------------------|
+| UserDocs | <N> | <list> | Correct behavior/setup instructions |
+| OperatorDocs | <N> | <list> | Add runbook/deploy/rollback guidance |
+| DeveloperDocs | <N> | <list> | Document local dev/test/build flow |
+| ApiDocs | <N> | <list> | Sync contracts and examples |
+| DecisionRecord | <N> | <list> | Add or update ADR |
+| StaleDocs | <N> | <list> | Remove or regenerate stale content |
+
+<Detail each finding with the documentation audit finding format>
+
+## <N+1c>. Privacy / Data Governance Analysis
+
+<Only for full or privacy mode. See prompts/privacy-audit.md>
+
+### Privacy Summary
+
+| Subtype | Count | Affected Data | Recommended Action |
+|---------|-------|---------------|-------------------|
+| DataInventory | <N> | <list> | Classify and document ownership |
+| Minimization | <N> | <list> | Stop collecting/storing unnecessary data |
+| AccessBoundary | <N> | <list> | Tighten access controls/audit logs |
+| Retention | <N> | <list> | Add retention policy/enforcement |
+| Deletion | <N> | <list> | Delete derived/cache/index data |
+| Export | <N> | <list> | Fix export completeness/boundaries |
+| TelemetryPrivacy | <N> | <list> | Redact logs/traces/metrics |
+
+<Detail each finding with the privacy audit finding format>
+
+## <N+1d>. Accessibility / UX Correctness Analysis
+
+<Only for full or accessibility mode. See prompts/accessibility-audit.md>
+
+### Accessibility Summary
+
+| Subtype | Count | Affected Workflows | Recommended Action |
+|---------|-------|-------------------|-------------------|
+| SemanticStructure | <N> | <list> | Use semantic controls/labels |
+| KeyboardFocus | <N> | <list> | Fix keyboard and focus behavior |
+| ResponsiveVisual | <N> | <list> | Fix layout/contrast/touch target |
+| ErrorState | <N> | <list> | Associate and clarify errors |
+| LoadingState | <N> | <list> | Prevent stale/duplicate actions |
+| UXStateCorrectness | <N> | <list> | Reconcile UI and server state |
+
+<Detail each finding with the accessibility audit finding format>
+
+## <N+1e>. Supply Chain / Reproducibility Analysis
+
+<Only for full or supply-chain mode. See prompts/supply-chain-audit.md>
+
+### Supply Chain Summary
+
+| Subtype | Count | Affected Surface | Recommended Action |
+|---------|-------|------------------|-------------------|
+| DependencyProvenance | <N> | <list> | Pin/verify dependency source |
+| Reproducibility | <N> | <list> | Enforce lock/toolchain reproducibility |
+| CIIntegrity | <N> | <list> | Harden workflow permissions/secrets |
+| ArtifactProvenance | <N> | <list> | Sign/checksum/SBOM/provenance |
+| RegistryHygiene | <N> | <list> | Clean package contents/ownership |
+
+<Detail each finding with the supply-chain audit finding format>
+
+## <N+1f>. Cost / Resource Economics Analysis
+
+<Only for full or cost mode. See prompts/cost-audit.md>
+
+### Cost Summary
+
+| Subtype | Count | Cost Driver | Recommended Action |
+|---------|-------|-------------|-------------------|
+| UnboundedWork | <N> | <CPU/memory/storage/etc.> | Add caps/deduplication |
+| ExternalApiCost | <N> | <API> | Add quotas/cache/retry budget |
+| LLMCost | <N> | <model/tokens> | Add token and concurrency budgets |
+| InfrastructureSizing | <N> | <resource> | Right-size limits/autoscaling |
+| ObservabilityCost | <N> | <logs/metrics/traces> | Add sampling/retention/cardinality control |
+| CostVisibility | <N> | <workflow/tenant> | Add cost metrics/budgets |
+
+<Detail each finding with the cost audit finding format>
+
+## <N+1g>. AI / LLM Safety Analysis
+
+<Only for full or ai-safety mode. See prompts/ai-safety-audit.md>
+
+### AI Safety Summary
+
+| Subtype | Count | Boundary Crossed | Recommended Action |
+|---------|-------|------------------|-------------------|
+| PromptInjection | <N> | <list> | Isolate untrusted content |
+| ToolAuthorization | <N> | <list> | Add deterministic policy checks |
+| RAGLeakage | <N> | <list> | Enforce retrieval access boundaries |
+| ModelFallback | <N> | <list> | Make fallback explicit and bounded |
+| OutputValidation | <N> | <list> | Validate structured outputs |
+| EvalGap | <N> | <list> | Add policy/security evals |
+| AbuseCost | <N> | <list> | Add rate/token/tool budgets |
+
+<Detail each finding with the ai-safety audit finding format>
+
+## <N+1h>. Observability / Operability Analysis
 
 <Only for full or observability mode. See prompts/observability-audit.md>
 
@@ -141,7 +275,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the observability audit finding format>
 
-## <N+1b>. Configuration Safety Analysis
+## <N+1i>. Configuration Safety Analysis
 
 <Only for full or configuration mode. See prompts/configuration-audit.md>
 
@@ -158,7 +292,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the configuration audit finding format>
 
-## <N+1c>. Data Integrity Analysis
+## <N+1j>. Data Integrity Analysis
 
 <Only for full or data-integrity mode. See prompts/data-integrity-audit.md>
 
@@ -176,7 +310,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the data-integrity audit finding format>
 
-## <N+1d>. Fallback / Defensive Code Analysis
+## <N+1k>. Fallback / Defensive Code Analysis
 
 <Only for full or fallback mode. See prompts/fallback-audit.md>
 
@@ -192,7 +326,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the fallback audit finding format>
 
-## <N+1e>. Testing Authenticity Analysis
+## <N+1l>. Testing Authenticity Analysis
 
 <Only for full or testing-authenticity mode. See prompts/testing-authenticity-audit.md>
 
@@ -216,7 +350,7 @@ Repeat for all dimensions covered by the audit mode.
 
 ---
 
-## <N+1f>. Type Safety Analysis
+## <N+1m>. Type Safety Analysis
 
 <Only for full or type-safety mode. See prompts/type-safety-audit.md>
 
@@ -234,7 +368,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the type-safety audit finding format>
 
-## <N+1g>. Frontend State Analysis
+## <N+1n>. Frontend State Analysis
 
 <Only for full or frontend-state mode. See prompts/frontend-state-audit.md>
 
@@ -253,7 +387,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the frontend-state audit finding format>
 
-## <N+1h>. Backend API Analysis
+## <N+1o>. Backend API Analysis
 
 <Only for full or backend-api mode. See prompts/backend-api-audit.md>
 
@@ -272,7 +406,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the backend-api audit finding format>
 
-## <N+1i>. Dependency Weight Analysis
+## <N+1p>. Dependency Weight Analysis
 
 <Only for full or dependency-weight mode. See prompts/dependency-weight-audit.md>
 

@@ -149,7 +149,8 @@
       - User chose "full"              → all sections below: summary, executive-summary, coverage, findings,
         security, stability, performance, testing, maintainability, architecture,
         design, release, documentation, configuration, observability,
-        data-integrity, fallback, testing-authenticity, type-safety, frontend-state, backend-api,
+        data-integrity, privacy, accessibility, supply-chain, cost, ai-safety,
+        fallback, testing-authenticity, type-safety, frontend-state, backend-api,
         dependency-weight, code-consistency, comment-coverage, principles, fix-order
       - User chose "security, release" → only summary, findings, security,
         release, principles, fix-order
@@ -162,14 +163,23 @@
     <a href="#executive-summary"><span class="icon">📝</span> [[EXECUTIVE_SUMMARY_LABEL]]</a>
     <a href="#coverage"><span class="icon">🧭</span> [[COVERAGE_LABEL]]</a>
     <a href="#findings"><span class="icon">🔍</span> [[FINDINGS_LABEL]]</a>
+    <a href="#architecture"><span class="icon">🏗</span> [[ARCHITECTURE_LABEL]]</a>
     <a href="#security"><span class="icon">🔒</span> [[SECURITY_LABEL]]</a>
     <a href="#stability"><span class="icon">⚡</span> [[STABILITY_LABEL]]</a>
     <a href="#performance"><span class="icon">🚀</span> [[PERFORMANCE_LABEL]]</a>
     <a href="#testing"><span class="icon">🧪</span> [[TESTING_LABEL]]</a>
     <a href="#maintainability"><span class="icon">📐</span> [[MAINTAINABILITY_LABEL]]</a>
+    <a href="#design"><span class="icon">📋</span> [[DESIGN_LABEL]]</a>
+    <a href="#release"><span class="icon">🚢</span> [[RELEASE_LABEL]]</a>
+    <a href="#documentation"><span class="icon">📚</span> [[DOCUMENTATION_LABEL]]</a>
     <a href="#configuration"><span class="icon">⚙️</span> [[CONFIGURATION_LABEL]]</a>
     <a href="#observability"><span class="icon">🩺</span> [[OBSERVABILITY_LABEL]]</a>
     <a href="#data-integrity"><span class="icon">🧱</span> [[DATA_INTEGRITY_LABEL]]</a>
+    <a href="#privacy"><span class="icon">🛡</span> [[PRIVACY_LABEL]]</a>
+    <a href="#accessibility"><span class="icon">⌨️</span> [[ACCESSIBILITY_LABEL]]</a>
+    <a href="#supply-chain"><span class="icon">🔗</span> [[SUPPLY_CHAIN_LABEL]]</a>
+    <a href="#cost"><span class="icon">💸</span> [[COST_LABEL]]</a>
+    <a href="#ai-safety"><span class="icon">🤖</span> [[AI_SAFETY_LABEL]]</a>
     <a href="#principles"><span class="icon">📋</span> [[PRINCIPLES_LABEL]]</a>
     <a href="#fix-order"><span class="icon">🎯</span> [[FIX_ORDER_LABEL]]</a>
   </div>
@@ -202,12 +212,27 @@
     - stability   → Stability
     - performance → Performance
     - testing     → Testing
+    - architecture → Maintainability, Design
     - maintainability → Maintainability
-    - design/architecture → Design
+    - design → Design
     - release     → Release
+    - documentation → Maintainability, Release
     - observability → Stability, Release
     - configuration → Security, Stability, Release
     - data-integrity → Stability, Release
+    - privacy → Security, Stability, Release
+    - accessibility → Testing, Maintainability, Design
+    - supply-chain → Security, Release
+    - cost → Performance, Release
+    - ai-safety → Security, Stability, Testing, Performance
+    - fallback → Stability
+    - testing-authenticity → Testing
+    - type-safety → Security, Design
+    - frontend-state → Maintainability
+    - backend-api → Security, Maintainability
+    - dependency-weight → Performance, Release
+    - code-consistency → Maintainability
+    - comment-coverage → Maintainability
     If the user chose multiple modes (e.g., "security, stability"), show ONLY those.
 
     Score → bar width: score * 10% (e.g., 8.5 → width:85%)
@@ -442,7 +467,7 @@
     CRITICAL: Generate one <h3> section per dimension that the user selected.
     Do NOT generate sections for dimensions the user didn't ask about.
     
-    FULL mode covers ALL 20 audit dimensions:
+    FULL mode covers ALL 25 audit dimensions:
       1.  Architecture & Module Boundaries
       2.  Security
       3.  Stability & Error Handling
@@ -455,14 +480,19 @@
       10. Configuration Safety
       11. Observability
       12. Data Integrity
-      13. Fallback / Defensive Code
-      14. Testing Authenticity
-      15. Type Safety
-      16. Frontend State
-      17. Backend API
-      18. Dependency Weight
-      19. Code Consistency
-      20. Comment Coverage
+      13. Privacy / Data Governance
+      14. Accessibility / UX Correctness
+      15. Supply Chain / Reproducibility
+      16. Cost / Resource Economics
+      17. AI / LLM Safety
+      18. Fallback / Defensive Code
+      19. Testing Authenticity
+      20. Type Safety
+      21. Frontend State
+      22. Backend API
+      23. Dependency Weight
+      24. Code Consistency
+      25. Comment Coverage
 
     Each section has the SAME pattern:
       <h3 class="section-title" id="[dimension-id]">[ICON] [TITLE]</h3>
@@ -509,7 +539,7 @@
   <!--
     BELOW ARE EXAMPLE SECTIONS showing the pattern for different cases.
     REPLACE all content with your actual audit data.
-    GENERATE one section per audited dimension (up to 20 in full mode).
+    GENERATE one section per audited dimension (up to 25 in full mode).
   -->
 
   <!-- EXAMPLE 1: Security — has findings -->
@@ -585,7 +615,8 @@
     REPEAT the above pattern for EVERY audited dimension.
     In full mode: Architecture, Security, Stability, Performance, Testing,
     Maintainability, Design, Release, Documentation, Configuration,
-    Observability, Data-Integrity, Fallback, Testing-Authenticity, Type-Safety,
+    Observability, Data-Integrity, Privacy, Accessibility, Supply-Chain,
+    Cost, AI-Safety, Fallback, Testing-Authenticity, Type-Safety,
     Frontend-State, Backend-API, Dependency-Weight, Code-Consistency,
     Comment-Coverage.
 

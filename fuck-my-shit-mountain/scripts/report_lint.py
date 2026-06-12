@@ -30,6 +30,67 @@ REQUIRED_HTML_IDS = (
     "fix-order",
 )
 
+FULL_SECTION_IDS = (
+    "architecture",
+    "security",
+    "stability",
+    "performance",
+    "testing",
+    "maintainability",
+    "design",
+    "release",
+    "documentation",
+    "configuration",
+    "observability",
+    "data-integrity",
+    "privacy",
+    "accessibility",
+    "supply-chain",
+    "cost",
+    "ai-safety",
+    "fallback",
+    "testing-authenticity",
+    "type-safety",
+    "frontend-state",
+    "backend-api",
+    "dependency-weight",
+    "code-consistency",
+    "comment-coverage",
+)
+
+MODE_TO_SECTION_IDS = {
+    "full": FULL_SECTION_IDS,
+    **{section_id: (section_id,) for section_id in FULL_SECTION_IDS},
+}
+
+MARKDOWN_SECTION_PATTERNS = {
+    "architecture": r"Architecture",
+    "security": r"Security",
+    "stability": r"Stability",
+    "performance": r"Performance",
+    "testing": r"Testing",
+    "maintainability": r"Maintainability",
+    "design": r"Design",
+    "release": r"Release",
+    "documentation": r"Documentation",
+    "configuration": r"Configuration",
+    "observability": r"Observability",
+    "data-integrity": r"Data Integrity",
+    "privacy": r"Privacy",
+    "accessibility": r"Accessibility",
+    "supply-chain": r"Supply Chain",
+    "cost": r"Cost",
+    "ai-safety": r"AI.*Safety|LLM.*Safety",
+    "fallback": r"Fallback",
+    "testing-authenticity": r"Testing Authenticity",
+    "type-safety": r"Type Safety",
+    "frontend-state": r"Frontend State",
+    "backend-api": r"Backend API",
+    "dependency-weight": r"Dependency Weight",
+    "code-consistency": r"Code Consistency",
+    "comment-coverage": r"Comment Coverage",
+}
+
 REQUIRED_FINDING_FIELDS = (
     "Severity",
     "Confidence",
@@ -92,6 +153,40 @@ def lint_required_sections(text: str, is_html: bool, issues: list[str]) -> None:
             add_issue(issues, f"Missing report section: {section}")
 
 
+def expand_modes(modes: str | None, issues: list[str]) -> tuple[str, ...]:
+    if not modes:
+        return ()
+
+    section_ids: list[str] = []
+    for raw_mode in re.split(r"[, ]+", modes.strip().lower()):
+        if not raw_mode:
+            continue
+        mapped = MODE_TO_SECTION_IDS.get(raw_mode)
+        if mapped is None:
+            add_issue(issues, f"Unknown audit mode for section check: {raw_mode}")
+            continue
+        for section_id in mapped:
+            if section_id not in section_ids:
+                section_ids.append(section_id)
+    return tuple(section_ids)
+
+
+def lint_mode_sections(text: str, is_html: bool, modes: str | None, issues: list[str]) -> None:
+    section_ids = expand_modes(modes, issues)
+    if not section_ids:
+        return
+
+    for section_id in section_ids:
+        if is_html:
+            if f'id="{section_id}"' not in text and f"id='{section_id}'" not in text:
+                add_issue(issues, f"Missing selected dimension HTML section id: {section_id}")
+            continue
+
+        pattern = MARKDOWN_SECTION_PATTERNS[section_id]
+        if re.search(rf"(?mi)^##+\s+.*(?:{pattern})", text) is None:
+            add_issue(issues, f"Missing selected dimension Markdown section: {section_id}")
+
+
 def finding_chunks(text: str) -> list[str]:
     starts = [m.start() for m in re.finditer(r"(?m)^### Finding:", text)]
     chunks: list[str] = []
@@ -145,7 +240,7 @@ def lint_markdown_stats(text: str, issues: list[str]) -> None:
             add_issue(issues, f"Total finding count mismatch: stats table has {expected_total}, detailed findings have {actual_total}")
 
 
-def lint_report(path: Path) -> list[str]:
+def lint_report(path: Path, modes: str | None = None) -> list[str]:
     text = path.read_text(encoding="utf-8")
     is_html = path.suffix.lower() in {".html", ".htm"}
     issues: list[str] = []
@@ -153,6 +248,7 @@ def lint_report(path: Path) -> list[str]:
     lint_placeholders(text, issues)
     lint_secrets(text, issues)
     lint_required_sections(text, is_html, issues)
+    lint_mode_sections(text, is_html, modes, issues)
 
     if not is_html:
         lint_markdown_findings(text, issues)
@@ -163,6 +259,7 @@ def lint_report(path: Path) -> list[str]:
 
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description="Lint generated audit reports for missing structure and unsafe leftovers.")
+    parser.add_argument("--modes", help="Comma-separated selected audit modes, for example 'full' or 'security,release'")
     parser.add_argument("reports", nargs="+", type=Path, help="Generated .md or .html report paths")
     args = parser.parse_args(argv)
 
@@ -172,7 +269,7 @@ def main(argv: list[str]) -> int:
             print(f"{report}: missing file", file=sys.stderr)
             exit_code = 2
             continue
-        issues = lint_report(report)
+        issues = lint_report(report, args.modes)
         if issues:
             exit_code = 1
             print(f"{report}: FAIL")
