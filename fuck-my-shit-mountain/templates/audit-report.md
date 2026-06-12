@@ -3,7 +3,7 @@
 # Fuck My Shit Mountain Audit Report
 
 **Project:** <project name>
-**Audit mode:** <full / security / stability / performance / testing / maintainability / release>
+**Audit mode:** <full / security / stability / performance / testing / maintainability / release / observability / configuration / data-integrity / fallback / testing-authenticity / type-safety / frontend-state / backend-api / dependency-weight / code-consistency / comment-coverage>
 **Date:** <date>
 **Reviewer:** <AI model / version>
 
@@ -58,12 +58,15 @@ Each dimension scored 0.0–10.0. **Higher = better (10 = clean, 0 = shit mounta
 Depending on audit mode:
 
 - **Full / Security / Backend-API:** Security Concerns
-- **Full / Stability / Fallback:** Stability Concerns
+- **Full / Stability / Fallback / Observability / Configuration / Data-Integrity:** Stability Concerns
 - **Full / Performance:** Performance Concerns
 - **Full / Testing / Testing-Authenticity:** Testing Gaps
 - **Full / Maintainability / Frontend-State / Backend-API:** Maintainability Concerns
 - **Full / Type-Safety:** Type Safety Concerns
-- **Full / Release / Dependency-Weight:** Release Concerns
+- **Full / Release / Dependency-Weight / Observability / Configuration / Data-Integrity:** Release Concerns
+- **Full / Observability:** Observability / Operability Analysis
+- **Full / Configuration:** Configuration Safety Analysis
+- **Full / Data-Integrity:** Data Integrity Analysis
 - **Security:** Security Concerns
 - **Stability:** Stability Concerns
 - **Performance:** Performance Concerns
@@ -72,6 +75,9 @@ Depending on audit mode:
 - **Maintainability:** Maintainability Concerns
 - **Design:** Design / Principles Concerns
 - **Release:** Release Concerns
+- **Observability:** Observability / Operability Analysis
+- **Configuration:** Configuration Safety Analysis
+- **Data-Integrity:** Data Integrity Analysis
 - **Fallback:** Fallback / Defensive Code Analysis
 - **Type-Safety:** Type Safety Analysis
 - **Frontend-State:** Frontend State Analysis
@@ -105,7 +111,60 @@ Repeat for all dimensions covered by the audit mode.
 
 ---
 
-## <N+1a>. Fallback / Defensive Code Analysis
+## <N+1a>. Observability / Operability Analysis
+
+<Only for full or observability mode. See prompts/observability-audit.md>
+
+### Signal Summary
+
+| Subtype | Count | Critical Signals Missing | Recommended Action |
+|---------|-------|--------------------------|-------------------|
+| Logging | <N> | <list> | Add structured logs / redact / correlate |
+| Metrics | <N> | <list> | Add counter / gauge / histogram |
+| Tracing | <N> | <list> | Propagate trace or correlation IDs |
+| HealthCheck | <N> | <list> | Add readiness/liveness/dependency checks |
+| Alerting | <N> | <list> | Add actionable alerts and thresholds |
+| Runbook | <N> | <list> | Document response steps |
+| Debuggability | <N> | <list> | Add safe diagnostic surface |
+
+<Detail each finding with the observability audit finding format>
+
+## <N+1b>. Configuration Safety Analysis
+
+<Only for full or configuration mode. See prompts/configuration-audit.md>
+
+### Configuration Summary
+
+| Subtype | Count | Affected Keys / Files | Recommended Action |
+|---------|-------|-----------------------|-------------------|
+| SchemaValidation | <N> | <list> | Validate at startup |
+| UnsafeDefault | <N> | <list> | Remove unsafe defaults / require explicit value |
+| EnvironmentSeparation | <N> | <list> | Move behavior to config values |
+| SecretConfig | <N> | <list> | Redact / move to secret store / rotate |
+| FeatureFlag | <N> | <list> | Add owner, expiry, tests, audit log |
+| ConfigDocs | <N> | <list> | Update docs and examples |
+
+<Detail each finding with the configuration audit finding format>
+
+## <N+1c>. Data Integrity Analysis
+
+<Only for full or data-integrity mode. See prompts/data-integrity-audit.md>
+
+### Integrity Summary
+
+| Subtype | Count | Invariants at Risk | Recommended Action |
+|---------|-------|-------------------|-------------------|
+| TransactionBoundary | <N> | <list> | Add transaction or atomic operation |
+| Idempotency | <N> | <list> | Add durable idempotency key |
+| ConcurrencyConsistency | <N> | <list> | Add locking/version check/CAS |
+| MigrationSafety | <N> | <list> | Make migration restartable and reversible |
+| InvariantValidation | <N> | <list> | Add validation and constraints |
+| BackupRestore | <N> | <list> | Test restore path |
+| Reconciliation | <N> | <list> | Add reconciliation/audit trail |
+
+<Detail each finding with the data-integrity audit finding format>
+
+## <N+1d>. Fallback / Defensive Code Analysis
 
 <Only for full or fallback mode. See prompts/fallback-audit.md>
 
@@ -121,7 +180,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the fallback audit finding format>
 
-## <N+1b>. Testing Authenticity Analysis
+## <N+1e>. Testing Authenticity Analysis
 
 <Only for full or testing-authenticity mode. See prompts/testing-authenticity-audit.md>
 
@@ -145,7 +204,7 @@ Repeat for all dimensions covered by the audit mode.
 
 ---
 
-## <N+1c>. Type Safety Analysis
+## <N+1f>. Type Safety Analysis
 
 <Only for full or type-safety mode. See prompts/type-safety-audit.md>
 
@@ -163,7 +222,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the type-safety audit finding format>
 
-## <N+1d>. Frontend State Analysis
+## <N+1g>. Frontend State Analysis
 
 <Only for full or frontend-state mode. See prompts/frontend-state-audit.md>
 
@@ -182,7 +241,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the frontend-state audit finding format>
 
-## <N+1e>. Backend API Analysis
+## <N+1h>. Backend API Analysis
 
 <Only for full or backend-api mode. See prompts/backend-api-audit.md>
 
@@ -201,7 +260,7 @@ Repeat for all dimensions covered by the audit mode.
 
 <Detail each finding with the backend-api audit finding format>
 
-## <N+1f>. Dependency Weight Analysis
+## <N+1i>. Dependency Weight Analysis
 
 <Only for full or dependency-weight mode. See prompts/dependency-weight-audit.md>
 

@@ -20,13 +20,13 @@ Each dimension is scored **0.0 – 10.0** — **higher = better**.
 
 | Dimension | What It Measures | Mapped From Modes |
 |-----------|-----------------|-------------------|
-| Security | How resistant to attack. Auth, injection, secrets, dependency risk. | security, type-safety |
-| Stability | How reliable under failure. Panic paths, error handling, retry, timeout, state consistency, fallback quality. | stability, fallback |
+| Security | How resistant to attack. Auth, injection, secrets, dependency risk. | security, type-safety, configuration |
+| Stability | How reliable under failure. Panic paths, error handling, retry, timeout, state consistency, fallback quality, data correctness, operability. | stability, fallback, observability, configuration, data-integrity |
 | Performance | How efficient under realistic load. Hot paths, memory, I/O, contention. | performance, dependency-weight |
 | Testing | How much real confidence tests provide. Coverage quality, test types, authenticity. | testing, testing-authenticity |
 | Maintainability | How easy to change. Complexity, coupling, duplication, naming, state management, API design. | maintainability, frontend-state, backend-api |
 | Design | How well it follows engineering principles. SRP, DRY, KISS, fail-fast, type safety. | (cross-cutting) |
-| Release | How ready to ship. CI/CD, versioning, upgrade, rollback, dependency weight. | release, dependency-weight |
+| Release | How ready to ship. CI/CD, versioning, upgrade, rollback, dependency weight, configuration, observability, migration safety. | release, dependency-weight, observability, configuration, data-integrity |
 
 ## Score Anchors
 

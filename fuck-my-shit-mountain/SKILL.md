@@ -1,6 +1,6 @@
 ---
 name: fuck-my-shit-mountain
-description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as security, stability, performance, testing, maintainability, release readiness, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
+description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as security, stability, performance, testing, maintainability, release readiness, observability, configuration safety, data integrity, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
 ---
 
 # Fuck My Shit Mountain — Skill Definition
@@ -15,7 +15,7 @@ Before reading code, determine whether the user has already supplied all require
 
 Required inputs:
 
-1. **Audit modes** — Accepted values: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
+1. **Audit modes** — Accepted values: `full`, `security`, `stability`, `performance`, `testing`, `maintainability`, `release`, `observability`, `configuration`, `data-integrity`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple modes, merge the audit areas from each selected prompt. Use the most specific finding format rules.
 2. **Report language** — The language used in the final report, such as English or Chinese. The programming language is inferred from the repository and is not a substitute for this answer.
@@ -37,7 +37,7 @@ If the user says something like "audit this project" without any of the required
    - `rubrics/confidence.md` for confidence labels.
    - `rubrics/evidence.md` for evidence quality and minimum evidence thresholds.
    - `rubrics/scoring.md` for score dashboards and grade anchors.
-   - `rubrics/principles.md` when producing full, maintainability, design, frontend-state, backend-api, type-safety, or principles-related findings.
+   - `rubrics/principles.md` when producing full, maintainability, design, frontend-state, backend-api, type-safety, configuration, data-integrity, or principles-related findings.
 4. The AI audits the codebase using the coverage strategy below.
 5. Each finding is recorded using `templates/issue-card.md`.
 6. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
@@ -60,10 +60,10 @@ By default, this skill audits and reports. It may create requested report files,
 Be exhaustively systematic over in-scope project files, not literally every byte in the repository.
 
 1. Start with a file inventory using fast project-aware search such as `rg --files`.
-2. Build a project map before writing findings: entry points, main modules, data flow, state ownership, persistence, external interfaces, security boundaries, tests, CI, release files, and dependency manifests.
+2. Build a project map before writing findings: entry points, main modules, data flow, state ownership, persistence, data integrity boundaries, external interfaces, security boundaries, observability surfaces, configuration sources, tests, CI, release files, and dependency manifests.
 3. Treat first-party source, tests, scripts, CI/config, migrations, dependency manifests, and documentation that describes behavior as in scope.
 4. Exclude by default: `.git`, dependency folders (`node_modules`, `vendor` unless first-party vendored code must be audited), build artifacts (`dist`, `build`, `target`, `out`, `coverage`, `.next`, `.nuxt`), generated files, minified bundles, binary assets, cache folders, and lockfiles unless the selected mode needs dependency or release evidence.
-5. For large repositories, prioritize high-risk areas first: auth, input boundaries, persistence, concurrency, network/file-system access, error handling, build/release config, and critical user workflows.
+5. For large repositories, prioritize high-risk areas first: auth, input boundaries, persistence, data integrity, concurrency, network/file-system access, error handling, observability gaps, build/release config, and critical user workflows.
 6. Include a short coverage note in the report, usually in Project Map or Executive Summary: inspected areas, excluded path categories, important commands run, and any time or access limits.
 7. If a file or area could not be inspected, say so explicitly. Do not imply complete coverage when coverage was partial.
 
@@ -87,6 +87,9 @@ If the audit discovers secrets, tokens, private keys, `.env` values, credentials
 | `testing` | `prompts/testing-audit.md` | Test quality & gaps |
 | `maintainability` | `prompts/maintainability-audit.md` | Complexity, coupling, principles |
 | `release` | `prompts/release-audit.md` | Release readiness |
+| `observability` | `prompts/observability-audit.md` | Logging, metrics, tracing, health checks, alerting |
+| `configuration` | `prompts/configuration-audit.md` | Config validation, defaults, feature flags, env separation |
+| `data-integrity` | `prompts/data-integrity-audit.md` | Transactions, idempotency, migrations, invariants |
 | `fallback` | `prompts/fallback-audit.md` | Silent fallback, catch, defensive guessing |
 | `testing-authenticity` | `prompts/testing-authenticity-audit.md` | Real confidence vs green checkmarks |
 | `type-safety` | `prompts/type-safety-audit.md` | Unsafe blocks, assertions, boundary types |

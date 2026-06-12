@@ -148,8 +148,8 @@
       sections for the dimensions the user actually selected. For example:
       - User chose "full"              → all sections below: summary, findings,
         executive-summary, security, stability, performance, testing, maintainability, architecture,
-        design, release, documentation, configuration, observability, fallback,
-        testing-authenticity, type-safety, frontend-state, backend-api,
+        design, release, documentation, configuration, observability,
+        data-integrity, fallback, testing-authenticity, type-safety, frontend-state, backend-api,
         dependency-weight, code-consistency, comment-coverage, principles, fix-order
       - User chose "security, release" → only summary, findings, security,
         release, principles, fix-order
@@ -166,6 +166,9 @@
     <a href="#performance"><span class="icon">🚀</span> [[PERFORMANCE_LABEL]]</a>
     <a href="#testing"><span class="icon">🧪</span> [[TESTING_LABEL]]</a>
     <a href="#maintainability"><span class="icon">📐</span> [[MAINTAINABILITY_LABEL]]</a>
+    <a href="#configuration"><span class="icon">⚙️</span> [[CONFIGURATION_LABEL]]</a>
+    <a href="#observability"><span class="icon">🩺</span> [[OBSERVABILITY_LABEL]]</a>
+    <a href="#data-integrity"><span class="icon">🧱</span> [[DATA_INTEGRITY_LABEL]]</a>
     <a href="#principles"><span class="icon">📋</span> [[PRINCIPLES_LABEL]]</a>
     <a href="#fix-order"><span class="icon">🎯</span> [[FIX_ORDER_LABEL]]</a>
   </div>
@@ -201,6 +204,9 @@
     - maintainability → Maintainability
     - design/architecture → Design
     - release     → Release
+    - observability → Stability, Release
+    - configuration → Security, Stability, Release
+    - data-integrity → Stability, Release
     If the user chose multiple modes (e.g., "security, stability"), show ONLY those.
 
     Score → bar width: score * 10% (e.g., 8.5 → width:85%)
@@ -409,7 +415,7 @@
     CRITICAL: Generate one <h3> section per dimension that the user selected.
     Do NOT generate sections for dimensions the user didn't ask about.
     
-    FULL mode covers ALL 19 audit dimensions:
+    FULL mode covers ALL 20 audit dimensions:
       1.  Architecture & Module Boundaries
       2.  Security
       3.  Stability & Error Handling
@@ -421,14 +427,15 @@
       9.  Documentation Accuracy
       10. Configuration Safety
       11. Observability
-      12. Fallback / Defensive Code
-      13. Testing Authenticity
-      14. Type Safety
-      15. Frontend State
-      16. Backend API
-      17. Dependency Weight
-      18. Code Consistency
-      19. Comment Coverage
+      12. Data Integrity
+      13. Fallback / Defensive Code
+      14. Testing Authenticity
+      15. Type Safety
+      16. Frontend State
+      17. Backend API
+      18. Dependency Weight
+      19. Code Consistency
+      20. Comment Coverage
 
     Each section has the SAME pattern:
       <h3 class="section-title" id="[dimension-id]">[ICON] [TITLE]</h3>
@@ -465,7 +472,7 @@
   <!--
     BELOW ARE EXAMPLE SECTIONS showing the pattern for different cases.
     REPLACE all content with your actual audit data.
-    GENERATE one section per audited dimension (up to 17 in full mode).
+    GENERATE one section per audited dimension (up to 20 in full mode).
   -->
 
   <!-- EXAMPLE 1: Security — has findings -->
@@ -541,7 +548,7 @@
     REPEAT the above pattern for EVERY audited dimension.
     In full mode: Architecture, Security, Stability, Performance, Testing,
     Maintainability, Design, Release, Documentation, Configuration,
-    Observability, Fallback, Testing-Authenticity, Type-Safety,
+    Observability, Data-Integrity, Fallback, Testing-Authenticity, Type-Safety,
     Frontend-State, Backend-API, Dependency-Weight, Code-Consistency,
     Comment-Coverage.
 
