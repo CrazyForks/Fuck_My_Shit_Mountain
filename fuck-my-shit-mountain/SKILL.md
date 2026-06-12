@@ -43,8 +43,9 @@ If the user says something like "audit this project" without any of the required
 5. Each finding is recorded using `templates/issue-card.md`.
 6. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
 7. If output-to-file was requested, the AI writes the report to disk.
-8. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
-9. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
+8. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
+9. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
+10. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
 
 ## Resource Loading
 
@@ -144,3 +145,4 @@ Before delivering the report, verify:
 - Score direction is correct: 10.0 is best and 0.0 is worst.
 - HTML reports are complete, self-contained, and contain no placeholder variables.
 - No full secrets, tokens, private keys, passwords, or sensitive dumps appear in the output.
+- `scripts/report_lint.py` passes for generated file output, or its checks were applied manually for stdout output.
