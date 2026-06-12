@@ -74,7 +74,7 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 
 1. Review all findings per dimension.
 2. Judge the score (0.0–10.0, **10 = best / clean, 0 = worst / shit mountain**) based on **engineering quality and maintainability**, not on mechanical deduction.
-3. Each score must have a **one-sentence justification** summarizing the strongest evidence.
+3. Each score must have a **one-sentence justification** summarizing the strongest evidence and any coverage limits.
 4. Render the score dashboard with ASCII bars and letter grades.
 5. Include the dashboard with justifications in the Executive Summary.
 
@@ -88,10 +88,11 @@ After collecting all findings, assign dimension scores using `rubrics/scoring.md
 3. For HTML output: read `templates/audit-report.html` and generate a COMPLETE HTML file that copies the exact structure:
    - Score dashboard: one .score-item per scoring dimension the user selected (full mode = Security, Stability, Performance, Testing, Maintainability, Design, Release). Do NOT show dimensions the user didn't pick.
    - Executive summary: 2-4 paragraph overview covering project health, biggest risks, bright spots, priorities, and overall grade in context
+   - Coverage matrix: one row per selected dimension with coverage confidence, inspected evidence, and exclusions/limits
    - Stats row with total + severity breakdown
    - Top risks table with all findings
    - Detailed findings with full evidence + fix boxes
-   - Per-dimension sections: one `<h3>` per audit dimension the user selected (full mode = ALL 20: Architecture, Security, Stability, Performance, Testing, Maintainability, Design, Release, Documentation, Configuration, Observability, Data-Integrity, Fallback, Testing-Authenticity, Type-Safety, Frontend-State, Backend-API, Dependency-Weight, Code-Consistency, Comment-Coverage). Each section has findings table + verified checklist. Do NOT skip any.
+   - Per-dimension sections: one `<h3>` per audit dimension the user selected (full mode = ALL 20: Architecture, Security, Stability, Performance, Testing, Maintainability, Design, Release, Documentation, Configuration, Observability, Data-Integrity, Fallback, Testing-Authenticity, Type-Safety, Frontend-State, Backend-API, Dependency-Weight, Code-Consistency, Comment-Coverage). Each section starts with a coverage note and then has findings table + verified checklist. Do NOT skip any.
    - Design principles violations table + followed checklist
    - Fix order with tables grouped by priority
    - Quick wins grid

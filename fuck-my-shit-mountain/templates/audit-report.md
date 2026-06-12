@@ -45,6 +45,12 @@ Each dimension scored 0.0–10.0. **Higher = better (10 = clean, 0 = shit mounta
 <How the project is structured — key components, entry points, data flow, state ownership, persistence, external interfaces, security boundaries>
 <Highlight areas most likely to contain risks>
 
+### Coverage Matrix
+
+| Dimension | Coverage | Evidence inspected | Exclusions / limits |
+|-----------|----------|--------------------|---------------------|
+| <dimension> | High / Medium / Low / Not assessed | <files, commands, patterns, runtime surfaces> | <what was not inspected and why> |
+
 ## 3. Top Risks
 
 <5-15 findings in priority order. Each entry includes finding title, severity, and one-sentence summary. Full details in section 4.>
@@ -85,6 +91,12 @@ Depending on audit mode:
 - **Dependency-Weight:** Dependency Weight Analysis
 
 Each section lists relevant issues grouped by sub-category.
+
+Each dimension-specific section MUST start with:
+
+- Coverage: High / Medium / Low / Not assessed
+- Inspected evidence: <files, commands, patterns, runtime surfaces>
+- Exclusions / limits: <what was not inspected and why>
 
 ## 6. <Next dimension-specific section>
 

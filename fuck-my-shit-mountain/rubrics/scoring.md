@@ -117,12 +117,13 @@ Overall         ██████░░░░  6.6  B
 
 ## Rules
 
-1. **Each score must have a one-sentence justification** in the score dashboard. The justification summarizes the strongest evidence.
+1. **Each score must have a one-sentence justification** in the score dashboard. The justification summarizes the strongest evidence and mentions coverage confidence when it limits the conclusion.
 2. **Do not average finding severities.** If there is 1 Critical issue and nothing else, judge based on whether that one issue is systemic or isolated.
 3. **Consider intensity and density.** 10 low-severity issues in one file may deserve a lower score than 1 critical issue with a trivial fix.
 4. **Consider context.** A 600-line file in a CLI tool is different from a 600-line file in a security-critical library. Adjust for project type and scale.
-5. **If a dimension has zero findings, score 10.0 (Excellent).** But confirm you actually checked — absence of evidence is not evidence of absence.
+5. **If a dimension has zero findings, score 10.0 (Excellent) only when coverage is High.** With Medium or Low coverage, explain the limitation and avoid presenting the dimension as fully clean.
 6. **Do not round to game the grade.** If the score is 5.9, show 5.9, not 6.0. If it's 6.0, show 6.0.
 7. **Include the score dashboard in the Executive Summary** with one-sentence justifications per dimension.
 8. **Focused audit modes** (security-only, etc.): only score the relevant dimension. State "not assessed" for others.
 9. **IMPORTANT — Direction:** 10.0 = best (clean). 0.0 = worst (shit mountain). Do not reverse this.
+10. **Coverage interaction:** Use `rubrics/coverage.md`. Not assessed dimensions are excluded from the overall score, and Low coverage should not support a high-confidence clean conclusion.

@@ -36,6 +36,7 @@ If the user says something like "audit this project" without any of the required
    - `rubrics/severity.md` for severity labels.
    - `rubrics/confidence.md` for confidence labels.
    - `rubrics/evidence.md` for evidence quality and minimum evidence thresholds.
+   - `rubrics/coverage.md` for dimension coverage confidence and reporting limits.
    - `rubrics/scoring.md` for score dashboards and grade anchors.
    - `rubrics/principles.md` when producing full, maintainability, design, frontend-state, backend-api, type-safety, configuration, data-integrity, or principles-related findings.
 4. The AI audits the codebase using the coverage strategy below.
@@ -64,8 +65,10 @@ Be exhaustively systematic over in-scope project files, not literally every byte
 3. Treat first-party source, tests, scripts, CI/config, migrations, dependency manifests, and documentation that describes behavior as in scope.
 4. Exclude by default: `.git`, dependency folders (`node_modules`, `vendor` unless first-party vendored code must be audited), build artifacts (`dist`, `build`, `target`, `out`, `coverage`, `.next`, `.nuxt`), generated files, minified bundles, binary assets, cache folders, and lockfiles unless the selected mode needs dependency or release evidence.
 5. For large repositories, prioritize high-risk areas first: auth, input boundaries, persistence, data integrity, concurrency, network/file-system access, error handling, observability gaps, build/release config, and critical user workflows.
-6. Include a short coverage note in the report, usually in Project Map or Executive Summary: inspected areas, excluded path categories, important commands run, and any time or access limits.
-7. If a file or area could not be inspected, say so explicitly. Do not imply complete coverage when coverage was partial.
+6. Assign coverage confidence per selected dimension using `rubrics/coverage.md`: High, Medium, Low, or Not assessed.
+7. Include a short coverage note in the report, usually in Project Map or Executive Summary: inspected areas, excluded path categories, important commands run, and any time or access limits.
+8. Include a coverage matrix in the report with one row per selected dimension: dimension, coverage confidence, inspected evidence, exclusions/limits.
+9. If a file or area could not be inspected, say so explicitly. Do not imply complete coverage when coverage was partial.
 
 ## Sensitive Information Handling
 
@@ -105,7 +108,7 @@ Full audits produce a **score dashboard** with 7 dimension scores (0.0–10.0) a
 
 - **Higher = better.** 10 = clean / production-ready. 0 = shit mountain / unacceptable. Do not reverse this.
 - Scores are **judgment-based**, not mechanical deductions. The AI evaluates evidence holistically per dimension.
-- Each score must have a **one-sentence justification** referencing the strongest evidence.
+- Each score must have a **one-sentence justification** referencing the strongest evidence and the coverage confidence when it limits the conclusion.
 - A letter grade (S/A/B/C/D/F) provides an at-a-glance health indicator.
 - Scores supplement detailed findings — they do not replace them.
 
@@ -134,7 +137,8 @@ Before delivering the report, verify:
 
 - Required inputs are known and the report uses the requested language and output format.
 - The selected prompt(s), required rubrics, and report template were followed.
-- The report contains a project map, coverage note, score dashboard, finding statistics, top risks, detailed findings, relevant dimension sections, principles compliance when applicable, fix order, and quick wins.
+- The report contains a project map, coverage note, coverage matrix, score dashboard, finding statistics, top risks, detailed findings, relevant dimension sections, principles compliance when applicable, fix order, and quick wins.
+- Each selected dimension has coverage confidence, inspected evidence, and exclusions/limits.
 - Every finding has severity, confidence, status, evidence, realistic failure scenario, minimal fix, regression test suggestion, and estimated effort.
 - Confirmed and Suspected issues are separated or clearly labeled.
 - Score direction is correct: 10.0 is best and 0.0 is worst.

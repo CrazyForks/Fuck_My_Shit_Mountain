@@ -146,8 +146,8 @@
     <!--
       CRITICAL: Generate ONE <a> per section in the report — only include
       sections for the dimensions the user actually selected. For example:
-      - User chose "full"              → all sections below: summary, findings,
-        executive-summary, security, stability, performance, testing, maintainability, architecture,
+      - User chose "full"              → all sections below: summary, executive-summary, coverage, findings,
+        security, stability, performance, testing, maintainability, architecture,
         design, release, documentation, configuration, observability,
         data-integrity, fallback, testing-authenticity, type-safety, frontend-state, backend-api,
         dependency-weight, code-consistency, comment-coverage, principles, fix-order
@@ -160,6 +160,7 @@
     -->
     <a href="#summary"><span class="icon">📊</span> [[SUMMARY_LABEL]]</a>
     <a href="#executive-summary"><span class="icon">📝</span> [[EXECUTIVE_SUMMARY_LABEL]]</a>
+    <a href="#coverage"><span class="icon">🧭</span> [[COVERAGE_LABEL]]</a>
     <a href="#findings"><span class="icon">🔍</span> [[FINDINGS_LABEL]]</a>
     <a href="#security"><span class="icon">🔒</span> [[SECURITY_LABEL]]</a>
     <a href="#stability"><span class="icon">⚡</span> [[STABILITY_LABEL]]</a>
@@ -217,7 +218,8 @@
       C → .bar-fill.c .grade-c
       D → .bar-fill.d .grade-d
       F → .bar-fill.f .grade-f
-    Overall score = average of selected dimensions.
+    Overall score = average of selected dimensions, excluding Not assessed dimensions.
+    A zero-finding dimension can receive 10.0 only when coverage is High.
   -->
   <div class="card">
     <div class="card-header">📊 评分面板</div>
@@ -334,6 +336,31 @@
   </div>
 
   <!-- ════════════════════════════════════════ -->
+  <!-- COVERAGE MATRIX                        -->
+  <!-- ════════════════════════════════════════ -->
+  <h3 class="section-title" id="coverage">🧭 [[COVERAGE_TITLE]]</h3>
+  <!--
+    Generate one row per selected dimension. Coverage values:
+    High / Medium / Low / Not assessed.
+    Evidence inspected should name files, commands, searches, or runtime surfaces.
+    Exclusions / limits must be explicit; do not imply complete coverage when it was partial.
+  -->
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[DIMENSION_COL]]</th><th style="width:120px">[[COVERAGE_COL]]</th><th>[[EVIDENCE_COL]]</th><th>[[LIMITS_COL]]</th></tr></thead>
+          <tbody>
+            <tr><td>Security</td><td><span class="badge badge-confirmed">High</span></td><td>[[COVERAGE_EVIDENCE]]</td><td>[[COVERAGE_LIMITS]]</td></tr>
+            <tr><td>Stability</td><td><span class="badge badge-suspected">Medium</span></td><td>[[COVERAGE_EVIDENCE]]</td><td>[[COVERAGE_LIMITS]]</td></tr>
+            <!-- ... one row per selected dimension ... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
   <!-- STATS                                  -->
   <!-- ════════════════════════════════════════ -->
   <!--
@@ -439,6 +466,16 @@
 
     Each section has the SAME pattern:
       <h3 class="section-title" id="[dimension-id]">[ICON] [TITLE]</h3>
+
+      <!-- coverage note (always include) -->
+      <div class="card">
+        <div class="card-header">🧭 [COVERAGE HEADER]</div>
+        <div class="card-body">
+          <p><strong>Coverage:</strong> High / Medium / Low / Not assessed</p>
+          <p><strong>Inspected evidence:</strong> [files, commands, patterns, runtime surfaces]</p>
+          <p><strong>Exclusions / limits:</strong> [what was not inspected and why]</p>
+        </div>
+      </div>
 
       <!-- findings table (if any) -->
       <div class="card">
