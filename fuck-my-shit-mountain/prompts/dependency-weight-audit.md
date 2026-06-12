@@ -2,15 +2,9 @@
 
 Use the fuck-my-shit-mountain skill in **dependency-weight mode**.
 
+Shared setup, coverage, report template, HTML, and lint rules live in `references/report-format.md`; load that reference before producing the report.
+
 Focus on whether dependencies are pulling their weight — not just known vulnerabilities, but whether each dependency is justified relative to the project's scale.
-
-## Required Context Before Auditing
-
-Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
-
----
-
----
 
 ## Audit Areas
 
@@ -55,11 +49,6 @@ Before reading code, verify that audit mode(s), report language, and output form
 3. Developer experience matters — a well-known library may be worth the weight for DX alone.
 4. For each flagged dependency, check: can it be removed, replaced with a lighter alternative, or inlined?
 
-## Format Constraint
-
-**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
-
-For HTML output: read `templates/audit-report.html` and generate complete HTML that copies the exact structure. Score dashboard: one .score-item per dimension relevant to this mode (NOT all 7 — only the dimensions this mode audits). Per-dimension sections: one `<h3>` per relevant dimension, each with findings table + verified checklist. Design principles, fix order tables, quick wins grid, sidebar nav for every section. Do NOT use placeholder variables. Generate complete self-contained HTML.
 
 ## Finding Format
 

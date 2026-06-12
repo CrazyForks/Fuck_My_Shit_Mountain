@@ -108,6 +108,7 @@ fuck-my-shit-mountain/
   SKILL.md              技能入口 — 工作方式和规则
   README.md             本文件
   prompts/              审计提示词模板（26 种模式）
+  references/           公共报告格式、HTML、coverage、lint 规则
   rubrics/              严重程度、置信度、证据、原则、评分
   scripts/              生成报告后的 lint / 校验工具
   templates/            报告、发现卡、修复计划模板

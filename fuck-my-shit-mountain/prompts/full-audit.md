@@ -1,12 +1,8 @@
 # Full Audit Prompt
 
-## Required Context Before Auditing
-
-Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
-
----
-
 Use the fuck-my-shit-mountain skill in **full mode**.
+
+Shared setup, coverage, report template, HTML, and lint rules live in `references/report-format.md`; load that reference before producing the report.
 
 Audit this repository as if it is preparing for a stable public release.
 

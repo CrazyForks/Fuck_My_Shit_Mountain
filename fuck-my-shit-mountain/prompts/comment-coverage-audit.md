@@ -2,13 +2,9 @@
 
 Use the fuck-my-shit-mountain skill in **comment-coverage mode**.
 
+Shared setup, coverage, report template, HTML, and lint rules live in `references/report-format.md`; load that reference before producing the report.
+
 Focus on documentation quality, comment coverage of public APIs, stale/misleading comments, and the balance between useful documentation and unnecessary noise.
-
-## Required Context Before Auditing
-
-Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
-
----
 
 ## Audit Areas
 
@@ -55,11 +51,6 @@ Before reading code, verify that audit mode(s), report language, and output form
 3. Consider the project's language ecosystem norms (Rust expects doc comments on pub items, Python less so).
 4. Flag commented-out code only if it's extensive (5+ lines) or has been there for multiple commits.
 
-## Format Constraint
-
-**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
-
-For HTML output: read `templates/audit-report.html` and generate complete HTML that copies the exact structure. Score dashboard: one .score-item per dimension relevant to this mode (NOT all 7 — only the dimensions this mode audits). Per-dimension sections: one `<h3>` per relevant dimension, each with findings table + verified checklist. Design principles, fix order tables, quick wins grid, sidebar nav for every section. Do NOT use placeholder variables. Generate complete self-contained HTML.
 
 ## Finding Format
 

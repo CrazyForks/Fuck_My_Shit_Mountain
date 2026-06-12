@@ -2,13 +2,9 @@
 
 Use the fuck-my-shit-mountain skill in **cost mode**.
 
+Shared setup, coverage, report template, HTML, and lint rules live in `references/report-format.md`; load that reference before producing the report.
+
 Focus on realistic cost risks from compute, storage, network, queues, background jobs, caches, observability, external APIs, and LLM/model usage.
-
-## Required Context Before Auditing
-
-Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
-
----
 
 ## Audit Areas
 
@@ -53,11 +49,6 @@ Before reading code, verify that audit mode(s), report language, and output form
 4. Treat cost controls as reliability controls when runaway cost can cause throttling or service shutdown.
 5. For LLM/model costs, include token/request/concurrency boundaries where visible.
 
-## Format Constraint
-
-**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
-
-For HTML output: read `templates/audit-report.html` and generate complete HTML that copies the exact structure. Score dashboard: one .score-item per dimension relevant to this mode (typically Performance and Release). Per-dimension sections: one `<h3>` per relevant dimension, each with coverage note, findings table, and verified checklist. Design principles, fix order tables, quick wins grid, sidebar nav for every section. Do NOT use placeholder variables. Generate complete self-contained HTML.
 
 ## Finding Format
 

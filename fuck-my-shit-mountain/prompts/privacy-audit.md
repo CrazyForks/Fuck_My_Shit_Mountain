@@ -2,13 +2,9 @@
 
 Use the fuck-my-shit-mountain skill in **privacy mode**.
 
+Shared setup, coverage, report template, HTML, and lint rules live in `references/report-format.md`; load that reference before producing the report.
+
 Focus on personal data handling, data minimization, retention, deletion, export, logging, access boundaries, and privacy-relevant governance.
-
-## Required Context Before Auditing
-
-Before reading code, verify that audit mode(s), report language, and output format are known. If any are missing, ask only for the missing item(s) in one concise message and wait for the answer. If they are already supplied by the user or by the invoking skill, proceed without re-asking.
-
----
 
 ## Audit Areas
 
@@ -54,11 +50,6 @@ Before reading code, verify that audit mode(s), report language, and output form
 4. Prefer data minimization, redaction, access control, retention config, and audit trails over broad rewrites.
 5. If no personal data is processed, mark the mode Not assessed or Info with evidence.
 
-## Format Constraint
-
-**CRITICAL: The report MUST follow the skill's template format (`templates/issue-card.md` for findings, `templates/audit-report.md` or `.html` for the full report). Do NOT copy the formatting, heading style, or structure of any markdown file inside the audited project. The project's own docs are not the report template.**
-
-For HTML output: read `templates/audit-report.html` and generate complete HTML that copies the exact structure. Score dashboard: one .score-item per dimension relevant to this mode (typically Security, Stability, and Release). Per-dimension sections: one `<h3>` per relevant dimension, each with coverage note, findings table, and verified checklist. Design principles, fix order tables, quick wins grid, sidebar nav for every section. Do NOT use placeholder variables. Generate complete self-contained HTML.
 
 ## Finding Format
 

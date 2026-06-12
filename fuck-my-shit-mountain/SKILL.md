@@ -32,20 +32,21 @@ If the user says something like "audit this project" without any of the required
 
 1. The user invokes the skill and the AI collects only the missing required inputs.
 2. The AI loads the corresponding prompt(s) from `prompts/`. If multiple modes are selected, merge the audit areas from each.
-3. The AI loads the required rubrics:
+3. The AI loads `references/report-format.md` for shared required-context, report template, coverage, HTML, and lint rules.
+4. The AI loads the required rubrics:
    - `rubrics/severity.md` for severity labels.
    - `rubrics/confidence.md` for confidence labels.
    - `rubrics/evidence.md` for evidence quality and minimum evidence thresholds.
    - `rubrics/coverage.md` for dimension coverage confidence and reporting limits.
    - `rubrics/scoring.md` for score dashboards and grade anchors.
    - `rubrics/principles.md` when producing full, architecture, maintainability, design, documentation, frontend-state, backend-api, type-safety, configuration, data-integrity, accessibility, or principles-related findings.
-4. The AI audits the codebase using the coverage strategy below.
-5. Each finding is recorded using `templates/issue-card.md`.
-6. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
-7. If output-to-file was requested, the AI writes the report to disk.
-8. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py --modes <selected-modes> <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
-9. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
-10. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
+5. The AI audits the codebase using the coverage strategy below.
+6. Each finding is recorded using `templates/issue-card.md`.
+7. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
+8. If output-to-file was requested, the AI writes the report to disk.
+9. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py --modes <selected-modes> <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
+10. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
+11. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
 
 ## Mode vs Dimension Model
 
@@ -57,6 +58,7 @@ If the user says something like "audit this project" without any of the required
 ## Resource Loading
 
 - Load only the prompt files for the selected modes.
+- Load `references/report-format.md` before producing any report. Focused prompt files intentionally omit repeated setup and template rules.
 - Load examples from `examples/` only for calibration when the user asks for examples or the report shape is unclear. Do not copy their findings into a real audit.
 - Do not load large generated or vendored files into context unless the selected mode specifically requires them.
 
