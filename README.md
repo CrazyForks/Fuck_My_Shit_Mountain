@@ -23,17 +23,28 @@
 
 ## 模式
 
-可选单个或组合（如 `security, stability, type-safety`）。Full 模式覆盖 **19 个审计维度**。
+可选单个或组合（如 `security, stability, type-safety`）。Full 模式覆盖 **25 个审计维度**。
 
 | 模式 | 聚焦 |
 |------|------|
-| `full` | 全部 19 个维度 |
+| `full` | 全部 25 个维度 |
+| `architecture` | 架构边界、依赖方向、状态所有权 |
 | `security` | 认证、注入、密钥、依赖 |
 | `stability` | Panic 路径、错误处理、并发、生命周期 |
 | `performance` | 热点路径、内存、I/O、启动开销 |
 | `testing` | 测试覆盖率、测试类型、脆性 |
 | `maintainability` | 复杂度、耦合、重复、命名 |
+| `design` | 工程原则和设计风险 |
 | `release` | CI/CD、版本管理、升级、回滚 |
+| `documentation` | 文档准确性、设置、运维/开发指南 |
+| `observability` | 日志、指标、追踪、健康检查、告警 |
+| `configuration` | 配置校验、默认值、环境隔离、功能开关 |
+| `data-integrity` | 事务、幂等、迁移、一致性、备份恢复 |
+| `privacy` | PII、数据最小化、保留、删除、导出 |
+| `accessibility` | 键盘、焦点、语义、响应式和 UX 状态 |
+| `supply-chain` | 依赖来源、可复现构建、CI 完整性、签名 |
+| `cost` | 资源经济性、预算、外部 API 和 LLM 成本 |
+| `ai-safety` | Prompt injection、工具授权、RAG 泄露、eval |
 | `fallback` | 静默降级、空 catch、防御性猜测 |
 | `testing-authenticity` | 过度 Mock、实现细节测试、虚假信心 |
 | `type-safety` | Unsafe 块、类型断言、边界类型 |
@@ -48,11 +59,22 @@
 ```
 fuck-my-shit-mountain/
 ├── SKILL.md              — 入口点 & 规则
-├── prompts/              — 15 个审计模式提示词
+├── agents/               — UI metadata
+├── prompts/              — 26 个审计模式提示词
+├── references/           — 公共报告格式、HTML、coverage、lint 规则
 ├── rubrics/              — 严重程度、置信度、证据、原则、评分
+├── scripts/              — 报告 lint、skill 打包工具
 ├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
 └── examples/             — Rust、Node.js、Vue 审计示例
 ```
+
+打包发布时建议运行：
+
+```bash
+python3 fuck-my-shit-mountain/scripts/package_skill.py
+```
+
+生成的 `dist/fuck-my-shit-mountain.zip` 会排除 README、`.DS_Store`、缓存文件等非运行必需内容。
 
 ## 评分面板示例
 
