@@ -8,7 +8,7 @@
 
 ## 工作流程
 
-1. **AI 先确认必要输入** — 缺少模式、报告语言、输出格式时才追问；如果你已经写明，就直接开始
+1. **AI 先确认必要输入** — 缺少模式、报告语言、输出格式时才追问；追问模式时会列出完整支持清单；如果你已经写明，就直接开始
 2. **AI 系统化审计你的代码库** — 覆盖一方源代码、测试、配置、依赖和发布文件，并诚实记录排除项
 3. **AI 生成结构化报告** — 评分、发现、原则合规、修复顺序、速赢项
 4. **HTML 输出** — 带侧边栏导航 + 滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表
@@ -68,13 +68,27 @@ fuck-my-shit-mountain/
 └── examples/             — Rust、Node.js、Vue 审计示例
 ```
 
-打包发布时建议运行：
+发布或安装时建议先生成干净 skill 包，或者用同一套排除规则同步到本机 skill 目录，避免把 README、`.DS_Store`、缓存文件等非运行必需内容带进去。
 
 ```bash
+python3 fuck-my-shit-mountain/scripts/package_skill.py --dry-run
 python3 fuck-my-shit-mountain/scripts/package_skill.py
 ```
 
 生成的 `dist/fuck-my-shit-mountain.zip` 会排除 README、`.DS_Store`、缓存文件等非运行必需内容。
+
+本机更新 Codex 中已安装的 skill 时，可以从仓库根目录执行：
+
+```bash
+rsync -av --delete --delete-excluded \
+  --exclude='README.md' \
+  --exclude='.DS_Store' \
+  --exclude='__pycache__/' \
+  --exclude='*.pyc' \
+  --exclude='*.pyo' \
+  --exclude='dist/' \
+  fuck-my-shit-mountain/ ~/.codex/skills/fuck-my-shit-mountain/
+```
 
 ## 评分面板示例
 
@@ -100,8 +114,8 @@ Overall         ██████░░░░  6.6  B
 
 ### Codex
 
-1. 将 `fuck-my-shit-mountain/` 整个目录复制到 `~/.codex/skills/fuck-my-shit-mountain/`
-2. 重启 Codex，让它重新加载 skill 元数据
+1. 推荐用上面的 `rsync` 命令同步到 `~/.codex/skills/fuck-my-shit-mountain/`，或把 `dist/fuck-my-shit-mountain.zip` 解压到 `~/.codex/skills/`
+2. 重启 Codex 或新开对话，让它重新加载 skill 元数据
 3. 在 Codex 对话里直接请求使用这个 skill
 
 ### Claude Code
@@ -125,7 +139,7 @@ Overall         ██████░░░░  6.6  B
 4. 用 `/skills list` 确认 skill 已被发现
 5. 如果使用项目目录安装，先确保工作区已 trust
 
-如果你更新了仓库里的 skill 内容，把目录重新同步到对应工具的 skills 目录，再按各工具的刷新方式重新加载即可。
+如果你更新了仓库里的 skill 内容，优先使用 `package_skill.py` 或上面的 `rsync` 排除规则重新同步到对应工具的 skills 目录，再按各工具的刷新方式重新加载即可。
 
 示例提示词：
 

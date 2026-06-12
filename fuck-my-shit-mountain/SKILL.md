@@ -18,6 +18,7 @@ Required inputs:
 1. **Audit modes** — Accepted values: `full`, `architecture`, `security`, `stability`, `performance`, `testing`, `maintainability`, `design`, `release`, `documentation`, `observability`, `configuration`, `data-integrity`, `privacy`, `accessibility`, `supply-chain`, `cost`, `ai-safety`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple modes, merge the audit areas from each selected prompt. Use the most specific finding format rules.
+   - If audit modes are missing, the setup question must include the complete supported mode list above and mention that `full` is the recommended default for a broad audit. Keep the list compact and show the options every time mode selection is requested.
 2. **Report language** — The language used in the final report, such as English or Chinese. The programming language is inferred from the repository and is not a substitute for this answer.
 3. **Output format** — Accepted values: `md`, `html`, `both`, `stdout`.
    - `md` — Save as `audit-report-<project>-<date>.md`.
@@ -26,7 +27,7 @@ Required inputs:
    - `stdout` — Print the report in the conversation only.
    - If `md`, `html`, or `both` is requested, write the file(s) after generating the report. For HTML output, read `templates/audit-report.html`, copy its **exact CSS and HTML structure**, include the sections and score items required for the selected modes, and replace the content with actual audit data. Do not use placeholder variables; generate complete, self-contained HTML.
 
-If the user says something like "audit this project" without any of the required inputs, ask all three. If the user says "full, Chinese, html", proceed without another setup question.
+If the user says something like "audit this project" without any of the required inputs, ask all three in one message and include the supported mode list. If the user says "full, Chinese, html", proceed without another setup question.
 
 ## How It Works
 
