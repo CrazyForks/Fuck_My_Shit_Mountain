@@ -11,15 +11,16 @@ Guide AI to perform an evidence-based, professional code audit of a software pro
 
 ## Required Inputs Before Auditing
 
-Before reading code, determine whether the user has already supplied all required inputs. Ask only for missing items, in one concise message, and wait for the answer before auditing. Do not re-ask items that are already explicit in the request.
+Before deep auditing, determine whether the user has already supplied all required inputs. Ask only for missing items, in one concise message, and wait for the answer before auditing. Do not re-ask items that are already explicit in the request. A lightweight inventory of file names and manifests is allowed before asking for mode selection.
 
 Required inputs:
 
 1. **Audit modes** — Accepted values: `full`, `architecture`, `security`, `stability`, `performance`, `testing`, `maintainability`, `design`, `release`, `documentation`, `observability`, `configuration`, `data-integrity`, `privacy`, `accessibility`, `supply-chain`, `cost`, `ai-safety`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
    - If the user picks `full`, do all dimensions.
    - If the user picks multiple modes, merge the audit areas from each selected prompt. Use the most specific finding format rules.
-   - If audit modes are missing, the setup question must include the complete supported mode list above and mention that `full` is the recommended default for a broad audit. Keep the list compact and show the options every time mode selection is requested.
-2. **Report language** — The language used in the final report, such as English or Chinese. The programming language is inferred from the repository and is not a substitute for this answer.
+   - If audit modes are missing, run `scripts/project_inventory.py <project-root> --format json` when available, then recommend a few user-facing audit choices in the user's language. Examples: full audit, security and privacy focused, frontend experience focused, release and operability focused. Translate these labels into the user's language; do not lead with raw internal mode tokens.
+   - Let the user reply with a number or natural-language option. Map that answer back to the `modes` field from the inventory recommendation. Show raw mode tokens only when the user asks for exact modes or advanced options.
+2. **Report language** — The language used in the final report, such as English or Chinese. The setup question and audit recommendations should use this language when it is explicit; otherwise use the user's conversation language. The programming language is inferred from the repository and is not a substitute for this answer.
 3. **Output format** — Accepted values: `md`, `html`, `both`, `stdout`.
    - `md` — Save as `audit-report-<project>-<date>.md`.
    - `html` — Save as `audit-report-<project>-<date>.html`.
@@ -27,11 +28,11 @@ Required inputs:
    - `stdout` — Print the report in the conversation only.
    - If `md`, `html`, or `both` is requested, write the file(s) after generating the report. For HTML output, read `templates/audit-report.html`, copy its **exact CSS and HTML structure**, include the sections and score items required for the selected modes, and replace the content with actual audit data. Do not use placeholder variables; generate complete, self-contained HTML.
 
-If the user says something like "audit this project" without any of the required inputs, ask all three in one message and include the supported mode list. If the user says "full, Chinese, html", proceed without another setup question.
+If the user says something like "audit this project" without any of the required inputs, ask all three in one message and include localized audit recommendations. If the user says "full, Chinese, html", proceed without another setup question.
 
 ## How It Works
 
-1. The user invokes the skill and the AI collects only the missing required inputs.
+1. The user invokes the skill and the AI collects only the missing required inputs. If mode is missing, run `scripts/project_inventory.py` when available and present localized recommendation labels instead of raw mode-token dumps.
 2. The AI loads the corresponding prompt(s) from `prompts/`. If multiple modes are selected, merge the audit areas from each.
 3. The AI loads `references/report-format.md` for shared required-context, report template, coverage, HTML, and lint rules.
 4. The AI loads the required rubrics:
@@ -60,6 +61,7 @@ If the user says something like "audit this project" without any of the required
 
 - Load only the prompt files for the selected modes.
 - Load `references/report-format.md` before producing any report. Focused prompt files intentionally omit repeated setup and template rules.
+- Load `references/tooling.md` when scanner, linter, typechecker, dependency, frontend, or AI/LLM tooling could improve evidence. Tools are optional; use configured local commands first and continue when tools are unavailable.
 - Load examples from `examples/` only for calibration when the user asks for examples or the report shape is unclear. Do not copy their findings into a real audit.
 - Do not load large generated or vendored files into context unless the selected mode specifically requires them.
 
@@ -71,7 +73,7 @@ By default, this skill audits and reports. It may create requested report files,
 
 Be exhaustively systematic over in-scope project files, not literally every byte in the repository.
 
-1. Start with a file inventory using fast project-aware search such as `rg --files`.
+1. Start with `scripts/project_inventory.py` when available, then use fast project-aware search such as `rg --files` for deeper coverage.
 2. Build a project map before writing findings: entry points, main modules, architecture boundaries, data flow, state ownership, persistence, data integrity boundaries, privacy-sensitive data, external interfaces, security boundaries, AI/model surfaces, observability surfaces, configuration sources, tests, CI, release files, and dependency manifests.
 3. Treat first-party source, tests, scripts, CI/config, migrations, dependency manifests, and documentation that describes behavior as in scope.
 4. Exclude by default: `.git`, dependency folders (`node_modules`, `vendor` unless first-party vendored code must be audited), build artifacts (`dist`, `build`, `target`, `out`, `coverage`, `.next`, `.nuxt`), generated files, minified bundles, binary assets, cache folders, and lockfiles unless the selected mode needs dependency or release evidence.
@@ -155,6 +157,7 @@ Full audits produce a **score dashboard** with 7 dimension scores (0.0–10.0) a
 Before delivering the report, verify:
 
 - Required inputs are known and the report uses the requested language and output format.
+- If setup questions were needed, recommendations were presented in the user's language and raw mode tokens were not the primary user-facing choice labels.
 - The selected prompt(s), required rubrics, and report template were followed.
 - The report contains a project map, coverage note, coverage matrix, score dashboard, finding statistics, top risks, detailed findings, relevant dimension sections, principles compliance when applicable, fix order, and quick wins.
 - Each selected dimension has coverage confidence, inspected evidence, and exclusions/limits.

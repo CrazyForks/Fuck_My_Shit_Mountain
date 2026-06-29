@@ -8,7 +8,7 @@
 
 ## 工作流程
 
-1. **AI 先确认必要输入** — 缺少模式、报告语言、输出格式时才追问；追问模式时会列出完整支持清单；如果你已经写明，就直接开始
+1. **AI 先确认必要输入** — 缺少模式、报告语言、输出格式时才追问；追问模式前会先做轻量项目画像，并用你的语言推荐“全量审计 / 偏安全 / 偏前端体验 / 偏发布运维”等选项；如果你已经写明，就直接开始
 2. **AI 系统化审计你的代码库** — 覆盖一方源代码、测试、配置、依赖和发布文件，并诚实记录排除项
 3. **AI 生成结构化报告** — 评分、发现、原则合规、修复顺序、速赢项
 4. **HTML 输出** — 带侧边栏导航 + 滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表
@@ -23,7 +23,7 @@
 
 ## 模式
 
-可选单个或组合（如 `security, stability, type-safety`）。Full 模式覆盖 **25 个审计维度**。
+普通用户可以直接选“全量审计”“偏安全与隐私”“偏前端体验”“偏发布与运维”等自然语言选项，AI 会映射到内部模式。高级用户也可以直接指定单个或组合模式（如 `security, stability, type-safety`）。Full 模式覆盖 **25 个审计维度**。
 
 | 模式 | 聚焦 |
 |------|------|
@@ -61,9 +61,9 @@ fuck-my-shit-mountain/
 ├── SKILL.md              — 入口点 & 规则
 ├── agents/               — UI metadata
 ├── prompts/              — 26 个审计模式提示词
-├── references/           — 公共报告格式、HTML、coverage、lint 规则
+├── references/           — 公共报告格式、HTML、coverage、lint、工具参考
 ├── rubrics/              — 严重程度、置信度、证据、原则、评分
-├── scripts/              — 报告 lint、skill 打包工具
+├── scripts/              — 项目画像、报告 lint、skill 打包工具
 ├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
 └── examples/             — Rust、Node.js、Vue 审计示例
 ```
