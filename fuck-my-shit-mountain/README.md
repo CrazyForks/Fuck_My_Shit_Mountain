@@ -34,17 +34,6 @@ tmp="$(mktemp -d)" && git clone --depth=1 https://github.com/XiNian-dada/Fuck_My
 
 然后重启 Codex，或者新开一个对话。
 
-### 打包发布
-
-开发时可以使用仓库中的 `fuck-my-shit-mountain/` 目录；发布或安装给别人时也可以先打包，避免把 README、`.DS_Store`、缓存文件等仓库/系统文件带进 skill 包。本 README 只面向仓库维护者，默认不会进入发布包。
-
-```bash
-python3 fuck-my-shit-mountain/scripts/package_skill.py --dry-run
-python3 fuck-my-shit-mountain/scripts/package_skill.py
-```
-
-默认输出 `dist/fuck-my-shit-mountain.zip`，并排除 `README.md`、`.DS_Store`、`__pycache__`、`dist/` 等非运行必需文件。
-
 | 工具 | 个人安装目录 | 项目安装目录 | 备注 |
 |------|--------------|--------------|------|
 | Codex | `~/.codex/skills/fuck-my-shit-mountain/` | - | 执行一行安装命令后重启 Codex |
@@ -125,12 +114,12 @@ python3 fuck-my-shit-mountain/scripts/report_lint.py --modes security,release au
 ```
 fuck-my-shit-mountain/
   SKILL.md              技能入口 — 工作方式和规则
-  README.md             本文件（仓库文档，不进入发布包）
+  README.md             本文件
   agents/               UI metadata（openai.yaml）
   prompts/              审计提示词模板（26 种模式）
   references/           公共报告格式、HTML、coverage、lint、工具参考
   rubrics/              严重程度、置信度、证据、原则、评分
-  scripts/              项目画像、生成报告后的 lint / 校验工具
+  scripts/              项目画像、生成报告后的 lint / 校验脚本
   templates/            报告、发现卡、修复计划模板
   examples/             不同项目类型的使用示例
 ```

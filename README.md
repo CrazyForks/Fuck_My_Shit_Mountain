@@ -65,7 +65,7 @@ fuck-my-shit-mountain/
 ├── prompts/              — 26 个审计模式提示词
 ├── references/           — 公共报告格式、HTML、coverage、lint、工具参考
 ├── rubrics/              — 严重程度、置信度、证据、原则、评分
-├── scripts/              — 项目画像、报告 lint、skill 打包工具
+├── scripts/              — 项目画像、报告 lint、校验脚本
 ├── templates/            — audit-report.md, audit-report.html, issue-card.md, remediation-plan.md
 └── examples/             — Rust、Node.js、Vue 审计示例
 ```
@@ -81,17 +81,6 @@ tmp="$(mktemp -d)" && git clone --depth=1 https://github.com/XiNian-dada/Fuck_My
 ```
 
 然后重启 Codex，或者新开一个对话。
-
-### 打包发布
-
-想打包给别人用，可以生成一个干净的 zip：
-
-```bash
-python3 fuck-my-shit-mountain/scripts/package_skill.py --dry-run
-python3 fuck-my-shit-mountain/scripts/package_skill.py
-```
-
-产物在 `dist/fuck-my-shit-mountain.zip`，会跳过 README、`.DS_Store`、缓存文件这些仓库杂物。
 
 ## 评分面板示例
 
@@ -117,7 +106,7 @@ Overall         ██████░░░░  6.6  B
 
 ### Codex
 
-1. 推荐用上面的 “Codex 一行安装 / 更新” 安装到 `~/.codex/skills/fuck-my-shit-mountain/`，或把 `dist/fuck-my-shit-mountain.zip` 解压到 `~/.codex/skills/`
+1. 推荐用上面的 “Codex 一行安装 / 更新” 安装到 `~/.codex/skills/fuck-my-shit-mountain/`
 2. 重启 Codex 或新开对话
 3. 在 Codex 对话里直接请求使用这个 skill
 
