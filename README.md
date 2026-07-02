@@ -1,29 +1,31 @@
 # Fuck My Shit Mountain 🏔️💩
 
-> 免责声明：AI 审查结果仅供娱乐和参考，不代表项目的实际质量、安全性、合规性或发布就绪度；任何结论都应结合人工审查、测试结果和真实运行环境验证。
+给 Codex、Claude Code、Copilot、Gemini 这类 AI coding agent 用的代码库审计 skill。
 
-> 基于证据的 AI 代码审计技能。专业输出。零情绪废话。
+它会先摸清项目结构，再按你选的方向生成审计报告：风险在哪里、证据是什么、为什么重要、先修什么、怎么补测试。名字是玩笑，报告尽量认真。
 
-**Fuck My Shit Mountain** 是一个 AI 技能（提示词框架），用于生成严谨、专业的代码审查报告。名字虽然粗俗，但每一份报告都是冷静、结构化、证据驱动、可执行的。
+提醒一下：AI 审计只能当参考，结论最好结合人工 review、测试结果和真实运行环境一起判断。
 
-## 工作流程
+## 怎么审
 
-1. **AI 先确认必要输入** — 缺少模式、报告语言、输出格式时才追问；追问模式前会先做轻量项目画像，并用你的语言推荐“全量审计 / 偏安全 / 偏前端体验 / 偏发布运维”等选项；如果你已经写明，就直接开始
-2. **AI 系统化审计你的代码库** — 覆盖一方源代码、测试、配置、依赖和发布文件，并诚实记录排除项
-3. **AI 生成结构化报告** — 评分、发现、原则合规、修复顺序、速赢项
-4. **HTML 输出** — 带侧边栏导航 + 滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表
+1. 先问清楚模式、报告语言和输出格式；如果你没选模式，会先扫一眼项目结构，再用你的语言推荐几个方向。
+2. 看项目源码、测试、配置、依赖、CI、发布文件和文档，报告里会写清楚看过什么、没看什么。
+3. 输出评分、发现、证据、影响、修复顺序、速赢项和回归测试建议。
+4. 需要 HTML 的话，会生成一个能直接打开的报告页，带侧边栏、评分条、发现表和修复计划。
 
-## Demo 预览
+## Demo
 
-如果你想直接给别人看一个“长得像真的”审查页面，可以看这个静态演示页：
+这里有一份静态演示页，可以先看看报告长什么样：
 
-- [`docs/index.html`](docs/index.html) 是 GitHub Pages 的入口页
-- 页面顶部已经明确标注 `演示 / 虚构 / 非真实审计`
-- 如果仓库的 Pages 源设置为 `main /docs`，推送后会自动发布；`.nojekyll` 已经放在 `docs/` 下
+[https://xinian-dada.github.io/Fuck_My_Shit_Mountain/](https://xinian-dada.github.io/Fuck_My_Shit_Mountain/)
+
+演示内容是虚构审计，页面顶部也有标注。
 
 ## 模式
 
-普通用户可以直接选“全量审计”“偏安全与隐私”“偏前端体验”“偏发布与运维”等自然语言选项，AI 会映射到内部模式。高级用户也可以直接指定单个或组合模式（如 `security, stability, type-safety`）。Full 模式覆盖 **25 个审计维度**。
+你可以直接说“全量审计”“偏安全与隐私”“偏前端体验”“偏发布与运维”。skill 会把这些说法映射到内部模式。
+
+熟悉以后，也可以直接写 mode 名，比如 `security, stability, type-safety`。`full` 会覆盖 **25 个审计维度**。
 
 | 模式 | 聚焦 |
 |------|------|
@@ -68,27 +70,28 @@ fuck-my-shit-mountain/
 └── examples/             — Rust、Node.js、Vue 审计示例
 ```
 
-发布或安装时建议先生成干净 skill 包，或者用同一套排除规则同步到本机 skill 目录，避免把 README、`.DS_Store`、缓存文件等非运行必需内容带进去。
+## 安装与更新
+
+复制这一行就行。安装和更新都用它：
+
+### Codex 一行安装 / 更新
+
+```bash
+tmp="$(mktemp -d)" && git clone --depth=1 https://github.com/XiNian-dada/Fuck_My_Shit_Mountain.git "$tmp" && mkdir -p ~/.codex/skills && rm -rf ~/.codex/skills/fuck-my-shit-mountain && cp -R "$tmp/fuck-my-shit-mountain" ~/.codex/skills/fuck-my-shit-mountain && rm -rf "$tmp"
+```
+
+然后重启 Codex，或者新开一个对话。
+
+### 打包发布
+
+想打包给别人用，可以生成一个干净的 zip：
 
 ```bash
 python3 fuck-my-shit-mountain/scripts/package_skill.py --dry-run
 python3 fuck-my-shit-mountain/scripts/package_skill.py
 ```
 
-生成的 `dist/fuck-my-shit-mountain.zip` 会排除 README、`.DS_Store`、缓存文件等非运行必需内容。
-
-本机更新 Codex 中已安装的 skill 时，可以从仓库根目录执行：
-
-```bash
-rsync -av --delete --delete-excluded \
-  --exclude='README.md' \
-  --exclude='.DS_Store' \
-  --exclude='__pycache__/' \
-  --exclude='*.pyc' \
-  --exclude='*.pyo' \
-  --exclude='dist/' \
-  fuck-my-shit-mountain/ ~/.codex/skills/fuck-my-shit-mountain/
-```
+产物在 `dist/fuck-my-shit-mountain.zip`，会跳过 README、`.DS_Store`、缓存文件这些仓库杂物。
 
 ## 评分面板示例
 
@@ -108,14 +111,14 @@ Overall         ██████░░░░  6.6  B
 
 详见 `fuck-my-shit-mountain/rubrics/scoring.md`。
 
-## 原生支持平台
+## 支持平台
 
-当前这个仓库提供的是标准的 `SKILL.md + prompts + rubrics + templates` skill 目录，原生可用于以下工具：
+仓库里提供的是标准 `SKILL.md + prompts + rubrics + templates` 目录，可以放进这些工具的 skills 目录里。
 
 ### Codex
 
-1. 推荐用上面的 `rsync` 命令同步到 `~/.codex/skills/fuck-my-shit-mountain/`，或把 `dist/fuck-my-shit-mountain.zip` 解压到 `~/.codex/skills/`
-2. 重启 Codex 或新开对话，让它重新加载 skill 元数据
+1. 推荐用上面的 “Codex 一行安装 / 更新” 安装到 `~/.codex/skills/fuck-my-shit-mountain/`，或把 `dist/fuck-my-shit-mountain.zip` 解压到 `~/.codex/skills/`
+2. 重启 Codex 或新开对话
 3. 在 Codex 对话里直接请求使用这个 skill
 
 ### Claude Code
@@ -139,7 +142,7 @@ Overall         ██████░░░░  6.6  B
 4. 用 `/skills list` 确认 skill 已被发现
 5. 如果使用项目目录安装，先确保工作区已 trust
 
-如果你更新了仓库里的 skill 内容，优先使用 `package_skill.py` 或上面的 `rsync` 排除规则重新同步到对应工具的 skills 目录，再按各工具的刷新方式重新加载即可。
+更新 skill 时，重新执行上面的一行安装命令，再按对应工具的刷新方式重载。
 
 示例提示词：
 
