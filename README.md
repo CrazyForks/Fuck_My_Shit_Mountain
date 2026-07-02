@@ -150,6 +150,16 @@ Overall         ██████░░░░  6.6  B
 输出格式：html
 ```
 
+## Star History
+
+<a href="https://www.star-history.com/#XiNian-dada/Fuck_My_Shit_Mountain&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=XiNian-dada/Fuck_My_Shit_Mountain&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=XiNian-dada/Fuck_My_Shit_Mountain&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=XiNian-dada/Fuck_My_Shit_Mountain&type=Date" />
+  </picture>
+</a>
+
 ## License
 
 MIT
