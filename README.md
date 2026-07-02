@@ -72,13 +72,20 @@ fuck-my-shit-mountain/
 
 ## 安装与更新
 
-复制这一行就行。安装和更新都用它：
+懒人版：把这个链接丢给你的 AI IDE，让它把 `fuck-my-shit-mountain/` 这个 skill 装到 Codex 里：
 
-### Codex 一行安装 / 更新
+[https://github.com/XiNian-dada/Fuck_My_Shit_Mountain](https://github.com/XiNian-dada/Fuck_My_Shit_Mountain)
+
+它要是装不明白，再展开下面这一行。
+
+<details>
+<summary>Codex 一行安装 / 更新</summary>
 
 ```bash
 tmp="$(mktemp -d)" && git clone --depth=1 https://github.com/XiNian-dada/Fuck_My_Shit_Mountain.git "$tmp" && mkdir -p ~/.codex/skills && rm -rf ~/.codex/skills/fuck-my-shit-mountain && cp -R "$tmp/fuck-my-shit-mountain" ~/.codex/skills/fuck-my-shit-mountain && rm -rf "$tmp"
 ```
+
+</details>
 
 然后重启 Codex，或者新开一个对话。
 
@@ -106,7 +113,7 @@ Overall         ██████░░░░  6.6  B
 
 ### Codex
 
-1. 推荐用上面的 “Codex 一行安装 / 更新” 安装到 `~/.codex/skills/fuck-my-shit-mountain/`
+1. 把仓库链接丢给 AI IDE，或者展开上面的 “Codex 一行安装 / 更新”
 2. 重启 Codex 或新开对话
 3. 在 Codex 对话里直接请求使用这个 skill
 
