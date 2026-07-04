@@ -1,6 +1,6 @@
 ---
 name: fuck-my-shit-mountain
-description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as architecture, design, security, stability, performance, testing, maintainability, release readiness, documentation, observability, configuration safety, data integrity, privacy, accessibility, supply chain, cost, AI/LLM safety, frontend state, backend API design, dependency weight, code consistency, or comment coverage.
+description: Use when the user asks for a comprehensive codebase audit or structured repository health report across multiple quality dimensions such as architecture, design, security, stability, performance, testing, maintainability, release readiness, documentation, observability, configuration safety, data integrity, privacy, accessibility, supply chain, cost, AI/LLM safety, frontend state, backend API design, dependency weight, code consistency, comment coverage, or concurrency. Also supports incremental audits of changed files for PR reviews and continuous auditing workflows.
 ---
 
 # Fuck My Shit Mountain — Skill Definition
@@ -15,40 +15,55 @@ Before deep auditing, determine whether the user has already supplied all requir
 
 Required inputs:
 
-1. **Audit modes** — Accepted values: `full`, `architecture`, `security`, `stability`, `performance`, `testing`, `maintainability`, `design`, `release`, `documentation`, `observability`, `configuration`, `data-integrity`, `privacy`, `accessibility`, `supply-chain`, `cost`, `ai-safety`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`.
+1. **Audit modes** — Accepted values: `full`, `incremental`, `architecture`, `security`, `stability`, `performance`, `testing`, `maintainability`, `design`, `release`, `documentation`, `observability`, `configuration`, `data-integrity`, `privacy`, `accessibility`, `supply-chain`, `cost`, `ai-safety`, `fallback`, `testing-authenticity`, `type-safety`, `frontend-state`, `backend-api`, `dependency-weight`, `code-consistency`, `comment-coverage`, `concurrency`.
    - If the user picks `full`, do all dimensions.
+   - If the user picks `incremental`, audit only files changed since a specified commit or branch (requires scope parameter with git reference).
    - If the user picks multiple modes, merge the audit areas from each selected prompt. Use the most specific finding format rules.
    - If audit modes are missing, run `scripts/project_inventory.py <project-root> --format json` when available, then recommend a few user-facing audit choices in the user's language. Examples: full audit, security and privacy focused, frontend experience focused, release and operability focused. Translate these labels into the user's language; do not lead with raw internal mode tokens.
    - Let the user reply with a number or natural-language option. Map that answer back to the `modes` field from the inventory recommendation. Show raw mode tokens only when the user asks for exact modes or advanced options.
 2. **Report language** — The language used in the final report, such as English or Chinese. The setup question and audit recommendations should use this language when it is explicit; otherwise use the user's conversation language. The programming language is inferred from the repository and is not a substitute for this answer.
-3. **Output format** — Accepted values: `md`, `html`, `both`, `stdout`.
+3. **Output format** — Accepted values: `md`, `html`, `json`, `both`, `stdout`.
    - `md` — Save as `audit-report-<project>-<date>.md`.
    - `html` — Save as `audit-report-<project>-<date>.html`.
-   - `both` — Save both files.
+   - `json` — Save as `audit-report-<project>-<date>.json` using `templates/audit-report.json` schema.
+   - `both` — Save both md and html files.
    - `stdout` — Print the report in the conversation only.
-   - If `md`, `html`, or `both` is requested, write the file(s) after generating the report. For HTML output, read `templates/audit-report.html`, copy its **exact CSS and HTML structure**, include the sections and score items required for the selected modes, and replace the content with actual audit data. Do not use placeholder variables; generate complete, self-contained HTML.
+   - If `md`, `html`, `json`, or `both` is requested, write the file(s) after generating the report. For HTML output, read `templates/audit-report.html`, copy its **exact CSS and HTML structure**, include the sections and score items required for the selected modes, and replace the content with actual audit data. For JSON output, follow the exact schema in `templates/audit-report.json`. Do not use placeholder variables; generate complete, self-contained output.
+4. **Audit scope** (optional) — Defines what parts of the codebase to audit:
+   - Path patterns: `src/auth/**`, `payments/`, `*.config.js`
+   - Semantic labels: `authentication`, `payments`, `api`, `frontend`, `backend`
+   - Git references: `main..HEAD`, `v1.2.0..HEAD` (for incremental mode)
+   - If not provided, audit the entire project (default).
+   - If provided, focus audit on matching files/areas and note scope limits in the coverage matrix.
 
-If the user says something like "audit this project" without any of the required inputs, ask all three in one message and include localized audit recommendations. If the user says "full, Chinese, html", proceed without another setup question.
+If the user says something like "audit this project" without any of the required inputs, ask for missing inputs in one message and include localized audit recommendations. If the user says "full, Chinese, html", proceed without another setup question. Scope is optional and can be omitted.
 
 ## How It Works
 
 1. The user invokes the skill and the AI collects only the missing required inputs. If mode is missing, run `scripts/project_inventory.py` when available and present localized recommendation labels instead of raw mode-token dumps.
-2. The AI loads the corresponding prompt(s) from `prompts/`. If multiple modes are selected, merge the audit areas from each.
-3. The AI loads `references/report-format.md` for shared required-context, report template, coverage, HTML, and lint rules.
-4. The AI loads the required rubrics:
+2. If scope is provided, determine the relevant files and areas to audit. For git references, use `git diff --name-only <ref>` to get the changed file list. For path patterns, use glob matching. For semantic labels, infer relevant directories based on project structure.
+3. If intelligent weight inference is needed (for full or multi-dimension audits), analyze the project characteristics:
+   - Detect languages, frameworks, and dependencies from manifests and file extensions.
+   - Identify project type from README, package.json, Cargo.toml, pom.xml, or similar metadata.
+   - Infer dimension weights based on detected characteristics (e.g., Django → higher security/data-integrity weight; React SPA → higher frontend-state/accessibility weight; public API service → higher observability/release weight).
+   - Document the inferred weights and reasoning in the report's methodology section.
+4. The AI loads the corresponding prompt(s) from `prompts/`. If multiple modes are selected, merge the audit areas from each.
+5. The AI loads `references/report-format.md` for shared required-context, report template, coverage, HTML, and lint rules.
+6. The AI loads the required rubrics:
    - `rubrics/severity.md` for severity labels.
    - `rubrics/confidence.md` for confidence labels.
    - `rubrics/evidence.md` for evidence quality and minimum evidence thresholds.
    - `rubrics/coverage.md` for dimension coverage confidence and reporting limits.
    - `rubrics/scoring.md` for score dashboards and grade anchors.
    - `rubrics/principles.md` when producing full, architecture, maintainability, design, documentation, frontend-state, backend-api, type-safety, configuration, data-integrity, accessibility, or principles-related findings.
-5. The AI audits the codebase using the coverage strategy below.
-6. Each finding is recorded using `templates/issue-card.md`.
-7. Results are assembled using `templates/audit-report.md` or `templates/audit-report.html`, depending on the requested output format.
-8. If output-to-file was requested, the AI writes the report to disk.
-9. For generated `md`, `html`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py --modes <selected-modes> <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
-10. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
-11. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
+7. The AI audits the codebase using the coverage strategy below.
+8. Each finding is recorded using `templates/issue-card.md`.
+9. Results are assembled using `templates/audit-report.md`, `templates/audit-report.html`, or `templates/audit-report.json`, depending on the requested output format.
+10. If output-to-file was requested, the AI writes the report to disk.
+11. Save audit metadata for historical tracking to `.claude/audits/audit-<project>-<date>-metadata.json` including: timestamp, commit hash, selected modes, scope, overall score, dimension scores, finding counts by severity, and file path to the full report.
+12. For generated `md`, `html`, `json`, or `both` output, run the skill's `scripts/report_lint.py` with `python3 <skill-dir>/scripts/report_lint.py --modes <selected-modes> <report-file>` when the script is available. Fix lint failures before delivering the report. For `stdout`, apply the same checks manually.
+13. If remediation planning is requested, the AI uses `templates/remediation-plan.md`.
+14. If implementation is requested separately, the AI fixes code only after the audit/report step is complete.
 
 ## Mode vs Dimension Model
 
@@ -97,6 +112,7 @@ If the audit discovers secrets, tokens, private keys, `.env` values, credentials
 | Mode | Prompt | Focus |
 |------|--------|-------|
 | `full` | `prompts/full-audit.md` | All dimensions + principles |
+| `incremental` | `prompts/incremental-audit.md` | Diff-based audit of changed files since git reference |
 | `architecture` | `prompts/architecture-audit.md` | Module boundaries, dependency direction, state ownership |
 | `security` | `prompts/security-audit.md` | Security risks |
 | `stability` | `prompts/stability-audit.md` | Reliability & errors |
@@ -122,6 +138,7 @@ If the audit discovers secrets, tokens, private keys, `.env` values, credentials
 | `dependency-weight` | `prompts/dependency-weight-audit.md` | Overweight deps, build toolchain |
 | `code-consistency` | `prompts/code-consistency-audit.md` | Naming, imports, patterns, style uniformity |
 | `comment-coverage` | `prompts/comment-coverage-audit.md` | Doc quality, stale comments, missing docs |
+| `concurrency` | `prompts/concurrency-audit.md` | Race conditions, deadlocks, atomicity, shared state, locking |
 
 ## Scoring
 

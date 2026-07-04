@@ -4,7 +4,12 @@
 
 ## 功能
 
-- 审计代码库的 **25 个维度**（full 模式）：架构、安全、稳定性、性能、测试、可维护性、设计、发布、文档、配置、可观测性、数据完整性、隐私治理、可访问性、供应链、成本、AI/LLM 安全、降级、测试真实性、类型安全、前端状态、后端 API、依赖权重、代码一致性、注释覆盖率
+- 审计代码库的 **27 个维度**（full 模式）：架构、安全、稳定性、性能、测试、可维护性、设计、发布、文档、配置、可观测性、数据完整性、隐私治理、可访问性、供应链、成本、AI/LLM 安全、降级、测试真实性、类型安全、前端状态、后端 API、依赖权重、代码一致性、注释覆盖率、**并发**
+- **增量审计模式**：只审计 git diff 中的变更文件，适用于 PR review 和持续审计
+- **智能权重推断**：根据项目特征（语言、框架、依赖）自动调整维度权重
+- **审计范围控制**：支持路径模式、语义标签或 git 引用限定审计范围
+- **多格式输出**：支持 Markdown、HTML、JSON（便于 CI/CD 集成）
+- **历史追踪**：保存审计元数据到 `.claude/audits/`，便于趋势对比
 - 生成结构化发现项，包含严重程度、置信度、证据和修复建议
 - 标注每个审计维度的覆盖置信度（High / Medium / Low / Not assessed）
 - 对 **7 个核心维度** 打分（0.0–10.0），附带等级 S/A/B/C/D/F
@@ -14,13 +19,14 @@
 
 ## 交互式初始化
 
-审计前会先确认 3 个必要输入；如果你的提示词里已经写明，就不会重复追问。缺少模式时，会先做轻量项目画像，再用用户当前语言推荐自然语言选项：
+审计前会先确认必要输入；如果你的提示词里已经写明，就不会重复追问。缺少模式时，会先做轻量项目画像，再用用户当前语言推荐自然语言选项：
 
-1. **选择模式？** — 可选“全量审计 / 偏安全与隐私 / 偏前端体验 / 偏后端接口与数据 / 偏发布与运维 / 偏 AI 安全与成本 / 偏测试补强 / 偏可维护性与文档”等；高级用户也可以直接写 26 种内部模式，逗号分隔或 `full`
+1. **选择模式？** — 可选”全量审计 / 增量审计（仅变更文件）/ 偏安全与隐私 / 偏前端体验 / 偏后端接口与数据 / 偏发布与运维 / 偏 AI 安全与成本 / 偏测试补强 / 偏可维护性与文档”等；高级用户也可以直接写 27 种内部模式，逗号分隔或 `full`
 2. **报告语言？** — 中文 / English / 其他
-3. **输出格式？** — `md` / `html` / `both` / `stdout`
+3. **输出格式？** — `md` / `html` / `json` / `both` / `stdout`
+4. **审计范围？**（可选）— 路径模式（`src/auth/**`）、语义标签（`authentication`, `payments`）、或 git 引用（`main..HEAD` 用于增量审计）
 
-HTML 输出（`templates/audit-report.html`）是一个完整的渲染页面，含侧边栏导航、滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表、速赢网格。
+HTML 输出（`templates/audit-report.html`）是一个完整的渲染页面，含侧边栏导航、滚动监听、彩色评分条、各维度发现表 + 已验证清单、设计原则合规表、修复顺序表、速赢网格。JSON 输出遵循 `templates/audit-report.json` 的结构化 schema，便于工具链集成。
 
 ## 安装与使用
 
@@ -57,11 +63,33 @@ cp -R Fuck_My_Shit_Mountain/fuck-my-shit-mountain ~/.codex/skills/
 输出格式：html
 ```
 
+增量审计（PR review）示例：
+
+```text
+使用 fuck-my-shit-mountain 审计本次 PR 的变更
+模式：incremental
+范围：main..HEAD
+报告语言：中文
+输出格式：json
+```
+
+指定范围审计示例：
+
+```text
+审计支付模块
+模式：security, data-integrity
+范围：src/payments/**
+报告语言：中文
+输出格式：md
+```
+
 ### 模式选择
 
 | 命令 | 范围 |
 |------|------|
-| `run full-audit` | 全部 25 个审计维度 |
+| `run full-audit` | 全部 27 个审计维度 |
+| `run incremental-audit` | **增量审计**：只审计 git diff 中的变更文件（需配合 scope 参数） |
+| `run concurrency-audit` | **并发审计**：竞态条件、死锁、原子性、共享状态、锁策略 |
 | `run architecture-audit` | 架构边界、依赖方向、状态所有权 |
 | `run security-audit` | 仅安全审查 |
 | `run stability-audit` | 可靠性和错误处理 |
@@ -123,11 +151,11 @@ fuck-my-shit-mountain/
   SKILL.md              技能入口 — 工作方式和规则
   README.md             本文件
   agents/               UI metadata（openai.yaml）
-  prompts/              审计提示词模板（26 种模式）
+  prompts/              审计提示词模板（27 种模式，含 incremental 和 concurrency）
   references/           公共报告格式、HTML、coverage、lint、工具参考
   rubrics/              严重程度、置信度、证据、原则、评分
   scripts/              项目画像、生成报告后的 lint / 校验脚本
-  templates/            报告、发现卡、修复计划模板
+  templates/            报告、发现卡、修复计划模板（含 JSON schema）
   examples/             不同项目类型的使用示例
 ```
 
